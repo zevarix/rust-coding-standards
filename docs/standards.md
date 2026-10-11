@@ -1,6 +1,6 @@
 # Rust Coding Standards — Draft 0.1
 
-These are **proposed shared rules**, not accepted policy for every Zevarix repository. An adopter controls the pinned revision, scope, explicit exceptions, and any stronger local rules. Code that predates adoption is not automatically noncompliant.
+These are **proposed shared rules**, not automatically accepted policy for every Zevarix repository. A project may explicitly adopt the **latest `main`** guidance without maintaining a commit pin, or choose a fixed revision for a specific assurance need. It retains its own scope, exceptions and stronger local rules. Code that predates adoption is not automatically noncompliant.
 
 ## Rule levels
 

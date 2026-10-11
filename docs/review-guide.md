@@ -1,11 +1,11 @@
 # Using Rust Coding Standards in code review
 
-This guide explains how a reviewer uses an **adopted, pinned** copy of the standards. It does not grant a reviewer permission to change another repository, merge a pull request, publish a release, or operate on user data.
+This guide explains how a reviewer uses the standards a project has **explicitly adopted**, normally from the **latest `main`**. Some projects may intentionally select a fixed revision. Either way, reviewers record the actual standards commit they consulted as evidence. This guide does not grant permission to change another repository, merge a pull request, publish a release or operate on user data.
 
 ## Start with the owning project
 
 1. Read the consumer repository's current issue, applicable architecture and safety rules, exact reviewed base and HEAD, and available test evidence.
-2. Confirm the project's own adoption declaration names **an immutable reviewed revision** of this repository and its scope. If it has not adopted the guidelines, use them as suggestions or research—not invented mandatory merge gates.
+2. Confirm the project's own adoption declaration names **latest `main`** (or an intentionally fixed revision) and its scope. Resolve and record the actual RCS commit consulted for this review; do not require a project PR to keep the reference current. If the project has not adopted RCS, use the guidelines as suggestions or research—not invented mandatory merge gates.
 3. Apply current owner-local requirements first. Resolve any conflict through the consumer's issue/decision process; a shared RCS rule never replaces a narrower product safety contract.
 
 See [adoption](adoption.md) for the declaration format.
@@ -27,7 +27,7 @@ Follow the execution path far enough to understand effects. The diff tells you w
 
 ## Classify a finding with evidence
 
-An actionable review comment should state:
+An actionable review comment should state (and the PR/review should record the **RCS commit actually consulted** when applying RCS):
 
 - **Rule:** exact ID, such as `RCS-NUM-001`, plus the owning project's stricter rule if applicable.
 - **Where:** file and symbol, along with the call path or state transition that reaches it.
@@ -78,4 +78,4 @@ The first command checks the Markdown index and local links without a site build
 
 ## Keep the rulebook maintainable
 
-Do not copy the entire RCS text into a consuming review skill. Link to the selected revision and load applicable pages when reviewing code. Proposed changes to shared rules belong in this repository; their adoption into each consumer remains a separate, reviewed decision.
+Do not copy the entire RCS text into a consuming review skill. Link to the consumer's **latest `main`** adoption (or intentional pin), read applicable pages before coding and during review, and record the actual RCS SHA used in review evidence. No recurring SHA-update PR is needed. Proposed changes to shared rules belong in this repository; each consumer retains its own code, policy, merge and release decisions.
