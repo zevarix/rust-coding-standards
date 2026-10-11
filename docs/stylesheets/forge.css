@@ -196,6 +196,45 @@ html { scroll-padding-top: 5rem; }
   letter-spacing: .04em;
   font: 650 .63rem/1.4 var(--md-code-font);
 }
+/* The dark hero is useful in dark mode, but makes an oversized navy slab
+ * on the light page. Let the light-mode introduction sit on the page itself;
+ * keep only the smaller code sample as a dark visual accent. */
+[data-md-color-scheme="default"] .md-typeset .forge-hero {
+  padding: .9rem 0 1.8rem;
+  color: var(--md-default-fg-color);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--forge-border);
+  border-radius: 0;
+}
+[data-md-color-scheme="default"] .forge-hero::after {
+  display: none;
+}
+[data-md-color-scheme="default"] .md-typeset .forge-hero h1 {
+  color: var(--md-default-fg-color);
+  font-size: clamp(2.1rem, 3.25vw, 3.25rem);
+}
+[data-md-color-scheme="default"] .md-typeset .forge-hero__lead {
+  color: var(--forge-muted);
+}
+[data-md-color-scheme="default"] .md-typeset a.forge-button--quiet {
+  color: var(--md-default-fg-color);
+  background: transparent;
+  border-color: var(--forge-border);
+}
+[data-md-color-scheme="default"] .md-typeset a.forge-button--quiet:hover {
+  color: var(--md-default-fg-color);
+  background: var(--forge-soft);
+  border-color: #c89c83;
+}
+[data-md-color-scheme="default"] .forge-hero__foot {
+  color: var(--forge-muted);
+}
+[data-md-color-scheme="default"] .forge-window {
+  transform: none;
+  box-shadow: 0 15px 38px rgba(29, 42, 49, .11);
+}
+
 /* Original decorative code panel; not falsely presented as a runnable demo. */
 .forge-window {
   background: #13222c;
