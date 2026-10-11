@@ -1,6 +1,6 @@
 # Zevarix Rust Coding Standards
 
-**Private draft — v0.1 not yet released or adopted.**
+**Private working draft — no versioned release yet.** Retro Distro has adopted the current standards on `main` by reference; other repositories opt in independently.
 
 Reusable, explicit Rust engineering standards for Zevarix projects, with rule identifiers, rationale, examples and review guidance.
 

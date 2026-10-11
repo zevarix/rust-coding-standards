@@ -39,7 +39,7 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 
 ## Using these rules in a code review
 
-Follow the [reviewer guide](review-guide.md) to select applicable rule IDs, trace affected call paths, record evidence-backed findings, and separate correctness defects from optional suggestions. A consumer must explicitly adopt a specific reviewed revision before these are binding project requirements.
+Follow the [reviewer guide](review-guide.md) to select applicable rule IDs, trace affected call paths, record evidence-backed findings, and separate correctness defects from optional suggestions. A consuming repository must explicitly adopt these rules (normally the latest `main`, or an intentional fixed revision) before they are binding requirements.
 
 ## Application
 
