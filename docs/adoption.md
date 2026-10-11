@@ -9,13 +9,13 @@ Place a short note in the adopting repository's own contributing/development doc
 ```text
 Rust coding guidance:
   Source: zevarix/rust-coding-standards
-  Revision: <reviewed immutable commit SHA or released version>
+  Standards reference: main (latest at time of implementation/review)
   Scope: new or meaningfully changed Rust code
   Local exceptions: <path to owner-local exceptions, or "none">
   Owner: <owning repository and issue/decision>
 ```
 
-A project must select a real revision after reviewing it. This draft does **not** supply a release tag. Any source that is still private must only be used by authorized members; copying private text into a public project would itself be a separate publication decision.
+With `main` adoption, no recurring revision bump is required. Human/agent coders and reviewers read the current guidance when they work, and record the **actual RCS commit SHA consulted** in the relevant PR/review evidence. That SHA is historical provenance, **not** a pin in the consumer's governance files. A project may deliberately choose an immutable commit or release for a specific assurance need; this remains optional. The repository currently has no release tag. Private material is only accessible to authorized members; copying private text to a public repository is a separate publication decision.
 
 ## What stays local
 
@@ -30,7 +30,7 @@ A consumer may adopt a subset or stricter rules, but should identify the differe
 
 ## Use in a review skill
 
-An adopting repository may tell its reviewer to read this pinned standards revision, select applicable `RCS-*` IDs and cite them in concrete findings. The [reviewer guide](review-guide.md) defines a concise method and an example comment. Do **not** paste the whole external rulebook into a project skill or have the skill automatically pull the latest unreviewed standard.
+An adopting repository may tell implementers **and** reviewers to read the applicable rules from current `main` and cite relevant `RCS-*` IDs in evidence-backed findings. The [reviewer guide](review-guide.md) defines a concise method and an example comment. Do **not** paste the whole rulebook into each project or automatically mirror standards content/code when `main` advances.
 
 A workable, owner-local review instruction would be:
 
@@ -57,4 +57,4 @@ For an application that commits `Cargo.lock`, a project may add `--locked`. For 
 
 ## Upgrades
 
-Propose an adoption update as an owner-reviewed PR: compare the old pinned revision to the proposed one, test affected code, document newly adopted or excepted rules, and obtain the project's normal merge authority. An external standards update never automatically changes existing consumer policy.
+For projects following latest `main`, **no project PR is necessary merely to refresh a rulebook SHA**. New work and reviews consult current applicable rules and record the revision inspected, while past accepted changes remain historical. A substantive local code, safety-contract or policy change still follows the consuming repository's own issue/PR, tests and owner authority. A project that deliberately uses an immutable pin may update it through its own established review process. External guideline updates never grant authority to rewrite, merge, deploy or publish consumer work.
