@@ -26,6 +26,8 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-API-001](rules/types-and-errors.md#rcs-api-001--follow-predictable-api-conventions) | Advisory | Review/Clippy | Conventional Rust APIs |
 | [RCS-ERR-001](rules/types-and-errors.md#rcs-err-001--use-explicit-recoverable-errors) | Required | Review/Clippy/tests | `Result` and error propagation |
 | [RCS-ERR-002](rules/types-and-errors.md#rcs-err-002--preserve-actionable-boundary-context) | Advisory | Human review/tests | Diagnostic boundaries |
+| [RCS-PROC-001](rules/processes-and-cancellation.md#rcs-proc-001--qualify-tools-and-use-structured-arguments) | Required* | Review/fake tools | Qualified structured process argv |
+| [RCS-PROC-002](rules/processes-and-cancellation.md#rcs-proc-002--verify-process-outcomes-and-bounded-output) | Required* | Review/fake tools | Verify bounded process outcomes |
 | [RCS-SAFE-001](rules/safety.md#rcs-safe-001--justify-unsafe-operations) | Required* | Review/tests | `unsafe` soundness |
 | [RCS-DATA-001](rules/safety.md#rcs-data-001--protect-user-owned-data) | Required* | Review/tests | Non-destructive defaults |
 | [RCS-FS-001](rules/mutable-effects.md#rcs-fs-001--recheck-mutable-filesystem-targets-before-consequential-effects) | Required* | Review/tests | Current file/target identity at effects |
@@ -34,11 +36,15 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-DB-002](rules/persistence-and-paths.md#rcs-db-002--qualify-the-live-schema-and-recovery-invariants) | Required* | Review/tests | Validate live SQLite enforcement schema |
 | [RCS-STATE-001](rules/mutable-effects.md#rcs-state-001--do-not-register-an-effect-as-complete-before-verification) | Required* | Review/tests | Prove output before completion |
 | [RCS-STATE-002](rules/mutable-effects.md#rcs-state-002--reconcile-uncertain-effects-before-retrying-them) | Required* | Review/tests | Reconcile ambiguous retry outcomes |
+| [RCS-CANCEL-001](rules/processes-and-cancellation.md#rcs-cancel-001--separate-stop-requests-from-durable-effect-truth) | Required* | Review/tests | Stop requests versus effect truth |
+| [RCS-CONC-001](rules/concurrency-and-tooling.md#rcs-conc-001--make-shared-state-invariants-atomic-at-the-right-boundary) | Required* | Review/contended tests | Atomic shared-state admission |
 | [RCS-PERF-001](rules/performance.md#rcs-perf-001--review-work-across-call-paths) | Required* | Review/instrumentation | Avoid costly duplicate work |
 | [RCS-PERF-002](rules/performance.md#rcs-perf-002--optimize-with-evidence) | Advisory | Profiling/review | Avoid premature optimization |
 | [RCS-TEST-001](rules/testing.md#rcs-test-001--make-tests-deterministic-and-owned) | Required | Tests/review | Synthetic fixture isolation |
 | [RCS-TEST-002](rules/testing.md#rcs-test-002--verify-real-failure-modes) | Required* | Tests/review | Negative-path coverage |
 | [RCS-DOC-001](rules/testing.md#rcs-doc-001--document-nonobvious-contracts) | Advisory | Rustdoc/review | Important invariants |
+| [RCS-TOOL-001](rules/concurrency-and-tooling.md#rcs-tool-001--align-formatting-edition-and-lint-expectations) | Advisory | rustfmt/Clippy/review | Align edition, format and lints |
+| [RCS-TOOL-002](rules/concurrency-and-tooling.md#rcs-tool-002--test-the-supported-contract-not-a-convenient-subset) | Required* | CI/review | Validate actual supported targets |
 
 **Required*** means required when that rule's stated applicability condition holds (for example, user-owned data or a large-file hot path), not when an unrelated project feature is absent.
 
