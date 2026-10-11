@@ -1,0 +1,48 @@
+# Contributing to Rust Coding Standards
+
+Thank you for helping improve these independently authored Rust guidelines. The
+project is a working draft: a proposed rule should make Rust easier to read,
+test or maintain, not merely add another reviewer requirement.
+
+Start with the [full contribution guide](docs/contributing.md), the
+[standards index](docs/standards.md), and the [review guide](docs/review-guide.md).
+For a substantive rule change, open a focused GitHub issue describing the
+specific problem, applicability, exceptions and verification evidence, then
+propose a reviewable pull request. Keep rule IDs stable when possible.
+
+## Validate your change
+
+Use Python, Zensical and a Rust toolchain supporting edition 2024:
+
+```sh
+python tools/verify_standards.py
+zensical build
+python tools/verify_standards.py --site
+python -m unittest discover -s tools -p "test_*.py"
+python tools/verify_rust_examples.py
+```
+
+CI builds documentation and runs tagged, self-contained Rust examples; it does
+not deploy the website. The consuming project chooses its own Rust toolchain,
+tests, architecture and merge authority.
+
+## Copyright and contributor rights
+
+**Copyright (c) 2026 Peder Klockmann (Zevarix)** for original project content.
+Contributors retain copyright in their contributions. Unless a different
+arrangement is clearly recorded and accepted, original contributions to the
+standards, examples, validators or independent Forge crab SVG are offered
+under **MIT OR Apache-2.0**, at the recipient's choice.
+
+The original Forge CSS and custom homepage presentation are **all rights
+reserved** and excluded from those open licenses. Changes to these files
+need separate coordination with their owner. See
+[Licensing and reuse](docs/licensing.md) and [LICENSE-FORGE-THEME](LICENSE-FORGE-THEME).
+
+Respect third-party copyrights and trademarks: cite references, do not paste
+proprietary examples, external artwork, secret credentials, private project
+payloads or someone else's documentation into a contribution. This repository
+is **not affiliated with or endorsed by** the Rust Project or Rust Foundation.
+
+For a confidential vulnerability report, follow [SECURITY.md](SECURITY.md)
+rather than posting sensitive details in a public issue.

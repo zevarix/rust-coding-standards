@@ -2,7 +2,7 @@
 
 The site uses **Zensical** and a [MkDocs-compatible configuration](https://zensical.org/docs/compatibility/mkdocs/), giving us the same Markdown source structure and familiar Material-style navigation as the [Drupal Coding Standards](https://project.pages.drupalcode.org/coding_standards/php/documentation/).
 
-No hosted site, Pages workflow, public domain or deployment is configured. The GitHub repository remains **private**. Preview only on your own trusted workstation; do not expose the development web server to public networks.
+No hosted site, Pages workflow, public domain or deployment is configured as of the publication-readiness audit. A local preview does **not** change GitHub visibility. The repository was **private** at that audit; consult [the public-readiness checklist](publication-readiness.md) for the current owner-controlled publication gate. Preview only on your own trusted workstation; do not expose the development web server to public networks.
 
 ## Windows PowerShell
 

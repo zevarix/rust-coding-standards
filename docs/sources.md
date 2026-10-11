@@ -33,7 +33,7 @@ hexagonal crab mark in this repository was **drawn independently**,
 not copied from Ferris's offered SVG/PNG files. No sponsorship or
 endorsement by the Rust Project or mascot artist is implied.
 
-The original crab SVG is Copyright (c) 2026 Peder Klockmann (Zevarix), licensed **MIT OR Apache-2.0** alongside the rulebook and tools. The separate Forge CSS and custom homepage visual theme remain **all rights reserved**; see [Licensing and reuse](licensing.md). The repository remains private and no public publication is approved.
+The original crab SVG is Copyright (c) 2026 Peder Klockmann (Zevarix), licensed **MIT OR Apache-2.0** alongside the rulebook and tools. The separate Forge CSS and custom homepage visual theme remain **all rights reserved**; see [Licensing and reuse](licensing.md). Licensing alone does not authorize publication; the repository was private at the preparation audit. See the [public-readiness checklist](publication-readiness.md).
 
 
 ## Source handling
