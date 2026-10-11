@@ -12,10 +12,10 @@ From the repository root:
 py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-docs.txt
 .\.venv\Scripts\zensical.exe build
-.\.venv\Scripts\zensical.exe serve --dev-addr 127.0.0.1:8000
+.\.venv\Scripts\zensical.exe serve --dev-addr 127.0.0.1:8001
 ```
 
-Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) on **the same machine**.
+Open [http://127.0.0.1:8001/](http://127.0.0.1:8001/) on **the same machine**.
 
 ## macOS or Linux
 
@@ -23,10 +23,27 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) on **the same machine**.
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-docs.txt
 .venv/bin/zensical build
-.venv/bin/zensical serve --dev-addr 127.0.0.1:8000
+.venv/bin/zensical serve --dev-addr 127.0.0.1:8001
 ```
 
 The local build output is written into `site/`, which is deliberately ignored by Git. Do not commit generated HTML or enable a deployment job until the owner independently approves publication.
+
+## Forge visual identity (draft)
+
+This project adds a small stylesheet (`docs/stylesheets/forge.css`) on top of
+Zensical's built-in modern Material-derived theme. The original crab-inspired
+SVG (`docs/assets/brand/forge-crab.svg`) acts as the logo and favicon.
+It references the broader Rustacean community but **is not Ferris artwork** or
+official Rust branding. See `docs/sources.md` for the inspiration and distinction.
+
+The design includes a custom home hero, editorial code illustration, topic cards,
+accessible focus states, dark/light palettes, responsive navigation, and reduced
+motion handling. Navigation, on-page headings and full-text search remain
+Zensical features; no custom JavaScript or hosted dependency was added.
+
+The examples use **localhost:8001** to reduce conflicts with other local
+development services. If that port is occupied, use any free loopback port
+without stopping unrelated services.
 
 ## Why use `mkdocs.yml` instead of Zensical-only configuration?
 

@@ -26,6 +26,9 @@ nav:
 theme:
   name: material
   variant: modern
+  logo: assets/brand/forge-crab.svg
+  favicon: assets/brand/forge-crab.svg
+  font: false
   language: en
   features:
     - navigation.sections
@@ -36,17 +39,20 @@ theme:
     - search.highlight
   palette:
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to dark mode
     - scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to light mode
+
+extra_css:
+  - stylesheets/forge.css
 
 plugins:
   - search

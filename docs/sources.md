@@ -12,6 +12,21 @@ This repository is **independently authored guidance**, not a copy of the materi
 | [Safety-Critical Rust Consortium](https://arewesafetycriticalyet.org/) | Research reference for stronger assurance when justified |
 | [Consortium coding guidelines](https://coding-guidelines.arewesafetycriticalyet.org/) | Emerging/draft suggestions to evaluate case-by-case, **not** automatically adopted standards |
 
+
+## Rustacean mascot inspiration and original artwork
+
+[Ferris the Crab](https://rustacean.net/) is the **unofficial** Rust mascot
+created by Karen Rustad Tölva. The website publishes a copyright waiver
+for Ferris artwork. We use Ferris as a cultural reference only: the
+hexagonal crab mark in this repository was **drawn independently**,
+not copied from Ferris's offered SVG/PNG files. No sponsorship or
+endorsement by the Rust Project or mascot artist is implied.
+
+The guidelines' mark and visual style remain **unreleased private draft assets**;
+an eventual original-document/artwork license and public-use review are still
+owner-controlled decisions.
+
+
 ## Source handling
 
 - Link to upstream explanations rather than reproducing their prose or examples verbatim.

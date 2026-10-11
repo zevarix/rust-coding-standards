@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-labelledby="title">
+  <title id="title">Zevarix crab forge mark</title>
+  <defs>
+    <linearGradient id="shell" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#ffb17f" />
+      <stop offset=".54" stop-color="#e78158" />
+      <stop offset="1" stop-color="#bd513b" />
+    </linearGradient>
+  </defs>
+  <path fill="#14232d" stroke="#d17b55" stroke-width="2" d="M40 3 71 21v38L40 77 9 59V21Z"/>
+  <g fill="none" stroke="url(#shell)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25 46 15 51 12 60M55 46l10 5 3 9"/>
+    <path d="M26 53 17 61M54 53l9 8"/>
+    <path d="M22 35 14 28M58 35l8-7"/>
+  </g>
+  <g fill="url(#shell)">
+    <path d="M21 34c0-11 8-19 19-19s19 8 19 19v12c0 10-9 18-19 18s-19-8-19-18z"/>
+    <path d="M15 29c-6-2-9-8-7-13l8 5 2-8c9 6 10 15 5 21z"/>
+    <path d="M65 29c6-2 9-8 7-13l-8 5-2-8c-9 6-10 15-5 21z"/>
+  </g>
+  <g fill="#14232d">
+    <rect x="31" y="35" width="5" height="7" rx="2.5"/>
+    <rect x="44" y="35" width="5" height="7" rx="2.5"/>
+  </g>
+  <path fill="none" stroke="#8d352c" stroke-width="2.1" stroke-linecap="round" d="M35 48q5 4 10 0"/>
+  <path fill="#fff0de" d="M34 35h1.6v2H34zM47 35h1.6v2H47z"/>
+</svg>
