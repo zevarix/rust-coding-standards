@@ -21,6 +21,8 @@ nav:
       - Safety and user data: rules/safety.md
       - Filesystem identity and effects: rules/mutable-effects.md
       - SQLite and native paths: rules/persistence-and-paths.md
+      - External processes and cancellation: rules/processes-and-cancellation.md
+      - Concurrency and tooling: rules/concurrency-and-tooling.md
       - Performance and efficiency: rules/performance.md
       - Testing and documentation: rules/testing.md
   - Adopting the standards: adoption.md

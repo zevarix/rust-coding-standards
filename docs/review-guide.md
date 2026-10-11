@@ -20,6 +20,9 @@ Read the [standards index](standards.md), then open only the rules relevant to t
 | File sizes, offsets, budgets, index conversions or serialization widths | [Numbers and bounds](rules/numbers-and-bounds.md) |
 | Unsafe code, external input or user-owned data | [Safety and user-owned data](rules/safety.md) |
 | Filesystem identity, copying, publishing or uncertain retries | [Filesystem identity and completed effects](rules/mutable-effects.md) |
+| External tools, subprocess output or cancellation | [Processes and cancellation](rules/processes-and-cancellation.md) |
+| Concurrent writer admission or shared mutable state | [Concurrency and tooling](rules/concurrency-and-tooling.md) |
+| Toolchain versions, format/lint or supported target checks | [Concurrency and tooling](rules/concurrency-and-tooling.md) |
 | File hashing, expensive helpers, database requests or repeated batches | [Performance and execution cost](rules/performance.md) |
 | Behavior changes, error paths or public contracts | [Testing and documentation](rules/testing.md) |
 

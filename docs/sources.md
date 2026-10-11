@@ -16,6 +16,10 @@ This repository is **independently authored guidance**, not a copy of the materi
 | [SQLite transaction control](https://www.sqlite.org/lang_transaction.html) | Atomic writes and writer reservation |
 | [SQLite PRAGMAs](https://www.sqlite.org/pragma.html) and [schema table](https://www.sqlite.org/schematab.html) | Live recovered schema and foreign-key integrity |
 | [Rust `std::path`](https://doc.rust-lang.org/std/path/) | Native pathname representation and components |
+| [Rust `Command`](https://doc.rust-lang.org/std/process/struct.Command.html) and [`Child`](https://doc.rust-lang.org/std/process/struct.Child.html) | Structured process execution and process lifecycle |
+| [Rust atomic types](https://doc.rust-lang.org/std/sync/atomic/) | Explicit shared-memory synchronization primitives |
+| [Rust 2024 formatting style edition](https://doc.rust-lang.org/edition-guide/rust-2024/rustfmt-style-edition.html) | Keep Cargo, editor and CI formatting aligned |
+| [Cargo testing](https://doc.rust-lang.org/cargo/commands/cargo-test.html) | Actual test targets and feature invocation |
 | [Safety-Critical Rust Consortium](https://arewesafetycriticalyet.org/) | Research reference for stronger assurance when justified |
 | [Consortium coding guidelines](https://coding-guidelines.arewesafetycriticalyet.org/) | Emerging/draft suggestions to evaluate case-by-case, **not** automatically adopted standards |
 
