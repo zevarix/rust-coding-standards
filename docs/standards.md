@@ -21,12 +21,17 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-TYPE-001](rules/types-and-errors.md#rcs-type-001--model-consequential-identities-distinctly) | Required* | Review/tests | Prevent identity/unit mixups |
 | [RCS-NUM-001](rules/numbers-and-bounds.md#rcs-num-001--check-consequential-arithmetic) | Required* | Review/tests | Checked sizes, offsets and budgets |
 | [RCS-NUM-002](rules/numbers-and-bounds.md#rcs-num-002--reject-lossy-conversions-where-identity-or-size-matters) | Required* | Review/tests | Explicit fallible narrowing |
+| [RCS-INPUT-001](rules/untrusted-input.md#rcs-input-001--bound-actual-work-not-just-declared-sizes) | Required* | Review/tests | Bound actual untrusted decode work |
+| [RCS-INPUT-002](rules/untrusted-input.md#rcs-input-002--make-malformed-or-partial-input-outcomes-explicit) | Required* | Review/tests | Reject incomplete authoritative parsing |
 | [RCS-API-001](rules/types-and-errors.md#rcs-api-001--follow-predictable-api-conventions) | Advisory | Review/Clippy | Conventional Rust APIs |
 | [RCS-ERR-001](rules/types-and-errors.md#rcs-err-001--use-explicit-recoverable-errors) | Required | Review/Clippy/tests | `Result` and error propagation |
 | [RCS-ERR-002](rules/types-and-errors.md#rcs-err-002--preserve-actionable-boundary-context) | Advisory | Human review/tests | Diagnostic boundaries |
 | [RCS-SAFE-001](rules/safety.md#rcs-safe-001--justify-unsafe-operations) | Required* | Review/tests | `unsafe` soundness |
 | [RCS-DATA-001](rules/safety.md#rcs-data-001--protect-user-owned-data) | Required* | Review/tests | Non-destructive defaults |
 | [RCS-FS-001](rules/mutable-effects.md#rcs-fs-001--recheck-mutable-filesystem-targets-before-consequential-effects) | Required* | Review/tests | Current file/target identity at effects |
+| [RCS-PATH-001](rules/persistence-and-paths.md#rcs-path-001--do-not-confuse-pathname-text-with-filesystem-identity) | Required* | Review/tests | Native path representation vs physical identity |
+| [RCS-DB-001](rules/persistence-and-paths.md#rcs-db-001--commit-related-state-transitions-atomically) | Required* | Review/tests | Atomic guarded SQLite transitions |
+| [RCS-DB-002](rules/persistence-and-paths.md#rcs-db-002--qualify-the-live-schema-and-recovery-invariants) | Required* | Review/tests | Validate live SQLite enforcement schema |
 | [RCS-STATE-001](rules/mutable-effects.md#rcs-state-001--do-not-register-an-effect-as-complete-before-verification) | Required* | Review/tests | Prove output before completion |
 | [RCS-STATE-002](rules/mutable-effects.md#rcs-state-002--reconcile-uncertain-effects-before-retrying-them) | Required* | Review/tests | Reconcile ambiguous retry outcomes |
 | [RCS-PERF-001](rules/performance.md#rcs-perf-001--review-work-across-call-paths) | Required* | Review/instrumentation | Avoid costly duplicate work |
