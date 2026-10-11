@@ -1,4 +1,4 @@
-<!-- Private local documentation theme. Links and headings work without JavaScript. -->
+<!-- Copyright (c) 2026 Peder Klockmann (Zevarix). Original Forge homepage presentation: all rights reserved. See LICENSE-FORGE-THEME at repository root. Links and headings work without JavaScript. -->
 
 <div class="forge-home">
   <section class="forge-hero" aria-labelledby="forge-hero-title">
@@ -9,7 +9,7 @@
         <a class="forge-button forge-button--accent" href="standards/">Browse rules</a>
         <a class="forge-button forge-button--quiet" href="adoption/">Adoption guide</a>
       </div>
-      <p class="forge-hero__foot">Private draft · Not yet adopted</p>
+      <p class="forge-hero__foot">Private working draft · Adopted by Retro Distro</p>
     </div>
     <div class="forge-window" aria-label="Example Rust function using checked arithmetic">
       <div class="forge-window__bar">
@@ -65,6 +65,6 @@ The rules draw on the Rust Style Guide, Rust API Guidelines, and Clippy. Every r
 
 ## Adoption and publication
 
-Projects opt into a reviewed version and retain their own architecture, exceptions, testing, and merge authority. See [adoption](adoption.md) and [contributing](contributing.md).
+Projects explicitly adopt either latest main or a selected revision, and retain their own architecture, exceptions, testing, and merge authority. See [adoption](adoption.md) and [contributing](contributing.md).
 
-The repository remains **private**. Licensing, public visibility, and deployment require separate owner approval. The crab-inspired mark is original artwork, not official Rust branding.
+Original RCS guidelines, code examples and the Forge crab mark are **MIT OR Apache-2.0**, Copyright (c) 2026 Peder Klockmann (Zevarix); the authored **Forge CSS and homepage theme** remain rights reserved. See [Licensing and reuse](licensing.md). This repository remains **private**: public visibility and deployment still require separate owner approval. The crab mark is not official Rust branding.

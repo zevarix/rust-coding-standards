@@ -1,0 +1,9 @@
+Zevarix Rust Coding Standards
+Copyright (c) 2026 Peder Klockmann (Zevarix)
+
+Except for the expressly reserved Forge theme files identified in COPYRIGHT,
+this repository's original documentation, examples, tooling and independently
+authored Forge crab SVG are dual-licensed under MIT OR Apache-2.0.
+
+The standards are independently authored and are not official Rust Project
+or Rust Foundation guidance. External references are cited separately.

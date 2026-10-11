@@ -8,4 +8,4 @@ Prefer minimal, broadly reusable principles over rules tied to one product, oper
 
 A project adopting these standards owns its own merge and release decisions. A reviewer finding here cannot authorize modifications or deployments in a consuming repository.
 
-Before opening this repository to the public, choose a compatible license for original text and review every example for third-party rights, private details and accidental publication. Public visibility requires the owner's explicit approval.
+Original documentation, Rust examples, tools and crab artwork are contributed under **MIT OR Apache-2.0** unless different rights are specifically documented and accepted. Contributors retain copyright in their original work; document third-party source rights. The Forge CSS and authored homepage presentation are **rights reserved**, not ordinary open-source contributions; editing them requires separate rights coordination. See [Licensing and reuse](licensing.md). Public visibility still requires a separate explicit owner approval and source/history review.

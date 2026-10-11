@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
 """Synthetic SQLite tests supporting RCS-DB-001 and RCS-DB-002.
 
 These test SQLite's documented transaction/schema properties, not a consumer

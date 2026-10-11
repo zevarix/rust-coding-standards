@@ -10,6 +10,8 @@ Reusable, explicit Rust engineering standards for Zevarix projects, with rule id
 - [How projects adopt these guidelines](docs/adoption.md)
 - [Preview and build instructions](docs/site-preview.md)
 
-The documentation source is in `docs/`; `mkdocs.yml` supports building the site with **Zensical** and preserves compatibility with Material for MkDocs. The private **Forge** visual theme uses an original crab-inspired logo and local CSS. Preview on `http://127.0.0.1:8001/` when the localhost preview server is running. No GitHub Pages or public deployment is configured.
+The documentation source is in `docs/`; `mkdocs.yml` supports building the site with **Zensical** and preserves compatibility with Material for MkDocs. The reserved-rights **Forge** visual theme uses a separately open-licensed, original crab-inspired logo and local CSS. Preview on `http://127.0.0.1:8001/` when the localhost preview server is running. No GitHub Pages or public deployment is configured.
 
-**Visibility remains private until the owner specifically approves publication.** Rule adoption and integration into another repository are separate owner-local decisions. The documentation license is still undecided for any future public release.
+**Licensing:** Original RCS rules, documentation, examples, validation tools and [Forge crab SVG](docs/assets/brand/forge-crab.svg) are offered under **MIT OR Apache-2.0**, at your choice, with copyright attributed to **Peder Klockmann (Zevarix)**. The original **Forge CSS and homepage visual theme** are **all rights reserved** and excluded from those licenses. See [Licensing and reuse](docs/licensing.md), [COPYRIGHT](COPYRIGHT), [LICENSE-MIT](LICENSE-MIT), [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-FORGE-THEME](LICENSE-FORGE-THEME).
+
+**Visibility remains private until separately approved for publication.** A license choice and the RCS merge authorization do not grant public-site deployment, a public release or a visibility change.

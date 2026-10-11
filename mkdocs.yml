@@ -4,6 +4,7 @@ site_name: Zevarix / Rust Coding Standards
 site_description: Explicit, practical and reusable Rust coding standards for human readers and automated review
 repo_name: zevarix/rust-coding-standards
 repo_url: https://github.com/zevarix/rust-coding-standards
+copyright: Copyright (c) 2026 Peder Klockmann (Zevarix) · Open rules MIT OR Apache-2.0 · Forge theme rights reserved
 
 docs_dir: docs
 site_dir: site
@@ -29,6 +30,7 @@ nav:
   - Local preview: site-preview.md
   - Sources and attribution: sources.md
   - Contributing: contributing.md
+  - Licensing and reuse: licensing.md
 
 theme:
   name: material
