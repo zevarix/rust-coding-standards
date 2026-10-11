@@ -223,7 +223,6 @@ html { scroll-padding-top: 5rem; }
 .md-typeset .forge-window pre code {
   padding: 0;
   background: transparent;
-  font: 550 clamp(.55rem, .9vw, .7rem)/1.85 var(--md-code-font);
   white-space: pre;
   color: #e5edf1;
 }
