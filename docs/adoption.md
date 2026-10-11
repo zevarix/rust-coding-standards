@@ -8,7 +8,7 @@ Place a short note in the adopting repository's own contributing/development doc
 
 ```text
 Rust coding guidance:
-  Source: zevarix/rust-guidelines
+  Source: zevarix/rust-coding-standards
   Revision: <reviewed immutable commit SHA or released version>
   Scope: new or meaningfully changed Rust code
   Local exceptions: <path to owner-local exceptions, or "none">
