@@ -2,7 +2,7 @@
 
 The purpose is to catch **real, significant repeated work**, not to enforce numerical budgets or optimize small code prematurely.
 
-## ZR-PERF-001 — Review work across call paths {#zr-perf-001--review-work-across-call-paths}
+## RCS-PERF-001 — Review work across call paths {#rcs-perf-001--review-work-across-call-paths}
 
 **Level:** Required when the changed or invoked path reads large data, does expensive external work, repeats in a batch, or contains consequential latency.
 
@@ -32,7 +32,7 @@ For large sources, stream bytes through one bounded buffer and update all necess
 
 A useful finding documents: action → nested call chain → number of full passes or queries → size/frequency → effect on time/I/O → which checks are actually independent → smallest safe correction. The count is evidence, not a hard pass/fail quota.
 
-## ZR-PERF-002 — Optimize with evidence {#zr-perf-002--optimize-with-evidence}
+## RCS-PERF-002 — Optimize with evidence {#rcs-perf-002--optimize-with-evidence}
 
 **Level:** Advisory.
 

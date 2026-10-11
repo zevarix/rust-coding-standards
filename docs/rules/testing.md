@@ -1,6 +1,6 @@
 # Testing and documentation
 
-## ZR-TEST-001 — Make tests deterministic and owned {#zr-test-001--make-tests-deterministic-and-owned}
+## RCS-TEST-001 — Make tests deterministic and owned {#rcs-test-001--make-tests-deterministic-and-owned}
 
 **Level:** Required for automated tests in the adopter's scope.
 
@@ -24,7 +24,7 @@ fn writes_only_to_owned_test_tree() -> std::io::Result<()> {
 
 A test capable of deleting or overwriting user files should include a stronger guard than "we hope the path is temporary": verify a test-owned root and refuse operations outside it before mutation. The exact fence is project-specific.
 
-## ZR-TEST-002 — Verify real failure modes {#zr-test-002--verify-real-failure-modes}
+## RCS-TEST-002 — Verify real failure modes {#rcs-test-002--verify-real-failure-modes}
 
 **Level:** Required where code guards identity, data integrity, recovery, untrusted input or other consequential behavior.
 
@@ -42,7 +42,7 @@ A green test count is not proof of atomicity, cross-platform behavior, realistic
 
 Do not require every project to implement irrelevant platform-specific tests or artificial fault-injection machinery.
 
-## ZR-DOC-001 — Document nonobvious contracts {#zr-doc-001--document-nonobvious-contracts}
+## RCS-DOC-001 — Document nonobvious contracts {#rcs-doc-001--document-nonobvious-contracts}
 
 **Level:** Advisory for internal helpers; stronger documentation may be required for public APIs and unsafe contracts.
 

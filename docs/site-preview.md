@@ -56,7 +56,7 @@ We keep the configuration intentionally small: navigation, search, code highligh
 1. Confirm `zensical build` exits successfully and produces `site/index.html`.
 2. Open the standards index, each rule page, adoption, source links and contributor instructions.
 3. Verify left navigation, built-in search and on-page headings work in the browser.
-4. Check Markdown cross-links and IDs such as `ZR-PERF-001` and `ZR-SAFE-001`.
+4. Check Markdown cross-links and IDs such as `RCS-PERF-001` and `RCS-SAFE-001`.
 5. Treat preview as unapproved draft, not a publicly released version.
 
 The source of the guidelines remains the Markdown files under `docs/`, not generated static HTML.

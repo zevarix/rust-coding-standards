@@ -2,7 +2,7 @@
 
 These rules apply when a Rust project handles native FFI, untrusted input, or consequential user data. A small pure arithmetic library need not invent a filesystem approval protocol.
 
-## ZR-SAFE-001 — Justify unsafe operations {#zr-safe-001--justify-unsafe-operations}
+## RCS-SAFE-001 — Justify unsafe operations {#rcs-safe-001--justify-unsafe-operations}
 
 **Level:** Required wherever `unsafe` is necessary.
 
@@ -29,7 +29,7 @@ A comment by itself never proves soundness: review how the preconditions are est
 
 Do not claim all FFI is automatically unsafe in the same way. On Windows, Unix and macOS, the applicable handle, sharing, error and path semantics require platform-specific evidence.
 
-## ZR-DATA-001 — Protect user-owned data {#zr-data-001--protect-user-owned-data}
+## RCS-DATA-001 — Protect user-owned data {#rcs-data-001--protect-user-owned-data}
 
 **Level:** Required when operating on user-owned files, archives, databases or other consequential external state.
 

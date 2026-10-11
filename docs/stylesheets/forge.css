@@ -110,7 +110,7 @@ html { scroll-padding-top: 5rem; }
 .md-typeset table:not([class]) th { background: var(--forge-soft); color: var(--md-default-fg-color); }
 .md-typeset table:not([class]) tr:hover { background: var(--forge-soft); }
 .md-typeset a:not(.forge-button, .forge-card, .headerlink) { text-underline-offset: .15em; }
-.md-typeset h2[id^="zr-"] {
+.md-typeset h2[id^="rcs-"] {
   padding: 1.05rem 0 .25rem;
   margin-top: 2.2rem;
   border-top: 1px solid var(--forge-border);

@@ -2,7 +2,7 @@
 
 These conventions are based on ordinary Rust tooling and the design goals of a shared coding standard. The rules below are original guidance, not copied from upstream.
 
-## ZR-FMT-001 — Format with rustfmt {#zr-fmt-001--format-with-rustfmt}
+## RCS-FMT-001 — Format with rustfmt {#rcs-fmt-001--format-with-rustfmt}
 
 **Level:** Required for Rust source in the adopter's declared scope.
 
@@ -16,7 +16,7 @@ cargo fmt --all -- --check
 
 A formatting diff alone is not evidence of a correctness defect. Do not create an unbounded unrelated reformatting PR in the middle of a behavioral fix.
 
-## ZR-NAME-001 — Use idiomatic names {#zr-name-001--use-idiomatic-names}
+## RCS-NAME-001 — Use idiomatic names {#rcs-name-001--use-idiomatic-names}
 
 **Level:** Required when naming new Rust code; backward-compatible public APIs may retain established names.
 
@@ -40,7 +40,7 @@ Avoid abbreviations only the original author understands, misleading security/au
 
 A local product may require different established public naming conventions; write down a scoped exception instead of silently renaming its API.
 
-## ZR-MOD-001 — Organize by responsibility {#zr-mod-001--organize-by-responsibility}
+## RCS-MOD-001 — Organize by responsibility {#rcs-mod-001--organize-by-responsibility}
 
 **Level:** Advisory.
 

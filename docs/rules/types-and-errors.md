@@ -1,6 +1,6 @@
 # Types, APIs and errors
 
-## ZR-TYPE-001 — Model consequential identities distinctly {#zr-type-001--model-consequential-identities-distinctly}
+## RCS-TYPE-001 — Model consequential identities distinctly {#rcs-type-001--model-consequential-identities-distinctly}
 
 **Level:** Required when accidentally interchanging same-primitive values would materially affect correctness or safety.
 
@@ -34,7 +34,7 @@ fn bind(source_id: &SourceId, target_id: &TargetId) {
 
 The example is intentionally small. Real constructors should validate externally supplied IDs. A newtype is **not** mandatory for every internal counter, temporary string or obvious local value: use it where the type carries a meaningful invariant.
 
-## ZR-API-001 — Follow predictable API conventions {#zr-api-001--follow-predictable-api-conventions}
+## RCS-API-001 — Follow predictable API conventions {#rcs-api-001--follow-predictable-api-conventions}
 
 **Level:** Advisory for public or broadly reused Rust APIs.
 
@@ -48,7 +48,7 @@ The example is intentionally small. Real constructors should validate externally
 
 Avoid introducing wrapper types and traits for hypothetical future integrations without a concrete consumer. Consult the [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/checklist.html), but apply public-library advice proportionally to private application code.
 
-## ZR-ERR-001 — Use explicit recoverable errors {#zr-err-001--use-explicit-recoverable-errors}
+## RCS-ERR-001 — Use explicit recoverable errors {#rcs-err-001--use-explicit-recoverable-errors}
 
 **Level:** Required on a path that can fail because of I/O, malformed input, provider output, or other expected environmental conditions.
 
@@ -71,7 +71,7 @@ fn read_magic(path: &Path) -> io::Result<[u8; 4]> {
 
 A failed I/O read must not produce an invented digest or a partially trusted state. `expect`/`unwrap` remain reasonable in tests, examples and contexts with proven invariants; a blanket ban is not intended.
 
-## ZR-ERR-002 — Preserve actionable boundary context {#zr-err-002--preserve-actionable-boundary-context}
+## RCS-ERR-002 — Preserve actionable boundary context {#rcs-err-002--preserve-actionable-boundary-context}
 
 **Level:** Advisory.
 
