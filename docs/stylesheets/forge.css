@@ -239,6 +239,14 @@ html { scroll-padding-top: 5rem; }
   border-top: 1px solid rgba(255,255,255,.07);
 }
 .forge-window__foot strong { color: #ffb587; }
+/* Zensical gives the clipboard navigation wrapper a pale background,
+ * including on hover. Remove only that extra panel around the custom
+ * copy button; preserve the button's own contrast and focus treatment. */
+.md-typeset .forge-window .md-code__nav,
+.md-typeset .forge-window pre:hover > .md-code__nav {
+  background-color: transparent;
+}
+
 /* Zensical inserts the example's .md-code__button at runtime, and its
  * ultra-muted default icon disappears against this fixed dark code panel.
  * Scope the contrast fix here; leave ordinary documentation blocks alone. */
