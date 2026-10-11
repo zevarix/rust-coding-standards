@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
 """Validate the single-source RCS Markdown rule index and local links.
 
 Standard library only; optional --site verifies generated Zensical anchors.

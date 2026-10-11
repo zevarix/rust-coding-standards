@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
 """Contract tests for opt-in Rust example extraction (standard library only)."""
 from __future__ import annotations
 

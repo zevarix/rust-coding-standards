@@ -1,0 +1,35 @@
+Zevarix Rust Coding Standards (RCS)
+Copyright (c) 2026 Peder Klockmann (Zevarix)
+
+Copyright in future third-party contributions remains with the respective
+contributors unless the contributor explicitly agrees otherwise. Git history
+and individual file notices may identify further rights holders.
+
+Except for the two file-specific Forge theme exceptions below, the original
+materials in this repository are offered, at your option, under either:
+
+  - the MIT License (LICENSE-MIT), OR
+  - the Apache License, Version 2.0 (LICENSE-APACHE).
+
+SPDX license expression: MIT OR Apache-2.0.
+
+This includes the written rules and guidance, Rust examples, Python tooling
+and tests, the site configuration, and the original Forge crab artwork at
+docs/assets/brand/forge-crab.svg.
+
+THEME EXCEPTION — NOT LICENSED UNDER MIT OR APACHE-2.0:
+
+  - docs/stylesheets/forge.css — original Forge visual CSS
+  - docs/index.md — original Forge homepage layout and presentation
+
+These two files are Copyright (c) 2026 Peder Klockmann (Zevarix).
+All rights are reserved as detailed in LICENSE-FORGE-THEME. The independent
+Forge crab SVG is explicitly NOT part of this theme exception.
+
+External links, Rust/Zensical/Material dependencies, third-party marks,
+and content not authored for RCS remain under their own rights. The shared
+license grants do not imply endorsement by the Rust Project, Rust Foundation
+or third parties, or separately authorize use of any Zevarix trade names.
+
+Repository licensing does not itself authorize changing this private
+repository's visibility, publishing the website or creating a public release.

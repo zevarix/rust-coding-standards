@@ -1,0 +1,25 @@
+Forge visual theme — reserved rights notice
+Copyright (c) 2026 Peder Klockmann (Zevarix). All rights reserved.
+
+This notice applies ONLY to:
+  docs/stylesheets/forge.css
+  docs/index.md (its original Forge homepage markup and visual layout)
+
+These files are NOT covered by the project's MIT OR Apache-2.0 grant.
+
+Permission is granted to view and render the unmodified theme as part of
+the original RCS documentation, including a private local preview for
+evaluation or contributions. No license is granted to use, copy, adapt,
+redistribute, sublicense, or publish the Forge visual theme as an independent
+theme or in another project without separate written permission from the
+copyright holder. GitHub's platform terms separately govern its hosted
+viewing and forking facilities.
+
+This reservation does not apply to the independently authored Forge crab SVG
+at docs/assets/brand/forge-crab.svg. The SVG is open for reuse under
+MIT OR Apache-2.0, like the written RCS rules and code examples.
+
+Third-party Zensical, Material and upstream Rust project assets are not
+owned or licensed by Zevarix under this notice. Making the repository
+public would expose the reserved theme source; reserved rights are not
+a secrecy mechanism.

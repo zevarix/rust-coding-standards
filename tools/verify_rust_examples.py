@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
 """Compile explicitly marked Rust examples from the RCS rulebook.
 
 Only immediately adjacent <!-- rcs-example: test|compile --> fenced Rust

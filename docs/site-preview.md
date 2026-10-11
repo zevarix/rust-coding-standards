@@ -32,7 +32,7 @@ The local build output is written into `site/`, which is deliberately ignored by
 
 This project adds a small stylesheet (`docs/stylesheets/forge.css`) on top of
 Zensical's built-in modern Material-derived theme. The original crab-inspired
-SVG (`docs/assets/brand/forge-crab.svg`) acts as the logo and favicon.
+SVG (`docs/assets/brand/forge-crab.svg`) acts as the logo and favicon. The SVG is **MIT OR Apache-2.0**, but the original Forge CSS and authored homepage visual theme remain all rights reserved. See [Licensing and reuse](licensing.md).
 It references the broader Rustacean community but **is not Ferris artwork** or
 official Rust branding. See `docs/sources.md` for the inspiration and distinction.
 

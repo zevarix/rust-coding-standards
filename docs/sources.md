@@ -33,9 +33,7 @@ hexagonal crab mark in this repository was **drawn independently**,
 not copied from Ferris's offered SVG/PNG files. No sponsorship or
 endorsement by the Rust Project or mascot artist is implied.
 
-The guidelines' mark and visual style remain **unreleased private draft assets**;
-an eventual original-document/artwork license and public-use review are still
-owner-controlled decisions.
+The original crab SVG is Copyright (c) 2026 Peder Klockmann (Zevarix), licensed **MIT OR Apache-2.0** alongside the rulebook and tools. The separate Forge CSS and custom homepage visual theme remain **all rights reserved**; see [Licensing and reuse](licensing.md). The repository remains private and no public publication is approved.
 
 
 ## Source handling
@@ -43,9 +41,9 @@ owner-controlled decisions.
 - Link to upstream explanations rather than reproducing their prose or examples verbatim.
 - Mark independently authored rules as our own; don't call them official Rust policy.
 - An upstream checklist item does **not** imply universal applicability to application internals. Consider whether the source describes public libraries, formatting, tooling or a specific assurance domain.
-- Before public release, verify licensing of all included material, select a license for original text, and perform a private-information and provenance check.
+- Before public release, verify the selected [licenses and exceptions](licensing.md) against included material, and perform a private-information and provenance check.
 - Upstream links can change. Review cited upstream semantics when materially revising a rule; do not silently import new upstream requirements.
 
-## First publication decision still pending
+## Publication decision still pending
 
-**No documentation license has been selected and no public release is authorized.** The repository owner will explicitly choose a license and approve visibility changes after reviewing the draft. Avoid third-party pasted guideline text or examples until redistribution rights have been examined.
+**The owner has selected MIT OR Apache-2.0 for original RCS documentation, tools and Forge crab SVG, with Forge CSS/homepage theme rights reserved. No public release or visibility change has been authorized.** Review history, assets and third-party materials before future publication, and avoid pasted guideline text/examples without verified redistribution rights.
