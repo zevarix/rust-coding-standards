@@ -9,7 +9,7 @@
         <a class="forge-button forge-button--accent" href="standards/">Browse rules</a>
         <a class="forge-button forge-button--quiet" href="adoption/">Adoption guide</a>
       </div>
-      <p class="forge-hero__foot">Private working draft · Adopted by Retro Distro</p>
+      <p class="forge-hero__foot">Working draft · Adopted by Retro Distro</p>
     </div>
     <div class="forge-window" aria-label="Example Rust function using checked arithmetic">
       <div class="forge-window__bar">
@@ -67,4 +67,4 @@ The rules draw on the Rust Style Guide, Rust API Guidelines, and Clippy. Every r
 
 Projects explicitly adopt either latest main or a selected revision, and retain their own architecture, exceptions, testing, and merge authority. See [adoption](adoption.md) and [contributing](contributing.md).
 
-Original RCS guidelines, code examples and the Forge crab mark are **MIT OR Apache-2.0**, Copyright (c) 2026 Peder Klockmann (Zevarix); the authored **Forge CSS and homepage theme** remain rights reserved. See [Licensing and reuse](licensing.md). This repository remains **private**: public visibility and deployment still require separate owner approval. The crab mark is not official Rust branding.
+Original RCS guidelines, code examples and the Forge crab mark are **MIT OR Apache-2.0**, Copyright (c) 2026 Peder Klockmann (Zevarix); the authored **Forge CSS and homepage theme** remain rights reserved. See [Licensing and reuse](licensing.md). Repository visibility, documentation hosting and public releases are separate owner decisions. RCS licensing does not itself approve publication. The crab mark is not official Rust branding.

@@ -42,11 +42,12 @@ and other third-party dependencies retain their own licenses.
 
 ## Current repository status
 
-RCS is currently **private** and has no public versioned release. These
-license terms prepare clear reuse rights but do not authorize public
-GitHub visibility, docs hosting, domain/deployment or a release. Any
-future publication requires a separate owner approval and source/history
-review. If the repository is eventually made public, the reserved
+At the 2026-10-11 preparation audit, RCS was **private** and had no
+public versioned release. These license terms prepare clear reuse rights,
+but do not authorize public GitHub visibility, documentation hosting,
+domain/deployment or a release. Any future publication requires separate
+owner approval and a fresh source/history review. See the
+[publication-readiness checklist](publication-readiness.md). If the repository is eventually made public, the reserved
 Forge CSS and homepage layout will also become visible in its source;
 copyright reservation alone does not keep those files confidential.
 
