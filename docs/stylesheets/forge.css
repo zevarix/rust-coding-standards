@@ -58,12 +58,29 @@ html { scroll-padding-top: 5rem; }
 .md-header__title { font-weight: 760; letter-spacing: -.035em; }
 .md-logo img { width: 2rem; height: 2rem; object-fit: contain; }
 .md-grid { max-width: 78rem; }
-.md-search__form {
-  background: rgba(255,255,255,.10);
-  border: 1px solid rgba(255,255,255,.13);
-  border-radius: .65rem;
+/* Zensical's modern theme renders the header search control as a button.
+ * Give the light palette an actual input-like surface against the navy header.
+ * Dark-mode search already has usable contrast and stays on the theme default. */
+[data-md-color-scheme="default"] .md-header .md-search__button {
+  color: #192a35;
+  background: #fff3e5;
+  border: 1px solid #e09b74;
+  border-radius: .48rem;
+  font-weight: 700;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .12);
 }
-.md-search__form:hover { background: rgba(255,255,255,.15); }
+[data-md-color-scheme="default"] .md-header .md-search__button::before {
+  background-color: #192a35;
+}
+[data-md-color-scheme="default"] .md-header .md-search__button:hover {
+  color: #14232d;
+  background: #ffffff;
+  border-color: #f2b38e;
+}
+[data-md-color-scheme="default"] .md-header .md-search__button:focus-visible {
+  outline: 3px solid #ffc39e;
+  outline-offset: 2px;
+}
 .md-nav__link--active { color: var(--forge-link); font-weight: 750; }
 .md-nav__link:hover { color: var(--forge-link); }
 .md-nav__title { font-weight: 680; }
