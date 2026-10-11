@@ -51,6 +51,20 @@ Zensical can use an existing `mkdocs.yml`, including familiar Material navigatio
 
 We keep the configuration intentionally small: navigation, search, code highlighting, a light/dark choice and anchored rule headings. Avoid plugins, analytics, private-site publication or content duplication unless they provide concrete value.
 
+## Check documentation and Rust examples
+
+These commands run locally and in the private repository's source-validation CI:
+
+```sh
+python tools/verify_standards.py
+zensical build
+python tools/verify_standards.py --site
+python -m unittest discover -s tools -p "test_*.py"
+python tools/verify_rust_examples.py
+```
+
+The Rust example check needs installed `rustc` with Rust 2024 edition support. It compiles **only marked self-contained examples**, runs marked tests and fails on a broken marker; deliberate anti-examples and pseudocode are never executed. The repository uses the current compatible stable Rust toolchain for shared examples; consuming projects keep their own supported toolchain and platform policy. The GitHub Actions workflow validates source only and does not deploy or publish the private site.
+
 ## What to validate
 
 1. Confirm `zensical build` exits successfully and produces `site/index.html`.

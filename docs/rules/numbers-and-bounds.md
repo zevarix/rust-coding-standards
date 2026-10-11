@@ -21,6 +21,7 @@ let end = start + length;
 
 **Prefer** when an overflowing range is invalid:
 
+<!-- rcs-example: test -->
 ```rust
 #[derive(Debug, PartialEq, Eq)]
 pub enum RangeError {
@@ -67,6 +68,7 @@ let encoded_length = file_size as u32;
 
 **Prefer**:
 
+<!-- rcs-example: test -->
 ```rust
 #[derive(Debug, PartialEq, Eq)]
 pub enum EncodeError {

@@ -22,6 +22,7 @@ if !path.exists() {
 
 **Prefer** an exclusive creation primitive for the narrow case of creating a new file where its parent and permission are already trusted:
 
+<!-- rcs-example: compile -->
 ```rust
 use std::{fs::{File, OpenOptions}, io, path::Path};
 
