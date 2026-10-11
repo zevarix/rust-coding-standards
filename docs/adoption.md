@@ -28,6 +28,21 @@ A project must select a real revision after reviewing it. This draft does **not*
 
 A consumer may adopt a subset or stricter rules, but should identify the difference explicitly rather than pretending every rule applies unchanged.
 
+## Use in a review skill
+
+An adopting repository may tell its reviewer to read this pinned standards revision, select applicable `RCS-*` IDs and cite them in concrete findings. The [reviewer guide](review-guide.md) defines a concise method and an example comment. Do **not** paste the whole external rulebook into a project skill or have the skill automatically pull the latest unreviewed standard.
+
+A workable, owner-local review instruction would be:
+
+```text
+When reviewing changed Rust, read the owning issue and local safety contracts first.
+Then inspect applicable rules from the explicitly adopted RCS revision.
+Cite rule IDs only for demonstrated applicability and evidence-backed findings.
+A clean RCS assessment is not independent review or merge authorization.
+```
+
+Any private repository source remains subject to the consumer's actual access permissions. The initial draft is not yet a released standard; adopters must not assume an unapproved commit pin.
+
 ## Example validation
 
 These are examples, not commands to impose on every repo:

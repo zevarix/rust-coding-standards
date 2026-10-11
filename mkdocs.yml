@@ -12,10 +12,13 @@ use_directory_urls: true
 nav:
   - Home: index.md
   - Standards index: standards.md
+  - Reviewing code: review-guide.md
   - Coding rules:
       - Style and structure: rules/style-and-structure.md
       - Types, APIs and errors: rules/types-and-errors.md
+      - Numbers and bounds: rules/numbers-and-bounds.md
       - Safety and user data: rules/safety.md
+      - Filesystem identity and effects: rules/mutable-effects.md
       - Performance and efficiency: rules/performance.md
       - Testing and documentation: rules/testing.md
   - Adopting the standards: adoption.md
