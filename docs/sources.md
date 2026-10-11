@@ -12,6 +12,10 @@ This repository is **independently authored guidance**, not a copy of the materi
 | [Standard checked integer arithmetic](https://doc.rust-lang.org/std/primitive.u64.html#method.checked_add) | Bounded arithmetic when overflow is invalid |
 | [`TryFrom` conversions](https://doc.rust-lang.org/std/convert/trait.TryFrom.html) | Fallible, lossless numeric and type conversions |
 | [`OpenOptions::create_new`](https://doc.rust-lang.org/std/fs/struct.OpenOptions.html#method.create_new) | Atomic exclusive file creation within a larger application safety contract |
+| [Rust `Read`](https://doc.rust-lang.org/std/io/trait.Read.html) | Streaming/bounded input observations |
+| [SQLite transaction control](https://www.sqlite.org/lang_transaction.html) | Atomic writes and writer reservation |
+| [SQLite PRAGMAs](https://www.sqlite.org/pragma.html) and [schema table](https://www.sqlite.org/schematab.html) | Live recovered schema and foreign-key integrity |
+| [Rust `std::path`](https://doc.rust-lang.org/std/path/) | Native pathname representation and components |
 | [Safety-Critical Rust Consortium](https://arewesafetycriticalyet.org/) | Research reference for stronger assurance when justified |
 | [Consortium coding guidelines](https://coding-guidelines.arewesafetycriticalyet.org/) | Emerging/draft suggestions to evaluate case-by-case, **not** automatically adopted standards |
 
