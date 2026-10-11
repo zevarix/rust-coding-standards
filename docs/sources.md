@@ -9,6 +9,9 @@ This repository is **independently authored guidance**, not a copy of the materi
 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | Idiomatic ownership, errors, testing and application-level explanations |
 | [Clippy documentation](https://doc.rust-lang.org/clippy/) | Mechanical diagnostics and selectable lint categories |
 | [Cargo Book](https://doc.rust-lang.org/cargo/) | Workspace/toolchain/dependency workflow context |
+| [Standard checked integer arithmetic](https://doc.rust-lang.org/std/primitive.u64.html#method.checked_add) | Bounded arithmetic when overflow is invalid |
+| [`TryFrom` conversions](https://doc.rust-lang.org/std/convert/trait.TryFrom.html) | Fallible, lossless numeric and type conversions |
+| [`OpenOptions::create_new`](https://doc.rust-lang.org/std/fs/struct.OpenOptions.html#method.create_new) | Atomic exclusive file creation within a larger application safety contract |
 | [Safety-Critical Rust Consortium](https://arewesafetycriticalyet.org/) | Research reference for stronger assurance when justified |
 | [Consortium coding guidelines](https://coding-guidelines.arewesafetycriticalyet.org/) | Emerging/draft suggestions to evaluate case-by-case, **not** automatically adopted standards |
 

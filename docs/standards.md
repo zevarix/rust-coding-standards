@@ -19,11 +19,16 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-NAME-001](rules/style-and-structure.md#rcs-name-001--use-idiomatic-names) | Required | Compiler/Clippy + review | Naming conventions |
 | [RCS-MOD-001](rules/style-and-structure.md#rcs-mod-001--organize-by-responsibility) | Advisory | Human review | Cohesive modules, not line quotas |
 | [RCS-TYPE-001](rules/types-and-errors.md#rcs-type-001--model-consequential-identities-distinctly) | Required* | Review/tests | Prevent identity/unit mixups |
+| [RCS-NUM-001](rules/numbers-and-bounds.md#rcs-num-001--check-consequential-arithmetic) | Required* | Review/tests | Checked sizes, offsets and budgets |
+| [RCS-NUM-002](rules/numbers-and-bounds.md#rcs-num-002--reject-lossy-conversions-where-identity-or-size-matters) | Required* | Review/tests | Explicit fallible narrowing |
 | [RCS-API-001](rules/types-and-errors.md#rcs-api-001--follow-predictable-api-conventions) | Advisory | Review/Clippy | Conventional Rust APIs |
 | [RCS-ERR-001](rules/types-and-errors.md#rcs-err-001--use-explicit-recoverable-errors) | Required | Review/Clippy/tests | `Result` and error propagation |
 | [RCS-ERR-002](rules/types-and-errors.md#rcs-err-002--preserve-actionable-boundary-context) | Advisory | Human review/tests | Diagnostic boundaries |
 | [RCS-SAFE-001](rules/safety.md#rcs-safe-001--justify-unsafe-operations) | Required* | Review/tests | `unsafe` soundness |
 | [RCS-DATA-001](rules/safety.md#rcs-data-001--protect-user-owned-data) | Required* | Review/tests | Non-destructive defaults |
+| [RCS-FS-001](rules/mutable-effects.md#rcs-fs-001--recheck-mutable-filesystem-targets-before-consequential-effects) | Required* | Review/tests | Current file/target identity at effects |
+| [RCS-STATE-001](rules/mutable-effects.md#rcs-state-001--do-not-register-an-effect-as-complete-before-verification) | Required* | Review/tests | Prove output before completion |
+| [RCS-STATE-002](rules/mutable-effects.md#rcs-state-002--reconcile-uncertain-effects-before-retrying-them) | Required* | Review/tests | Reconcile ambiguous retry outcomes |
 | [RCS-PERF-001](rules/performance.md#rcs-perf-001--review-work-across-call-paths) | Required* | Review/instrumentation | Avoid costly duplicate work |
 | [RCS-PERF-002](rules/performance.md#rcs-perf-002--optimize-with-evidence) | Advisory | Profiling/review | Avoid premature optimization |
 | [RCS-TEST-001](rules/testing.md#rcs-test-001--make-tests-deterministic-and-owned) | Required | Tests/review | Synthetic fixture isolation |
@@ -31,6 +36,10 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-DOC-001](rules/testing.md#rcs-doc-001--document-nonobvious-contracts) | Advisory | Rustdoc/review | Important invariants |
 
 **Required*** means required when that rule's stated applicability condition holds (for example, user-owned data or a large-file hot path), not when an unrelated project feature is absent.
+
+## Using these rules in a code review
+
+Follow the [reviewer guide](review-guide.md) to select applicable rule IDs, trace affected call paths, record evidence-backed findings, and separate correctness defects from optional suggestions. A consumer must explicitly adopt a specific reviewed revision before these are binding project requirements.
 
 ## Application
 
