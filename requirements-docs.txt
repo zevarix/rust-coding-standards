@@ -1,0 +1,3 @@
+# Pin the site builder for repeatable local draft previews.
+# Version choice is not an approval to publish or a full lock of transitive packages.
+zensical==0.0.69

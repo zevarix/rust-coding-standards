@@ -1,0 +1,61 @@
+# Local documentation preview only. Publishing and public visibility are owner-gated.
+# MkDocs-compatible configuration used by Zensical.
+site_name: Zevarix Rust Coding Standards
+site_description: Explicit, practical and reusable Rust coding standards for human readers and automated review
+repo_name: zevarix/rust-guidelines
+repo_url: https://github.com/zevarix/rust-guidelines
+
+docs_dir: docs
+site_dir: site
+use_directory_urls: true
+
+nav:
+  - Home: index.md
+  - Standards index: standards.md
+  - Coding rules:
+      - Style and structure: rules/style-and-structure.md
+      - Types, APIs and errors: rules/types-and-errors.md
+      - Safety and user data: rules/safety.md
+      - Performance and efficiency: rules/performance.md
+      - Testing and documentation: rules/testing.md
+  - Adopting the standards: adoption.md
+  - Local preview: site-preview.md
+  - Sources and attribution: sources.md
+  - Contributing: contributing.md
+
+theme:
+  name: material
+  variant: modern
+  language: en
+  features:
+    - navigation.sections
+    - navigation.path
+    - navigation.top
+    - content.code.copy
+    - toc.follow
+    - search.highlight
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+plugins:
+  - search
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
