@@ -27,6 +27,7 @@
   --forge-border: #e1dbd2;
   --forge-link: #984527;
   --forge-card-shadow: 0 16px 50px rgba(29, 39, 47, .055);
+  --forge-code-shadow: 0 15px 38px rgba(29, 42, 49, .11);
 }
 
 [data-md-color-scheme="slate"] {
@@ -46,6 +47,7 @@
   --forge-border: #35454e;
   --forge-link: #ffb18a;
   --forge-card-shadow: 0 18px 45px rgba(0, 0, 0, .2);
+  --forge-code-shadow: 0 15px 38px rgba(0, 0, 0, .26);
 }
 
 html { scroll-padding-top: 5rem; }
@@ -118,8 +120,8 @@ html { scroll-padding-top: 5rem; }
 .md-header__button:focus-visible, .forge-card:focus-visible,
 .forge-button:focus-visible { outline: 3px solid #ffad7e; outline-offset: 3px; }
 
-/* The landing page has a first-class visual composition while rule pages
- * remain plain, legible technical prose. */
+/* Shared layout and spacing for both palettes: toggling light/dark changes
+ * color but not the geometry or position of the hero and its code sample. */
 .md-typeset .forge-home { margin: 0 0 1.5rem; }
 .md-typeset .forge-hero {
   position: relative;
@@ -129,41 +131,25 @@ html { scroll-padding-top: 5rem; }
   grid-template-columns: minmax(0, 1.05fr) minmax(15rem, .95fr);
   align-items: center;
   gap: clamp(1.3rem, 3vw, 2.5rem);
-  padding: clamp(1.5rem, 3.5vw, 3.1rem);
-  border: 1px solid #304451;
-  border-radius: 1.05rem;
-  color: #eff3f5;
-  background:
-    radial-gradient(circle at 94% 0%, rgba(230, 125, 75, .22), transparent 40%),
-    radial-gradient(circle at 2% 100%, rgba(61, 92, 109, .19), transparent 55%),
-    linear-gradient(125deg, #182a35, #101b24);
-}
-.forge-hero::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  z-index: -1;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
-  background-size: 31px 31px;
-  opacity: .16;
-  mask-image: linear-gradient(to right, transparent 10%, black 85%);
+  padding: .9rem 0 1.8rem;
+  border: 0;
+  border-bottom: 1px solid var(--forge-border);
+  border-radius: 0;
+  color: var(--md-default-fg-color);
+  background: transparent;
 }
 .md-typeset .forge-hero h1 {
   margin: 0 0 1.05rem;
-  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  font-size: clamp(2.1rem, 3.25vw, 3.25rem);
   line-height: 1.07;
   font-weight: 820;
   letter-spacing: -.06em;
-  color: #fff6ed;
+  color: var(--md-default-fg-color);
 }
-.forge-hero h1 em { color: #ffb487; font-style: normal; }
 .md-typeset .forge-hero__lead {
   margin: 0 0 1.6rem;
   max-width: 29rem;
-  color: #c9d5da;
+  color: var(--forge-muted);
   font-size: clamp(.86rem, 1.1vw, 1rem);
   line-height: 1.65;
 }
@@ -184,65 +170,30 @@ html { scroll-padding-top: 5rem; }
 .md-typeset a.forge-button--accent { background: #ffb587; color: #2b201e; }
 .md-typeset a.forge-button--accent:hover { background: #ffd1a9; color: #2b201e; }
 .md-typeset a.forge-button--quiet {
-  background: rgba(255,255,255,.06);
-  border-color: #4e6573;
-  color: #f0f5f6;
+  background: transparent;
+  border-color: var(--forge-border);
+  color: var(--md-default-fg-color);
 }
-.md-typeset a.forge-button--quiet:hover { background: rgba(255,255,255,.12); color: #fff; }
+.md-typeset a.forge-button--quiet:hover {
+  background: var(--forge-soft);
+  border-color: var(--forge-coral);
+  color: var(--md-default-fg-color);
+}
 .forge-hero__foot {
   display: flex; align-items: center; gap: .55rem;
   margin-top: 1.5rem;
-  color: #a8b6bf;
+  color: var(--forge-muted);
   letter-spacing: .04em;
   font: 650 .63rem/1.4 var(--md-code-font);
 }
-/* The dark hero is useful in dark mode, but makes an oversized navy slab
- * on the light page. Let the light-mode introduction sit on the page itself;
- * keep only the smaller code sample as a dark visual accent. */
-[data-md-color-scheme="default"] .md-typeset .forge-hero {
-  padding: .9rem 0 1.8rem;
-  color: var(--md-default-fg-color);
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--forge-border);
-  border-radius: 0;
-}
-[data-md-color-scheme="default"] .forge-hero::after {
-  display: none;
-}
-[data-md-color-scheme="default"] .md-typeset .forge-hero h1 {
-  color: var(--md-default-fg-color);
-  font-size: clamp(2.1rem, 3.25vw, 3.25rem);
-}
-[data-md-color-scheme="default"] .md-typeset .forge-hero__lead {
-  color: var(--forge-muted);
-}
-[data-md-color-scheme="default"] .md-typeset a.forge-button--quiet {
-  color: var(--md-default-fg-color);
-  background: transparent;
-  border-color: var(--forge-border);
-}
-[data-md-color-scheme="default"] .md-typeset a.forge-button--quiet:hover {
-  color: var(--md-default-fg-color);
-  background: var(--forge-soft);
-  border-color: #c89c83;
-}
-[data-md-color-scheme="default"] .forge-hero__foot {
-  color: var(--forge-muted);
-}
-[data-md-color-scheme="default"] .forge-window {
-  transform: none;
-  box-shadow: 0 15px 38px rgba(29, 42, 49, .11);
-}
-
 /* Original decorative code panel; not falsely presented as a runnable demo. */
 .forge-window {
   background: #13222c;
   border: 1px solid #405460;
   border-radius: .85rem;
   overflow: hidden;
-  box-shadow: 0 24px 48px rgba(0,0,0,.24);
-  transform: rotate(1deg);
+  box-shadow: var(--forge-code-shadow);
+  transform: none;
 }
 .forge-window__bar {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
@@ -288,6 +239,36 @@ html { scroll-padding-top: 5rem; }
   border-top: 1px solid rgba(255,255,255,.07);
 }
 .forge-window__foot strong { color: #ffb587; }
+/* Zensical inserts the example's .md-code__button at runtime, and its
+ * ultra-muted default icon disappears against this fixed dark code panel.
+ * Scope the contrast fix here; leave ordinary documentation blocks alone. */
+.forge-window .md-code__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  color: #f4f8fa;
+  background: #354c5b;
+  border: 1px solid #668191;
+  border-radius: .35rem;
+  cursor: pointer;
+  opacity: 1;
+  transition: background-color .15s ease, color .15s ease;
+}
+.forge-window .md-code__button::after {
+  background-color: currentColor;
+}
+.forge-window .md-code__button:hover,
+.forge-window .md-code__button:focus-visible {
+  background: #ffd0aa;
+  border-color: #ffd0aa;
+  color: #14232d;
+}
+.forge-window .md-code__button:focus-visible {
+  outline: 2px solid #ffd0aa;
+  outline-offset: 3px;
+}
 .md-typeset .forge-intro { margin-top: 1.3rem; }
 .md-typeset .forge-intro h2 { margin: .4rem 0 0; font-size: clamp(1.5rem, 2.5vw, 2rem); }
 .md-typeset .forge-intro p { margin: .48rem 0 0; max-width: 38rem; color: var(--forge-muted); }
@@ -321,13 +302,13 @@ html { scroll-padding-top: 5rem; }
 .forge-card__description { display: block; margin: .42rem 0 .6rem; color: var(--forge-muted); font-size: .74rem; line-height: 1.6; }
 
 @media (max-width: 72rem) {
-  .forge-hero { grid-template-columns: 1fr; }
+  .md-typeset .forge-hero { grid-template-columns: minmax(0, 1fr); }
   .forge-window { transform: none; max-width: 34rem; }
 }
 @media (max-width: 45rem) {
   .md-typeset .forge-hero { padding: 1.3rem; }
   .md-typeset .forge-hero h1 { font-size: clamp(2.15rem, 9vw, 3.25rem); }
-      .forge-grid { grid-template-columns: 1fr; }
+  .forge-grid { grid-template-columns: 1fr; }
   .forge-window__bar { font-size: .59rem; }
   .forge-window__foot { font-size: .55rem; }
 }
