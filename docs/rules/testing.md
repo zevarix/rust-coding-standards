@@ -42,6 +42,126 @@ A green test count is not proof of atomicity, cross-platform behavior, realistic
 
 Do not require every project to implement irrelevant platform-specific tests or artificial fault-injection machinery.
 
+## RCS-TEST-003 — Organize tests around behavioral contracts and named cases {#rcs-test-003--organize-tests-around-behavioral-contracts-and-named-cases}
+
+**Level:** Advisory. It becomes especially useful when several tests repeat the same
+setup/operation/outcome shape for different input states.
+
+**Enforcement:** Human review of test intent, failure output and duplicated setup; refactor
+only when grouping preserves or improves diagnosis.
+
+### Requirement
+
+Treat one test function as one **independently meaningful behavioral contract**, not as one
+branch, assertion or input combination.
+
+When several scenarios exercise the same contract with the same essential setup,
+operation and outcome shape, prefer a compact table/array of **named cases** over one
+`#[test]` per scenario. Each case should carry enough human-readable identity that a
+failure names the scenario that broke.
+
+Do not optimize for the smallest possible test-function count. Keep separate tests when
+scenarios have materially different setup, external effects, recovery semantics, platform
+requirements, failure contracts, or when grouping would make a failure harder to
+understand.
+
+Prefer a small named case struct once positional tuples become difficult to scan. The
+field names should make the behavior matrix readable without forcing a future maintainer
+to mentally decode several booleans or IDs.
+
+Do not force table-driven structure when only one meaningful scenario exists or when
+parameterization adds more indirection than clarity. Shared helpers/case setup must not
+hide the important precondition the test is supposed to prove.
+
+The purpose is **human-readable executable documentation and maintainable coverage**:
+adding another equivalent scenario should usually mean adding a case, while adding a new
+behavioral contract should usually mean adding a test.
+
+### Example: one selection contract with named cases
+
+<!-- rcs-example: test -->
+```rust
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum Presentation {
+    Interactive,
+    Plain,
+}
+
+fn presentation(is_terminal: bool, plain_requested: bool) -> Presentation {
+    if is_terminal && !plain_requested {
+        Presentation::Interactive
+    } else {
+        Presentation::Plain
+    }
+}
+
+struct Case {
+    name: &'static str,
+    is_terminal: bool,
+    plain_requested: bool,
+    expected: Presentation,
+}
+
+#[test]
+fn presentation_respects_terminal_and_plain_mode() {
+    let cases = [
+        Case {
+            name: "redirected",
+            is_terminal: false,
+            plain_requested: false,
+            expected: Presentation::Plain,
+        },
+        Case {
+            name: "plain requested",
+            is_terminal: true,
+            plain_requested: true,
+            expected: Presentation::Plain,
+        },
+        Case {
+            name: "interactive terminal",
+            is_terminal: true,
+            plain_requested: false,
+            expected: Presentation::Interactive,
+        },
+    ];
+
+    for case in cases {
+        assert_eq!(
+            presentation(case.is_terminal, case.plain_requested),
+            case.expected,
+            "case: {}",
+            case.name,
+        );
+    }
+}
+```
+
+The three rows are examples of the same presentation-selection contract. A scenario that
+needed different terminal cleanup, subprocess effects or recovery assertions would likely
+deserve a separate test rather than another row.
+
+### Reviewer check
+
+- Read the test name: does it describe one behavior/contract rather than an implementation
+  branch or incidental input?
+- Look for clusters of nearly identical tests. If only the input/expected value changes,
+  would named cases make the behavior matrix easier to scan and extend?
+- Check that each grouped case identifies itself in failure output.
+- Prefer a named struct when tuple positions or boolean combinations are hard to decipher.
+- Do not combine tests whose setup, effects, recovery guarantees or platform contracts are
+  independently meaningful.
+- Do not treat fewer test functions as a quality metric. The refactor should reduce
+  duplication or improve comprehension without weakening coverage.
+- Verify shared helpers do not conceal the exact failure precondition.
+
+**Exceptions:** Property tests, fuzz targets, compile-fail suites, macro-generated tests,
+platform harnesses and framework-native parameterized tests may already provide their own
+case identity and execution model. Use the underlying principle rather than wrapping them
+in another table solely for stylistic uniformity.
+
+**Related:** [RCS-TEST-001](#rcs-test-001--make-tests-deterministic-and-owned) and
+[RCS-TEST-002](#rcs-test-002--verify-real-failure-modes).
+
 ## RCS-DOC-001 — Document nonobvious contracts {#rcs-doc-001--document-nonobvious-contracts}
 
 **Level:** Advisory for internal helpers; stronger documentation may be required for public APIs and unsafe contracts.
