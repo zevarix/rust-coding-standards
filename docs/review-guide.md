@@ -24,6 +24,7 @@ Read the [standards index](standards.md), then open only the rules relevant to t
 | Concurrent writer admission or shared mutable state | [Concurrency and tooling](rules/concurrency-and-tooling.md) |
 | Toolchain versions, format/lint or supported target checks | [Concurrency and tooling](rules/concurrency-and-tooling.md) |
 | File hashing, expensive helpers, database requests or repeated batches | [Performance and execution cost](rules/performance.md) |
+| Long-running work, terminal progress, verbose output or diagnostic logging | [Progress, diagnostics and logging](rules/observability.md) |
 | Behavior changes, error paths or public contracts | [Testing and documentation](rules/testing.md) |
 
 Follow the execution path far enough to understand effects. The diff tells you where code changed, not necessarily where the problem occurs. Tests and Clippy can confirm important properties, but passing them does not establish that a file copy, durable transition or large-data call path is correct.
