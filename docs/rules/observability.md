@@ -144,6 +144,111 @@ caller rather than rendering anything itself.
 [RCS-PERF-002](performance.md#rcs-perf-002--optimize-with-evidence), and
 [RCS-CANCEL-001](processes-and-cancellation.md#rcs-cancel-001--separate-stop-requests-from-durable-effect-truth).
 
+## RCS-TERM-001 — Keep terminal presentation recoverable and adaptable {#rcs-term-001--keep-terminal-presentation-recoverable-and-adaptable}
+
+**Level:** Required when an application uses terminal control sequences, cursor hiding,
+in-place animation, alternate screens, color-dependent status, or similar terminal state
+for user-facing operation feedback.
+
+**Enforcement:** Exercise TTY and non-TTY rendering paths, success/failure/cancellation
+cleanup, plain-output mode, and representative narrow/redirected terminals. Review
+terminal-state ownership and cleanup for early returns and panics where the project
+supports panic recovery.
+
+### Requirement
+
+Treat terminal state as a resource that must be restored. If the application hides the
+cursor, changes terminal modes, enters an alternate screen, or applies persistent styling,
+pair acquisition with cleanup that runs on normal completion and ordinary error/cancel
+paths. Prefer an RAII-style guard or another single ownership mechanism over scattered
+"restore" calls that can be skipped by an early return.
+
+A best-effort cleanup failure should not erase the operation's primary error. If restoring
+terminal state itself can fail, retain the primary failure and surface cleanup trouble
+through an appropriate diagnostic channel.
+
+Do not emit terminal-control escape sequences merely because stdout/stderr exists. Detect
+whether the selected presentation stream is an interactive terminal and fall back to plain,
+deterministic text when output is redirected, piped, captured by tests, or otherwise
+non-interactive. Machine-readable modes remain subject to
+[RCS-PROGRESS-001](#rcs-progress-001--keep-perceptibly-long-operations-observable): human
+terminal control must not contaminate their contract.
+
+Provide a practical way to disable animation or in-place rendering when those effects are
+material to the interface. This may be an explicit plain/no-animation option, an adopting
+project's accessibility setting, or another documented mechanism. Do not require a
+particular environment variable or terminal crate universally.
+
+Do not encode essential state in color, animation, cursor position, spinner glyphs, or
+other decoration alone. A user who disables styling, uses a screen reader, redirects
+output, or views a retained log should still be able to determine the phase and final
+outcome from text/structured state.
+
+Choose rendering that degrades sensibly on constrained terminals. Compact output may
+collapse detail while verbose mode exposes more, but neither should corrupt the terminal,
+wrap an unbounded status line indefinitely, or hide the final result after animation ends.
+
+Terminal rendering is presentation, not operation truth. Losing a TTY, failing to draw a
+spinner, or switching to plain output must not change the underlying verification,
+cancellation, persistence or recovery semantics.
+
+### Example: choose an interactive renderer without changing operation semantics
+
+<!-- rcs-example: test -->
+```rust
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum Presentation {
+    Interactive,
+    Plain,
+}
+
+pub fn presentation(is_terminal: bool, plain_requested: bool) -> Presentation {
+    if is_terminal && !plain_requested {
+        Presentation::Interactive
+    } else {
+        Presentation::Plain
+    }
+}
+
+#[test]
+fn redirected_or_explicit_plain_output_never_uses_terminal_animation() {
+    assert_eq!(presentation(false, false), Presentation::Plain);
+    assert_eq!(presentation(true, true), Presentation::Plain);
+    assert_eq!(presentation(true, false), Presentation::Interactive);
+}
+```
+
+This example models the presentation decision only. Real terminal code should use the
+platform/runtime's actual terminal detection (for example Rust's standard terminal
+detection where appropriate) and should own any terminal-state restoration with a guard
+whose cleanup does not panic.
+
+### Reviewer check
+
+- Identify every terminal state changed by the interactive renderer and the single owner
+  responsible for restoring it.
+- Exercise normal success, recoverable error and cancellation/early-return paths; verify
+  the cursor/mode/style is not left altered.
+- Redirect/capture the selected output stream and verify no spinner, cursor-control or ANSI
+  escape sequence leaks into plain/machine-readable output.
+- Confirm users can obtain a non-animated/plain presentation when animation is materially
+  used.
+- Read output without color/animation and confirm phase, failure and final result remain
+  understandable.
+- Inspect high-frequency redraws for flicker, unnecessary work and unbounded line growth.
+- Confirm terminal-rendering failure cannot fabricate operation failure/success or bypass
+  the application's actual state transitions.
+
+**Exceptions:** An application that emits only ordinary newline-delimited text and never
+owns terminal state does not need terminal cleanup machinery. A full-screen terminal UI
+may have a richer renderer contract, but it still needs deterministic state restoration,
+noninteractive separation where supported, and an accessible way to recover essential
+status without relying solely on decoration.
+
+**Related:** [RCS-PROGRESS-001](#rcs-progress-001--keep-perceptibly-long-operations-observable),
+[RCS-LOG-001](#rcs-log-001--emit-useful-bounded-and-safe-diagnostic-logs), and
+[RCS-CANCEL-001](processes-and-cancellation.md#rcs-cancel-001--separate-stop-requests-from-durable-effect-truth).
+
 ## RCS-LOG-001 — Emit useful, bounded and safe diagnostic logs {#rcs-log-001--emit-useful-bounded-and-safe-diagnostic-logs}
 
 **Level:** Required when an application owns long-running, multi-stage, external-effect or

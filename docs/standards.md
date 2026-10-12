@@ -41,6 +41,7 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-PERF-001](rules/performance.md#rcs-perf-001--review-work-across-call-paths) | Required* | Review/instrumentation | Avoid costly duplicate work |
 | [RCS-PERF-002](rules/performance.md#rcs-perf-002--optimize-with-evidence) | Advisory | Profiling/review | Avoid premature optimization |
 | [RCS-PROGRESS-001](rules/observability.md#rcs-progress-001--keep-perceptibly-long-operations-observable) | Required* | Review/tests | Observable long-running work |
+| [RCS-TERM-001](rules/observability.md#rcs-term-001--keep-terminal-presentation-recoverable-and-adaptable) | Required* | Review/tests | Recoverable terminal presentation |
 | [RCS-LOG-001](rules/observability.md#rcs-log-001--emit-useful-bounded-and-safe-diagnostic-logs) | Required* | Review/tests | Safe bounded diagnostics |
 | [RCS-TEST-001](rules/testing.md#rcs-test-001--make-tests-deterministic-and-owned) | Required | Tests/review | Synthetic fixture isolation |
 | [RCS-TEST-002](rules/testing.md#rcs-test-002--verify-real-failure-modes) | Required* | Tests/review | Negative-path coverage |
