@@ -88,6 +88,12 @@ pub trait ProgressSink {
     fn report(&mut self, progress: Progress);
 }
 
+impl ProgressSink for Vec<Progress> {
+    fn report(&mut self, progress: Progress) {
+        self.push(progress);
+    }
+}
+
 pub fn process_three_items(sink: &mut impl ProgressSink) {
     for completed in 1..=3 {
         sink.report(Progress {
@@ -105,12 +111,7 @@ pub fn process_three_items(sink: &mut impl ProgressSink) {
 
 #[test]
 fn finalization_is_visible_after_determinate_work() {
-    let mut events = Vec::new();
-    impl ProgressSink for Vec<Progress> {
-        fn report(&mut self, progress: Progress) {
-            self.push(progress);
-        }
-    }
+    let mut events: Vec<Progress> = Vec::new();
 
     process_three_items(&mut events);
 
