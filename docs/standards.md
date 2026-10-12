@@ -40,6 +40,8 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-CONC-001](rules/concurrency-and-tooling.md#rcs-conc-001--make-shared-state-invariants-atomic-at-the-right-boundary) | Required* | Review/contended tests | Atomic shared-state admission |
 | [RCS-PERF-001](rules/performance.md#rcs-perf-001--review-work-across-call-paths) | Required* | Review/instrumentation | Avoid costly duplicate work |
 | [RCS-PERF-002](rules/performance.md#rcs-perf-002--optimize-with-evidence) | Advisory | Profiling/review | Avoid premature optimization |
+| [RCS-PROGRESS-001](rules/observability.md#rcs-progress-001--keep-perceptibly-long-operations-observable) | Required* | Review/tests | Observable long-running work |
+| [RCS-LOG-001](rules/observability.md#rcs-log-001--emit-useful-bounded-and-safe-diagnostic-logs) | Required* | Review/tests | Safe bounded diagnostics |
 | [RCS-TEST-001](rules/testing.md#rcs-test-001--make-tests-deterministic-and-owned) | Required | Tests/review | Synthetic fixture isolation |
 | [RCS-TEST-002](rules/testing.md#rcs-test-002--verify-real-failure-modes) | Required* | Tests/review | Negative-path coverage |
 | [RCS-DOC-001](rules/testing.md#rcs-doc-001--document-nonobvious-contracts) | Advisory | Rustdoc/review | Important invariants |
