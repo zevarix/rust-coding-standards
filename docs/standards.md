@@ -18,6 +18,7 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-FMT-001](rules/style-and-structure.md#rcs-fmt-001--format-with-rustfmt) | Required | `rustfmt` | Consistent Rust formatting |
 | [RCS-NAME-001](rules/style-and-structure.md#rcs-name-001--use-idiomatic-names) | Required | Compiler/Clippy + review | Naming conventions |
 | [RCS-MOD-001](rules/style-and-structure.md#rcs-mod-001--organize-by-responsibility) | Advisory | Human review | Cohesive modules, not line quotas |
+| [RCS-META-001](rules/style-and-structure.md#rcs-meta-001--derive-package-release-versions-from-their-authority) | Advisory | Review/tests | Use package release metadata, not duplicate version literals |
 | [RCS-TYPE-001](rules/types-and-errors.md#rcs-type-001--model-consequential-identities-distinctly) | Required* | Review/tests | Prevent identity/unit mixups |
 | [RCS-NUM-001](rules/numbers-and-bounds.md#rcs-num-001--check-consequential-arithmetic) | Required* | Review/tests | Checked sizes, offsets and budgets |
 | [RCS-NUM-002](rules/numbers-and-bounds.md#rcs-num-002--reject-lossy-conversions-where-identity-or-size-matters) | Required* | Review/tests | Explicit fallible narrowing |
