@@ -9,7 +9,7 @@
         <a class="forge-button forge-button--accent" href="standards/">Browse rules</a>
         <a class="forge-button forge-button--quiet" href="adoption/">Adoption guide</a>
       </div>
-      <p class="forge-hero__foot">Working draft · Adopted by Retro Distro</p>
+      <p class="forge-hero__foot">Working draft · Project-local adoption</p>
     </div>
     <div class="forge-window" aria-label="Example Rust function using checked arithmetic">
       <div class="forge-window__bar">

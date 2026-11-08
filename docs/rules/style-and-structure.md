@@ -93,7 +93,7 @@ simply omit it. Different packages in a workspace may intentionally have
 different package versions; do not manufacture a global version authority.
 
 **Keep independent contracts independent.** A CLI JSON protocol identifier
-such as `retro-distro.cli/v1`, database schema numbers, wire/API format
+such as `sample-app.cli/v1`, database schema numbers, wire/API format
 versions, explicit supported-version ranges, release-history examples and
 historical roadmap milestones have different compatibility or documentary
 meaning. They must **not** be replaced with the Cargo release version or

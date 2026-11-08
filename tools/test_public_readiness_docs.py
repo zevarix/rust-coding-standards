@@ -15,9 +15,9 @@ class PublicationDocs(unittest.TestCase):
             self.assertTrue((ROOT / name).is_file(), name)
             self.assertIn(name, readme)
 
-    def test_homepage_does_not_claim_nonadoption(self) -> None:
+    def test_homepage_describes_project_local_adoption(self) -> None:
         homepage = self.read("docs/index.md")
-        self.assertIn("Adopted by Retro Distro", homepage)
+        self.assertIn("Project-local adoption", homepage)
         self.assertNotIn("Not yet adopted", homepage)
         self.assertNotIn("Private working draft", homepage)
         self.assertIn("publication", homepage.lower())
