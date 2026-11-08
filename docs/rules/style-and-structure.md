@@ -62,4 +62,56 @@ This is only an illustrative design, not a mandated module layout. A larger cohe
 
 **Review question:** Would an experienced Rust maintainer understand the behavior, responsibilities, and failure paths without reconstructing a maze of wrappers?
 
+## RCS-META-001 — Derive package release versions from their authority {#rcs-meta-001--derive-package-release-versions-from-their-authority}
+
+**Level:** Advisory for executable/library code that displays or embeds its own
+*package release version*.
+
+**Enforcement:** Review package/build metadata and user-visible version output;
+where practical, test that the release string follows the actual package
+version without a second source edit.
+
+### Guidance
+
+Use the existing package/build definition as the source of truth for its
+release version. Avoid repeating a literal such as `v0.1.0` in CLI help text,
+log banners or application labels when that text is meant to represent the
+currently built package. In a Cargo package, built-in compile-time metadata
+requires no new version constant, build script or dependency:
+
+```rust
+pub const RELEASE_VERSION: &str = env!("CARGO_PKG_VERSION");
+
+pub fn product_banner() -> String {
+    format!("ExampleApp {RELEASE_VERSION}")
+}
+```
+
+For static strings, `concat!("ExampleApp ", env!("CARGO_PKG_VERSION"))`
+also works. A stable help heading that does not need the release number can
+simply omit it. Different packages in a workspace may intentionally have
+different package versions; do not manufacture a global version authority.
+
+**Keep independent contracts independent.** A CLI JSON protocol identifier
+such as `retro-distro.cli/v1`, database schema numbers, wire/API format
+versions, explicit supported-version ranges, release-history examples and
+historical roadmap milestones have different compatibility or documentary
+meaning. They must **not** be replaced with the Cargo release version or
+automatically advanced on every release.
+
+### Reviewer check
+
+- Is the string actually meant to display the *current built package version*?
+  If so, does it read the same release authority as the build instead of a
+  second manually maintained literal?
+- Would a package version change update normal `--version` output without
+  searching unrelated source files?
+- Are independent compatibility/schema IDs intentionally unchanged and tested?
+- Is a proposed version helper necessary, or would the existing package
+  metadata (or no banner version at all) be simpler?
+
+This is guidance, **not** a requirement to build a version registry, rewrite
+old documentation, change independent schema versions, or change a package's
+release/merge approval procedure.
+
 [Back to standards index](../standards.md).
