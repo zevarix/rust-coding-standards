@@ -30,7 +30,7 @@ Install either skill, or select both. This example targets Codex in the
 current project and copies the complete skill packages:
 
 ```sh
-npx skills add zevarix/rust-coding-standards --skill rcs-guidance --skill rust-performance --agent codex --copy
+npx skills add zevarix/rust-coding-standards --skill rcs-guidance rust-performance --agent codex --copy
 ```
 
 Select another supported client with `--agent`; inspect the CLI's current
@@ -55,7 +55,7 @@ From the same project:
 
 ```sh
 npx skills list
-npx skills check
+npx skills check --project
 npx skills update --project rcs-guidance rust-performance
 ```
 
@@ -63,11 +63,15 @@ The check command exits with status 1 when an update is available. Review
 updates before applying them; use `--global` for a deliberately global
 installation. CLI commands can evolve, so verify the selected version's help.
 
-For a reproducible skill-source revision, the CLI accepts
-`zevarix/rust-coding-standards@<git-ref>`; replace the placeholder with an
-intentional full commit or tag. Inspect and retain the installer's generated
-lock/provenance files under the consuming project's policy. RCS has no
-versioned release to imply by this example.
+For a reproducible skill-source revision, the tested CLI 1.7.6 accepts
+`zevarix/rust-coding-standards#<git-ref>`; replace the placeholder with an
+intentional full commit or tag and quote the source argument. In that
+version, `@` selects a skill rather than pinning a Git revision. Verify the
+selected CLI version's syntax and inspect the generated lock/provenance
+files; a successful exit alone does not prove the requested source ran.
+Alternatively, check out the desired revision in an RCS clone, verify its
+HEAD, and pass that local directory to `skills add`. RCS has no versioned
+release to imply by these examples.
 
 Updating an installed workflow and selecting the documentation revision are
 different choices. A project adopting latest RCS `main` still resolves and
