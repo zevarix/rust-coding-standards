@@ -46,6 +46,26 @@ Review and explicitly accept or remediate these residual disclosures at the
 Never rewrite or delete Git history or GitHub conversations merely to make an
 audit report look clean without separately authorized retention decisions.
 
+## 2026-11-08 current-surface reconciliation
+
+Following owner direction, the source's former named-consumer references have
+been generalized in the README, Forge homepage copy, one rule example and its
+regression test. The site's visual theme and rule semantics remain unchanged.
+
+The current GitHub issue and pull-request descriptions were inspected and 14
+affected descriptions edited. Three top-level issue/PR comments were edited to
+remove named private consumers or machine-specific checkout paths. Independent
+API readback verified each affected item; a fresh scan of all 23 issue/PR
+descriptions and 29 issue/PR comments found no remaining matches for the
+targeted private-project references or personal workspace paths.
+
+The owner accepted leaving residual provenance in historical records instead of
+rewriting Git commits or deleting GitHub discussions. **These edits do not
+erase** historical commit contents, GitHub edit history, API caches, attachments,
+previously shared URLs, or unexamined external copies. Rerun a full final
+exposure review immediately before any public visibility change. This work
+does not authorize publication, license changes or theme distribution.
+
 ## Final owner-controlled exposure checklist
 
 - [ ] Recheck the repository's **live** GitHub visibility, branch, refs, issues,
