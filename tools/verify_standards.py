@@ -70,6 +70,7 @@ def validate(root: Path, verify_site: bool) -> list[str]:
 
     rule_paths = {p for p, _ in headings.values()}
     source_files = sorted(docs.rglob("*.md"))
+    source_files += sorted((root / "skills").rglob("*.md"))
     for page in source_files:
         content = page.read_text(encoding="utf-8")
         if "ZR-" in content or "zr-" in content:

@@ -27,6 +27,7 @@ nav:
       - Performance and efficiency: rules/performance.md
       - Progress, diagnostics and logging: rules/observability.md
       - Testing and documentation: rules/testing.md
+  - Rust skills: skills.md
   - Adopting the standards: adoption.md
   - Local preview: site-preview.md
   - Sources and attribution: sources.md
