@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rust Performance"
+  short_description: "Investigate Rust bottlenecks with reproducible evidence"
+  default_prompt: "Use rust-performance to investigate this workload and report evidence-backed optimization options."
