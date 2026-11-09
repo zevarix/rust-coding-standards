@@ -58,6 +58,23 @@ class LicenseScopeTests(unittest.TestCase):
             self.assertNotIn("SPDX-License-Identifier: MIT OR Apache-2.0",
                              self.read(rel))
 
+    def test_each_skill_bundles_complete_license_texts_and_notice(self) -> None:
+        skills = sorted((ROOT / "skills").glob("*/SKILL.md"))
+        self.assertTrue(skills, "No installable skills found")
+        for entry in skills:
+            with self.subTest(skill=entry.parent.name):
+                for filename in ("LICENSE-MIT", "LICENSE-APACHE", "NOTICE"):
+                    self.assertTrue((entry.parent / filename).is_file(), filename)
+                for filename in ("LICENSE-MIT", "LICENSE-APACHE"):
+                    self.assertEqual(
+                        self.read(filename),
+                        (entry.parent / filename).read_text(encoding="utf-8"),
+                    )
+                notice = (entry.parent / "NOTICE").read_text(encoding="utf-8")
+                self.assertIn(OWNER, notice)
+                self.assertIn(SPDX, notice)
+                self.assertFalse((entry.parent / "docs/stylesheets/forge.css").exists())
+
     def test_publication_remains_separately_owner_gated(self) -> None:
         readme = self.read("README.md")
         rights = self.read("docs/licensing.md")

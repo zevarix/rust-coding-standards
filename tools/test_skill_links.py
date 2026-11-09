@@ -44,5 +44,19 @@ class SkillLinkTests(unittest.TestCase):
             self.assertEqual([], validate(root, verify_site=False))
 
 
+    def test_reports_missing_canonical_rcs_document(self) -> None:
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            self.fixture(root, reference_exists=True)
+            (root / "skills/example/SKILL.md").write_text(
+                "[Rule](https://github.com/zevarix/rust-coding-standards/"
+                "blob/main/docs/rules/missing.md)\n",
+                encoding="utf-8",
+            )
+            errors = validate(root, verify_site=False)
+            self.assertTrue(any("broken relative link" in error for error in errors),
+                            errors)
+
+
 if __name__ == "__main__":
     unittest.main()

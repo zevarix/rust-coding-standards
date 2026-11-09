@@ -1,27 +1,89 @@
 # Reusable Rust skills
 
-RCS standards state engineering expectations. RCS skills provide practical
-workflows for applying that guidance; they do not introduce another rule
-level, grant mutation authority or replace a consuming project's contracts.
+RCS documentation is the canonical source of standards and technical guidance.
+Skills are small task workflows that find and apply that documentation.
+They do not add a rule level or grant mutation, merge or publication authority.
 
 | Skill | Load for |
 | --- | --- |
-| [rust-performance](https://github.com/zevarix/rust-coding-standards/blob/main/skills/rust-performance/SKILL.md) | Slow Rust operations, worker scaling, performance comparisons, allocation/memory/I/O costs, binary size or build time |
+| [rcs-guidance](https://github.com/zevarix/rust-coding-standards/blob/main/skills/rcs-guidance/SKILL.md) | Find applicable RCS standards, adoption and implementation/review guidance |
+| [rust-performance](https://github.com/zevarix/rust-coding-standards/blob/main/skills/rust-performance/SKILL.md) | Investigate slow Rust operations and compare optimization experiments |
 
-## Use a skill
+Detailed methods live in the [measurement](performance/measurement.md),
+[profiling](performance/profiling.md) and
+[optimization](performance/optimization.md) documentation. Skills load these
+pages as needed rather than carrying separate copies.
 
-Read the skill from current RCS `main`, then load only the references needed
-for the task. Record the actual RCS revision inspected in implementation or
-review evidence, following [adoption guidance](adoption.md).
+## Install with the Skills CLI
 
-The canonical directory is `skills/rust-performance/`. To use an agent's
-local skill discovery, deliberately install the complete directory, including
-its references and metadata, in that client's documented skill location.
-This repository does not automatically install skills or change an agent's
-configuration. A consuming project may instead link to the canonical source
-and instruct agents to read it when applicable.
+Run installation from the project that should receive the skills. Use a
+Node.js version supported by the selected
+[Skills CLI](https://github.com/vercel-labs/skills/blob/main/docs/commands.md).
 
-Keep host details, private datasets, raw profiles and project-specific
-decisions with the consuming project. Add only generalized methods and
-redistributable examples here. Skills use this repository's open
-[licensing scope](licensing.md); theme exceptions remain separate.
+List the repository's skills without installing:
+
+```sh
+npx skills add zevarix/rust-coding-standards --list
+```
+
+Install either skill, or select both. This example targets Codex in the
+current project and copies the complete skill packages:
+
+```sh
+npx skills add zevarix/rust-coding-standards --skill rcs-guidance --skill rust-performance --agent codex --copy
+```
+
+Select another supported client with `--agent`; inspect the CLI's current
+help for available targets. Project installation is the default. Add
+`--global` only when deliberately choosing a user-wide installation. The
+installer may replace an existing same-name skill; review the destination
+and preserve local changes before reinstalling.
+
+Each skill directory includes `SKILL.md`, client metadata, both complete
+license texts and its attribution notice. Detailed RCS documentation is
+loaded through an authorized GitHub route or an existing RCS checkout at the
+consumer's selected revision.
+
+While RCS is private, installation and remote documentation reads require
+existing repository access. The CLI supports configured Git/GitHub CLI/SSH
+authentication; do not put credentials in commands or repository files.
+This installation guide does not change visibility or publish a package.
+
+## Check and update installed workflows
+
+From the same project:
+
+```sh
+npx skills list
+npx skills check
+npx skills update --project rcs-guidance rust-performance
+```
+
+The check command exits with status 1 when an update is available. Review
+updates before applying them; use `--global` for a deliberately global
+installation. CLI commands can evolve, so verify the selected version's help.
+
+For a reproducible skill-source revision, the CLI accepts
+`zevarix/rust-coding-standards@<git-ref>`; replace the placeholder with an
+intentional full commit or tag. Inspect and retain the installer's generated
+lock/provenance files under the consuming project's policy. RCS has no
+versioned release to imply by this example.
+
+Updating an installed workflow and selecting the documentation revision are
+different choices. A project adopting latest RCS `main` still resolves and
+records current documentation when working. A project adopting a fixed
+revision continues using that revision. Installing a skill does not change
+either declaration; see [adoption](adoption.md).
+
+## Direct use and portability
+
+A project may link to canonical skill source and instruct an agent to read it.
+Alternatively, copy the entire `skills/rcs-guidance/` or
+`skills/rust-performance/` directory into the client's documented skill
+location, preserving metadata, notices and licenses. Client discovery and
+invocation behavior vary; the standard directory is not an automatic
+installation into every application.
+
+Keep machine details, private datasets, raw profiles and project decisions
+with the consuming project. Shared RCS additions use generalized methods and
+redistributable examples. See [licensing and reuse](licensing.md).
