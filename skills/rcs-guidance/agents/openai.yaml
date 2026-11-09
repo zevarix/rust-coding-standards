@@ -1,0 +1,4 @@
+interface:
+  display_name: "RCS Guidance"
+  short_description: "Find and apply relevant Rust Coding Standards"
+  default_prompt: "Use $rcs-guidance to consult the applicable RCS documentation for this Rust task."

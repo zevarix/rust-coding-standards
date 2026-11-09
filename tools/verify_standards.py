@@ -76,12 +76,18 @@ def validate(root: Path, verify_site: bool) -> list[str]:
         if "ZR-" in content or "zr-" in content:
             errors.append(f"{page.relative_to(root)}: retired ZR- identifier remains")
         for href in MARKDOWN_LINK.findall(content):
-            parsed = urlsplit(href.strip())
+            target = href.strip()
+            base = page.parent
+            canonical = "https://github.com/zevarix/rust-coding-standards/blob/main/"
+            if target.startswith(canonical):
+                target = target[len(canonical):]
+                base = root
+            parsed = urlsplit(target)
             if parsed.scheme or parsed.netloc or href.startswith("#"):
                 continue
             if not parsed.path:
                 continue
-            path = (page.parent / unquote(parsed.path)).resolve()
+            path = (base / unquote(parsed.path)).resolve()
             if not path.is_file():
                 errors.append(f"{page.relative_to(root)}: broken relative link {href}")
             elif parsed.fragment and path in rule_paths:

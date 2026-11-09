@@ -16,6 +16,10 @@ consuming project's correctness contract.
 
 Read the consuming repository's instructions, owning work item and applicable
 [RCS rules](https://github.com/zevarix/rust-coding-standards/blob/main/docs/standards.md).
+Resolve the project's chosen RCS reference to an actual commit and read the
+linked documentation at that revision. Use an authorized GitHub read route
+or an existing checkout; report any unavailable pages. The links below
+locate canonical documentation rather than a bundled rulebook.
 Record the actual revisions inspected. Keep architecture, safety, supported
 platforms and merge/deployment authority with that project. An audit request
 authorizes investigation; it does not authorize implementation, installation
@@ -30,18 +34,18 @@ time from preparation or post-run inspection.
 1. **Establish comparable evidence.** Read existing completed and failed
    results before scheduling work. Prove the executed artifact's source and
    optimized configuration. Select representative inputs and equivalent
-   starting state. Read [measurement](references/measurement.md) before a
+   starting state. Read [measurement](https://github.com/zevarix/rust-coding-standards/blob/main/docs/performance/measurement.md) before a
    baseline, comparison or performance claim.
 2. **Locate the limiting work.** Trace orchestration, workers, locks,
    persistence, native calls and output verification. Count expensive nested
    operations per item and per batch. Distinguish on-CPU work, blocked time,
    I/O and instrumentation overhead. Read
-   [profiling](references/profiling.md) to select a platform-appropriate
+   [profiling](https://github.com/zevarix/rust-coding-standards/blob/main/docs/performance/profiling.md) to select a platform-appropriate
    measurement.
 3. **Form a falsifiable hypothesis.** State the call path, frequency, observed
    cost, reuse boundary, proposed mechanism and result that would reject it.
    Separate confirmed costs from plausible causes. Read
-   [optimization](references/optimization.md) when selecting an experiment.
+   [optimization](https://github.com/zevarix/rust-coding-standards/blob/main/docs/performance/optimization.md) when selecting an experiment.
    Identify behavior changes explicitly; a faster operation with different
    integrity or recovery guarantees is a different contract.
 4. **Change and qualify one cause.** Within authorized implementation scope,

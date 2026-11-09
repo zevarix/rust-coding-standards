@@ -6,6 +6,7 @@ Reusable, explicit Rust engineering standards for Zevarix projects, with rule id
 
 - [Documentation home](docs/index.md)
 - [Standards index](docs/standards.md)
+- [Installable Rust skills](docs/skills.md)
 - [Source references](docs/sources.md)
 - [How projects adopt these guidelines](docs/adoption.md)
 - [Preview and build instructions](docs/site-preview.md)
