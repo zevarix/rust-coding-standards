@@ -6,11 +6,11 @@ External tools are outside Rust's type and memory-safety guarantees. These rules
 
 **Level:** Required when launching external executables or passing untrusted paths/values as arguments.
 
-**Enforcement:** Review executable selection and \`Command\` construction, test a synthetic fake executable's argv, and inspect version/capability failures.
+**Enforcement:** Review executable selection and `Command` construction, test a synthetic fake executable's argv, and inspect version/capability failures.
 
 ### Requirement
 
-Select an executable through the project's approved configured-path/PATH policy and establish the **required capability/version**, not just that a similarly named binary exists. Build arguments with \`std::process::Command\` and separate \`arg\`/\`args\`, never interpolate untrusted data into a shell command string. Preserve platform-native \`Path\`/\`OsStr\` values when passing filenames. Do not put tokens, passwords or private data in argv, command echo, error logs or serialized receipts when a safer private input channel is needed.
+Select an executable through the project's approved configured-path/PATH policy and establish the **required capability/version**, not just that a similarly named binary exists. Build arguments with `std::process::Command` and separate `arg`/`args`, never interpolate untrusted data into a shell command string. Preserve platform-native `Path`/`OsStr` values when passing filenames. Do not put tokens, passwords or private data in argv, command echo, error logs or serialized receipts when a safer private input channel is needed.
 
 **Avoid** shell interpretation of user paths:
 
@@ -49,7 +49,7 @@ fn path_with_spaces_is_one_argument() {
 }
 ```
 
-This proves argument separation only. Real tool flags and the meaning of \`--\` are **tool-specific** and must be qualified, not assumed. A program that accepts \`--version\` may still lack an operation the caller needs.
+This proves argument separation only. Real tool flags and the meaning of `--` are **tool-specific** and must be qualified, not assumed. A program that accepts `--version` may still lack an operation the caller needs.
 
 ### Reviewer check
 
@@ -57,7 +57,7 @@ Trace configured executable identity, provider/version probe, actual command arg
 
 **Exception:** A deliberately invoked shell script is an external integration in its own right. Its caller still has to control script identity, input quoting and trust boundaries; a blanket ban on all shells is not the purpose of this rule.
 
-**Source:** [Rust \`Command\`](https://doc.rust-lang.org/std/process/struct.Command.html).
+**Source:** [Rust `Command`](https://doc.rust-lang.org/std/process/struct.Command.html).
 
 ## RCS-PROC-002 — Verify process outcomes and bounded output {#rcs-proc-002--verify-process-outcomes-and-bounded-output}
 
@@ -67,7 +67,7 @@ Trace configured executable identity, provider/version probe, actual command arg
 
 ### Requirement
 
-A child exiting successfully does **not** prove its expected output is complete or correct. Handle spawn/exit/termination errors, bound untrusted stdout/stderr capture and parse results through the same untrusted-input rules as file data. For a long-lived process, design cancellation/timeout and child **wait/reap** so resource handles and any child effects are reconciled; avoid assuming dropping \`Child\` stops or waits for it.
+A child exiting successfully does **not** prove its expected output is complete or correct. Handle spawn/exit/termination errors, bound untrusted stdout/stderr capture and parse results through the same untrusted-input rules as file data. For a long-lived process, design cancellation/timeout and child **wait/reap** so resource handles and any child effects are reconciled; avoid assuming dropping `Child` stops or waits for it.
 
 **Avoid** treating status alone as success:
 
@@ -93,11 +93,11 @@ A caller may stream logs to an owned bounded sink or consume stdout incrementall
 
 ### Reviewer check
 
-Test fake tools that return \`0\` with absent output, nonzero with plausible output, malformed records, long stderr, early pipe close and cancellation after work begins. Prove the caller neither hangs from pipe backpressure nor fabricates completion. Determine which output files or side effects may survive a killed process and how they are reconciled.
+Test fake tools that return `0` with absent output, nonzero with plausible output, malformed records, long stderr, early pipe close and cancellation after work begins. Prove the caller neither hangs from pipe backpressure nor fabricates completion. Determine which output files or side effects may survive a killed process and how they are reconciled.
 
 **Exception:** A short, read-only diagnostic command without persistent effects may have a simpler timeout and result contract than an archive writer.
 
-**Sources:** [Rust \`Child\`](https://doc.rust-lang.org/std/process/struct.Child.html), [Rust \`Output\`](https://doc.rust-lang.org/std/process/struct.Output.html).
+**Sources:** [Rust `Child`](https://doc.rust-lang.org/std/process/struct.Child.html), [Rust `Output`](https://doc.rust-lang.org/std/process/struct.Output.html).
 
 ## RCS-CANCEL-001 — Separate stop requests from durable effect truth {#rcs-cancel-001--separate-stop-requests-from-durable-effect-truth}
 
@@ -153,7 +153,7 @@ fn uncertainty_never_authorizes_a_replay() {
 }
 ```
 
-Only a current qualified verifier can produce those \`EffectEvidence\` cases in real code; passing an arbitrary caller-supplied enum is not evidence. A "safe to start" decision remains subject to current approval, target identity and collision checks.
+Only a current qualified verifier can produce those `EffectEvidence` cases in real code; passing an arbitrary caller-supplied enum is not evidence. A "safe to start" decision remains subject to current approval, target identity and collision checks.
 
 ### Reviewer check
 

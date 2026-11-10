@@ -65,17 +65,17 @@ List all writers and their exact shared objects, not only the function under rev
 
 **Level:** Advisory, except that a project's declared required formatter/linter settings must be applied consistently when checking its code.
 
-**Enforcement:** Confirm the actual \`Cargo.toml\` Rust edition, toolchain, \`rustfmt\` style edition/editor behavior, and the locally configured Clippy commands.
+**Enforcement:** Confirm the actual `Cargo.toml` Rust edition, toolchain, `rustfmt` style edition/editor behavior, and the locally configured Clippy commands.
 
 ### Requirement
 
-Prefer \`cargo fmt --all -- --check\` against the project's actual toolchain and formatting contract. Rust's **language edition** and \`rustfmt\` **style edition** are related but distinct; direct editor \`rustfmt\` invocations can choose different defaults from \`cargo fmt\`. For projects using Rust 2024 formatting intentionally, a \`rustfmt.toml\` can declare:
+Prefer `cargo fmt --all -- --check` against the project's actual toolchain and formatting contract. Rust's **language edition** and `rustfmt` **style edition** are related but distinct; direct editor `rustfmt` invocations can choose different defaults from `cargo fmt`. For projects using Rust 2024 formatting intentionally, a `rustfmt.toml` can declare:
 
 ```toml
 style_edition = "2024"
 ```
 
-When the application declares edition 2024 in \`Cargo.toml\`, \`cargo fmt\` ordinarily derives the corresponding style edition; a project-wide configuration helps direct formatter/editor invocations stay aligned. Introduce a style-edition migration deliberately instead of burying mass reformatting inside a behavior fix.
+When the application declares edition 2024 in `Cargo.toml`, `cargo fmt` ordinarily derives the corresponding style edition; a project-wide configuration helps direct formatter/editor invocations stay aligned. Introduce a style-edition migration deliberately instead of burying mass reformatting inside a behavior fix.
 
 Run Clippy with the **target/features that actually compile in this project**, selecting a stable baseline such as:
 
@@ -83,7 +83,7 @@ Run Clippy with the **target/features that actually compile in this project**, s
 cargo clippy --all-targets
 ```
 
-If the project expressly treats chosen Clippy warnings as errors, then its own check may add \`-- -D warnings\`. Do **not** automatically require \`clippy::pedantic\`, \`clippy::nursery\`, \`--all-features\`, \`-D warnings\` or a particular paid reviewer across every consumer. A lint is evidence to investigate, not proof that more wrappers or larger code rewrites are safer.
+If the project expressly treats chosen Clippy warnings as errors, then its own check may add `-- -D warnings`. Do **not** automatically require `clippy::pedantic`, `clippy::nursery`, `--all-features`, `-D warnings` or a particular paid reviewer across every consumer. A lint is evidence to investigate, not proof that more wrappers or larger code rewrites are safer.
 
 ### Reviewer check
 
@@ -99,7 +99,7 @@ Identify the claimed toolchain and flags, inspect actual diagnostics and note sk
 
 ### Requirement
 
-Choose validation from the *consumer's declared supported targets and behavior*, not from a universal list of commands. For applications, a committed \`Cargo.lock\` and \`--locked\` checks can improve repeatability; libraries may choose a different lockfile policy. Distinguish \`cargo check\` (type checking) from \`cargo test\` (executing tests), Clippy warnings from tests, and source compilation from native filesystem acceptance.
+Choose validation from the *consumer's declared supported targets and behavior*, not from a universal list of commands. For applications, a committed `Cargo.lock` and `--locked` checks can improve repeatability; libraries may choose a different lockfile policy. Distinguish `cargo check` (type checking) from `cargo test` (executing tests), Clippy warnings from tests, and source compilation from native filesystem acceptance.
 
 For example, a project might run:
 
@@ -109,7 +109,7 @@ cargo clippy --all-targets -- -D warnings
 cargo test --locked
 ```
 
-These commands are **illustrative**, not mandatory universal flags: the adopting project decides whether \`-D warnings\`, \`--locked\`, feature matrices and platform testing are required. Running tests on Windows alone cannot prove macOS or Linux pathname, handle or atomic-publication behavior. When a platform is unavailable, preserve the acceptance gap instead of fabricating a PASS.
+These commands are **illustrative**, not mandatory universal flags: the adopting project decides whether `-D warnings`, `--locked`, feature matrices and platform testing are required. Running tests on Windows alone cannot prove macOS or Linux pathname, handle or atomic-publication behavior. When a platform is unavailable, preserve the acceptance gap instead of fabricating a PASS.
 
 ### Reviewer check
 

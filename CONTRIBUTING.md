@@ -12,15 +12,11 @@ propose a reviewable pull request. Keep rule IDs stable when possible.
 
 ## Validate your change
 
-Use Python, Zensical and a Rust toolchain supporting edition 2024:
-
-```sh
-python tools/verify_standards.py
-zensical build
-python tools/verify_standards.py --site
-python -m unittest discover -s tools -p "test_*.py"
-python tools/verify_rust_examples.py
-```
+Follow the [environment setup and validation commands](docs/site-preview.md#check-documentation-and-rust-examples)
+for Windows PowerShell or macOS/Linux. They check source links and rule IDs,
+build the documentation, inspect rendered output, run the Python tests, and
+compile/run marked Rust examples. The example check requires a Rust toolchain
+supporting edition 2024.
 
 CI builds documentation and runs tagged, self-contained Rust examples; it does
 not deploy the website. The consuming project chooses its own Rust toolchain,

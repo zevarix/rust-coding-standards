@@ -4,6 +4,34 @@
 
 Reusable, explicit Rust engineering standards for Zevarix projects, with rule identifiers, rationale, examples and review guidance.
 
+## Quickstart
+
+For a code review, open the [standards index](docs/standards.md) and follow the
+[review guide](docs/review-guide.md) to select the rules relevant to your change.
+
+To install the two Rust skills, run this from the project that should receive
+them, using Node.js/npm supported by the [Skills CLI](https://github.com/vercel-labs/skills/blob/main/docs/commands.md):
+
+```sh
+npx skills add zevarix/rust-coding-standards --skill rcs-guidance rust-performance --agent codex --copy
+```
+
+This example installs project-local copies for Codex. Review the installer's
+destination before replacing any existing skills. See the [skills guide](docs/skills.md)
+for other clients, authentication, updates and fixed-revision installs.
+Once your client discovers the skills, try:
+
+```text
+Use $rcs-guidance to review this Rust change against the applicable RCS rules.
+Use $rust-performance to investigate this slow operation and compare optimizations.
+```
+
+Installing a skill does not adopt standards for your repository. Use the
+[adoption guide](docs/adoption.md) to declare scope and choose latest `main`
+or an intentional fixed revision. Your project keeps its own rules and review authority.
+
+## Documentation
+
 - [Documentation home](docs/index.md)
 - [Standards index](docs/standards.md)
 - [Installable Rust skills](docs/skills.md)

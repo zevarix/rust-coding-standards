@@ -77,7 +77,7 @@ Use the existing package/build definition as the source of truth for its
 release version. Avoid repeating a literal such as `v0.1.0` in CLI help text,
 log banners or application labels when that text is meant to represent the
 currently built package. In a Cargo package, built-in compile-time metadata
-requires no new version constant, build script or dependency:
+avoids a separately maintained version string, build script or dependency:
 
 ```rust
 pub const RELEASE_VERSION: &str = env!("CARGO_PKG_VERSION");

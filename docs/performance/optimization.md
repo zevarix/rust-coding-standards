@@ -68,7 +68,7 @@ a worthwhile optimization or override a previous rejection.
 
 ## Sources and authorship
 
-This RCS skill is independently written and uses no copied third-party code
+This guidance is independently written and uses no copied third-party code
 or prose. General workflow comparison included
 [full-stack-skills/rust-skills: rust-performance](https://github.com/full-stack-skills/rust-skills/blob/b8a6af74af28ee86b8cbbbc3075cde0b31a5155e/skills/rust-performance/SKILL.md)
 at commit `b8a6af74af28ee86b8cbbbc3075cde0b31a5155e`, skill blob
