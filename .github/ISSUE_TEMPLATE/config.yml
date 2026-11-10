@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
+blank_issues_enabled: true
+contact_links:
+  - name: Questions and help
+    url: https://github.com/zevarix/rust-coding-standards/discussions/categories/q-a
+    about: Ask about applying the standards, adopting RCS, or using its skills.
+  - name: Explore an idea
+    url: https://github.com/zevarix/rust-coding-standards/discussions/categories/ideas
+    about: Discuss an early idea before turning it into a scoped proposal.
+  - name: Report a vulnerability privately
+    url: https://github.com/zevarix/rust-coding-standards/security/advisories/new
+    about: Use private reporting for security-sensitive defects; never disclose secrets in a public issue.

@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Explore an early idea for the standards, documentation, tools, or skills. A mature proposal can move to an [issue](https://github.com/zevarix/rust-coding-standards/issues/new/choose).
+        Use generalized examples and respect third-party rights. Keep security-sensitive details in [private reporting](https://github.com/zevarix/rust-coding-standards/security/advisories/new).
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea and motivation
+      description: What would improve RCS, and who would benefit?
+    validations:
+      required: true
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Examples, alternatives, or tradeoffs
+      description: Share a synthetic example, relevant sources, or open questions. Early ideas do not need to be complete proposals.

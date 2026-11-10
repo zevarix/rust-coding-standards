@@ -39,6 +39,7 @@ or an intentional fixed revision. Your project keeps its own rules and review au
 - [How projects adopt these guidelines](docs/adoption.md)
 - [Preview and build instructions](docs/site-preview.md)
 - [Contributing](CONTRIBUTING.md) and [security reporting](SECURITY.md)
+- [Community questions and ideas](https://github.com/zevarix/rust-coding-standards/discussions)
 - [Public-readiness review and publication checklist](docs/publication-readiness.md)
 
 The documentation source is in `docs/`; `mkdocs.yml` supports building the site with **Zensical** and preserves compatibility with Material for MkDocs. The reserved-rights **Forge** visual theme uses a separately open-licensed, original crab-inspired logo and local CSS. Preview on `http://127.0.0.1:8001/` when the localhost preview server is running. No GitHub Pages or public deployment is configured.
