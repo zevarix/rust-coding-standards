@@ -82,5 +82,13 @@ not assume a recommendation authorizes a settings change. Follow the
 without inventing a reporting address or an unconfigured feature.
 
 Documentation hosting, a public domain, release tags and downloadable releases
-remain separate choices. The included CI validates source and does not publish
-the documentation website.
+remain separate choices. The included CI validates pull requests; after
+owner-authorized hosting activation, successful `main` builds publish the
+documentation website. See [hosting and deployment](site-preview.md#documentation-hosting).
+
+For the initial site activation, confirm the Pages publishing source, custom
+domain, domain ownership verification, HTTPS and environment branch policy.
+Inspect the live homepage, rule deep links, search, assets and mobile layout.
+Verify that pull requests cannot publish and that a failed validation blocks
+deployment. Preserve unrelated DNS records and keep release tags separate
+from documentation publication.

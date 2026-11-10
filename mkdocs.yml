@@ -1,6 +1,7 @@
-# Documentation build and local preview. No deployment is configured here.
+# Documentation build, local preview and GitHub Pages configuration.
 # MkDocs-compatible configuration used by Zensical.
 site_name: Zevarix / Rust Coding Standards
+site_url: https://rcs.zevarix.com/
 site_description: Explicit, practical and reusable Rust coding standards for human readers and automated review
 repo_name: zevarix/rust-coding-standards
 repo_url: https://github.com/zevarix/rust-coding-standards
