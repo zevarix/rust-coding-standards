@@ -2,7 +2,7 @@
 
 The site uses **Zensical** and a [MkDocs-compatible configuration](https://zensical.org/docs/compatibility/mkdocs/), giving us the same Markdown source structure and familiar Material-style navigation as the [Drupal Coding Standards](https://project.pages.drupalcode.org/coding_standards/php/documentation/).
 
-No hosted site, Pages workflow, public domain or deployment is configured as of the publication-readiness audit. A local preview does **not** change GitHub visibility. The repository was **private** at that audit; consult [the public-readiness checklist](publication-readiness.md) for the current owner-controlled publication gate. Preview only on your own trusted workstation; do not expose the development web server to public networks.
+The included workflow validates source and does not deploy documentation. A local preview does **not** change repository visibility or publish a website. Review the [publication-readiness checklist](publication-readiness.md) before any distribution decision. Bind the development server to loopback on your own workstation.
 
 ## Windows PowerShell
 
@@ -53,7 +53,7 @@ We keep the configuration intentionally small: navigation, search, code highligh
 
 ## Check documentation and Rust examples
 
-These commands run locally and in the private repository's source-validation CI:
+These commands run locally and in the source-validation CI:
 
 ```sh
 python tools/verify_standards.py
@@ -63,7 +63,7 @@ python -m unittest discover -s tools -p "test_*.py"
 python tools/verify_rust_examples.py
 ```
 
-The Rust example check needs installed `rustc` with Rust 2024 edition support. It compiles **only marked self-contained examples**, runs marked tests and fails on a broken marker; deliberate anti-examples and pseudocode are never executed. The repository uses the current compatible stable Rust toolchain for shared examples; consuming projects keep their own supported toolchain and platform policy. The GitHub Actions workflow validates source only and does not deploy or publish the private site.
+The Rust example check needs installed `rustc` with Rust 2024 edition support. It compiles **only marked self-contained examples**, runs marked tests and fails on a broken marker; deliberate anti-examples and pseudocode are never executed. The repository uses the current compatible stable Rust toolchain for shared examples; consuming projects keep their own supported toolchain and platform policy. The GitHub Actions workflow validates source only and does not deploy or publish the site.
 
 ## What to validate
 

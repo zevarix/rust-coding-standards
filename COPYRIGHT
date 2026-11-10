@@ -31,5 +31,5 @@ and content not authored for RCS remain under their own rights. The shared
 license grants do not imply endorsement by the Rust Project, Rust Foundation
 or third parties, or separately authorize use of any Zevarix trade names.
 
-Repository licensing does not itself authorize changing this private
-repository's visibility, publishing the website or creating a public release.
+Repository licensing does not itself authorize changing repository
+visibility, publishing the website or creating a public release.
