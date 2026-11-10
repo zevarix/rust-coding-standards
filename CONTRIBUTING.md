@@ -28,9 +28,10 @@ build the documentation, inspect rendered output, run the Python tests, and
 compile/run marked Rust examples. The example check requires a Rust toolchain
 supporting edition 2024.
 
-CI builds documentation and runs tagged, self-contained Rust examples; it does
-not deploy the website. The consuming project chooses its own Rust toolchain,
-tests, architecture and merge authority.
+CI builds documentation and runs tagged, self-contained Rust examples. Pull
+requests validate without publishing; successful `main` builds publish the
+documentation through GitHub Pages after hosting is activated. The consuming
+project chooses its own Rust toolchain, tests, architecture and merge authority.
 
 ## Copyright and contributor rights
 

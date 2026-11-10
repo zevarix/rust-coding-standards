@@ -32,6 +32,7 @@ or an intentional fixed revision. Your project keeps its own rules and review au
 
 ## Documentation
 
+- [Documentation website](https://rcs.zevarix.com/)
 - [Documentation home](docs/index.md)
 - [Standards index](docs/standards.md)
 - [Installable Rust skills](docs/skills.md)
@@ -42,7 +43,7 @@ or an intentional fixed revision. Your project keeps its own rules and review au
 - [Community questions and ideas](https://github.com/zevarix/rust-coding-standards/discussions)
 - [Public-readiness review and publication checklist](docs/publication-readiness.md)
 
-The documentation source is in `docs/`; `mkdocs.yml` supports building the site with **Zensical** and preserves compatibility with Material for MkDocs. The reserved-rights **Forge** visual theme uses a separately open-licensed, original crab-inspired logo and local CSS. Preview on `http://127.0.0.1:8001/` when the localhost preview server is running. No GitHub Pages or public deployment is configured.
+The documentation source is in `docs/`; `mkdocs.yml` supports building the site with **Zensical** and preserves compatibility with Material for MkDocs. The reserved-rights **Forge** visual theme uses a separately open-licensed, original crab-inspired logo and local CSS. GitHub Pages publishes the validated `main` build at **https://rcs.zevarix.com/** after hosting is activated. Pull requests run validation without publishing. For local work, preview on `http://127.0.0.1:8001/` when the localhost preview server is running.
 
 **Licensing:** Original RCS rules, documentation, examples, validation tools and [Forge crab SVG](docs/assets/brand/forge-crab.svg) are offered under **MIT OR Apache-2.0**, at your choice, with copyright attributed to **Peder Klockmann (Zevarix)**. The original **Forge CSS and homepage visual theme** are **all rights reserved** and excluded from those licenses. See [Licensing and reuse](docs/licensing.md), [COPYRIGHT](COPYRIGHT), [LICENSE-MIT](LICENSE-MIT), [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-FORGE-THEME](LICENSE-FORGE-THEME).
 
