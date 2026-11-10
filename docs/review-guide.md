@@ -1,12 +1,12 @@
 # Using Rust Coding Standards in code review
 
-This guide explains how a reviewer uses the standards a project has **explicitly adopted**, normally from the **latest `main`**. Some projects may intentionally select a fixed revision. Either way, reviewers record the actual standards commit they consulted as evidence. This guide does not grant permission to change another repository, merge a pull request, publish a release or operate on user data.
+Use this guide to review Rust against the rules a project has adopted.
 
 ## Start with the owning project
 
 1. Read the consumer repository's current issue, applicable architecture and safety rules, exact reviewed base and HEAD, and available test evidence.
-2. Confirm the project's own adoption declaration names **latest `main`** (or an intentionally fixed revision) and its scope. Resolve and record the actual RCS commit consulted for this review; do not require a project PR to keep the reference current. If the project has not adopted RCS, use the guidelines as suggestions or research—not invented mandatory merge gates.
-3. Apply current owner-local requirements first. Resolve any conflict through the consumer's issue/decision process; a shared RCS rule never replaces a narrower product safety contract.
+2. Confirm the project's adoption declaration, revision choice and scope. Record the RCS commit consulted. If the project has not adopted RCS, use the guidelines as suggestions.
+3. Apply the project's requirements first, including its architecture and safety rules. Resolve rule conflicts through its issue/decision process.
 
 See [adoption](adoption.md) for the declaration format.
 
@@ -69,7 +69,7 @@ and the [measurement guide](performance/measurement.md) for investigation method
 
 Use the verdict language required by the **owning project**. Distinguish verified defects, supported recommendations, and unverified questions. Be explicit about which platform, code path and evidence were not checked.
 
-A normal implementation reviewer may perform self-review; an independent review must actually be performed by a separate reviewer or process before it can be described as independent. Neither result grants merge or release authority. If code changes after review, reevaluate the affected code and evidence against the new exact HEAD.
+Label self-review and independent review accurately: independent review requires a separate reviewer or process. If code changes after review, recheck the affected code and evidence at the new HEAD.
 
 ## Checking rulebook changes
 
@@ -82,4 +82,8 @@ from their headings and index; it never requires a hardcoded total.
 
 ## Keep the rulebook maintainable
 
-Do not copy the entire RCS text into a consuming review skill. Link to the consumer's **latest `main`** adoption (or intentional pin), read applicable pages before coding and during review, and record the actual RCS SHA used in review evidence. No recurring SHA-update PR is needed. Proposed changes to shared rules belong in this repository; each consumer retains its own code, policy, merge and release decisions.
+Link to applicable rules from review skills and read them during implementation
+and review. Propose changes to shared rules in this repository; handle project
+code and policy changes in that project's repository. See the
+[adoption upgrade guidance](adoption.md#upgrades) for following `main` or
+updating a fixed revision.

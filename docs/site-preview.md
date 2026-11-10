@@ -2,7 +2,9 @@
 
 The site uses **Zensical** and a [MkDocs-compatible configuration](https://zensical.org/docs/compatibility/mkdocs/), giving us the same Markdown source structure and familiar Material-style navigation as the [Drupal Coding Standards](https://project.pages.drupalcode.org/coding_standards/php/documentation/).
 
-The included workflow validates pull requests and publishes successful `main` builds through GitHub Pages after hosting is activated. A local preview does **not** change repository visibility or publish a website. Review the [publication-readiness checklist](publication-readiness.md) before any distribution decision. Bind the development server to loopback on your own workstation.
+The commands below build and serve a local preview. Bind the development server
+to loopback on your own workstation. For publication checks, see the
+[publication-readiness checklist](publication-readiness.md).
 
 ## Windows PowerShell
 
@@ -26,7 +28,7 @@ python3 -m venv .venv
 .venv/bin/zensical serve --dev-addr 127.0.0.1:8001
 ```
 
-The local build output is written into `site/`, which is deliberately ignored by Git. Do not commit generated HTML. Initial hosting activation or a change of publication destination requires the owner's approval.
+Generated HTML goes into the Git-ignored `site/` directory. Keep it out of commits.
 
 ## Forge visual identity (draft)
 
@@ -78,7 +80,7 @@ first if it is still running in that terminal.
 .venv/bin/python tools/verify_rust_examples.py
 ```
 
-The Rust example check needs installed `rustc` on `PATH` with Rust 2024 edition support. It compiles **only marked self-contained examples**, runs marked tests and fails on a broken marker; deliberate anti-examples and pseudocode are never executed. The repository uses the current compatible stable Rust toolchain for shared examples; consuming projects keep their own supported toolchain and platform policy. The GitHub Actions workflow runs the same checks with its own environment. On `main`, it uploads the generated site only after all checks pass, then deploys that artifact in the separate `github-pages` environment.
+The Rust example check needs installed `rustc` on `PATH` with Rust 2024 edition support. It compiles **only marked self-contained examples**, runs marked tests and fails on a broken marker; deliberate anti-examples and pseudocode are never executed. CI runs these checks with the current compatible stable Rust toolchain. Consuming projects choose their own supported toolchains and platforms.
 
 ## Documentation hosting
 
@@ -87,7 +89,7 @@ Pages with GitHub Actions as the publishing source; the custom domain is a
 repository Pages setting. The subdomain's DNS CNAME target is
 `zevarix.github.io`, without the repository name. Existing A/AAAA records at
 the same subdomain conflict with that CNAME. Domain verification and HTTPS
-must be checked during owner-authorized activation; preserve unrelated
+must be checked during setup; preserve unrelated
 website, email and verification records.
 
 The `source-and-examples` job validates every pull request and push to `main`.
@@ -111,6 +113,5 @@ at an unserved GitHub Pages destination.
 2. Open the standards index, each rule page, adoption, source links and contributor instructions.
 3. Verify left navigation, built-in search and on-page headings work in the browser.
 4. Check Markdown cross-links and IDs such as `RCS-PERF-001` and `RCS-SAFE-001`.
-5. Treat preview as unapproved draft, not a publicly released version.
 
 The source of the guidelines remains the Markdown files under `docs/`, not generated static HTML.
