@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
+name: Documentation, example, or tooling bug
+description: Report an incorrect RCS page, broken example, validator defect, or skill installation problem.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Report defects in RCS here. Ask usage questions in [Q&A](https://github.com/zevarix/rust-coding-standards/discussions/categories/q-a); report consumer-application bugs to that project's maintainers.
+        Use [private vulnerability reporting](https://github.com/zevarix/rust-coding-standards/security/advisories/new) for security-sensitive defects. Do not paste secrets, private paths, or real user data into this public form.
+  - type: input
+    id: location
+    attributes:
+      label: Affected page, rule, skill, or tool
+      description: Include a link and the RCS commit you consulted when available.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: Explain what is incorrect and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps or minimal example
+      description: Provide commands, a broken link, or a small synthetic example that demonstrates the issue. Sanitize logs before sharing them.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Relevant versions and environment
+      description: If relevant, include OS and Rust, Python, Zensical, Skills CLI, or client versions. Omit machine names, credentials, and personal filesystem paths.

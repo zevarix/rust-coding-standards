@@ -10,6 +10,16 @@ For a substantive rule change, open a focused GitHub issue describing the
 specific problem, applicability, exceptions and verification evidence, then
 propose a reviewable pull request. Keep rule IDs stable when possible.
 
+## Questions, ideas, and reports
+
+- Ask about rules, adoption, or skills in [Discussions Q&A](https://github.com/zevarix/rust-coding-standards/discussions/categories/q-a).
+- Explore early suggestions in [Ideas](https://github.com/zevarix/rust-coding-standards/discussions/categories/ideas).
+- Use the [issue chooser](https://github.com/zevarix/rust-coding-standards/issues/new/choose) for concrete rule proposals or RCS documentation, example, and tooling defects.
+- Report security-sensitive defects through [private vulnerability reporting](https://github.com/zevarix/rust-coding-standards/security/advisories/new), following [SECURITY.md](SECURITY.md).
+
+Discussions help develop a proposal; scoped implementation work belongs in an
+issue and pull request. Keep public examples synthetic and sanitize any logs.
+
 ## Validate your change
 
 Follow the [environment setup and validation commands](docs/site-preview.md#check-documentation-and-rust-examples)

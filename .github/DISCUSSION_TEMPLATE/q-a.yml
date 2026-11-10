@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ask about RCS rules, adoption, review workflows, or the Rust skills.
+        Keep examples synthetic and omit private project data. For security-sensitive reports, use [private vulnerability reporting](https://github.com/zevarix/rust-coding-standards/security/advisories/new).
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What are you trying to understand or accomplish?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Relevant rules and context
+      description: Link the rule/page or skill, include the RCS revision if known, and share a small sanitized example if useful.
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you have tried or read
+      description: Share relevant investigation or explain where the documentation became unclear.

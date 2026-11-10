@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
+# SPDX-License-Identifier: MIT OR Apache-2.0
+name: Rule proposal or improvement
+description: Propose a concrete new rule or a change to an existing RCS rule.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for a scoped proposal. Explore early ideas in [Discussions](https://github.com/zevarix/rust-coding-standards/discussions/categories/ideas).
+        Keep examples synthetic and remove private project details. Report vulnerabilities through [private reporting](https://github.com/zevarix/rust-coding-standards/security/advisories/new).
+  - type: input
+    id: related-rules
+    attributes:
+      label: Related rule IDs or pages
+      description: Link existing rules if applicable; maintainers can assign an ID for a new rule.
+      placeholder: RCS-PERF-001 or a documentation link
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and consequence
+      description: Describe a concrete call path, input, or maintenance problem and why it matters.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed guidance
+      description: Explain the smallest useful change. Include good/bad examples or draft wording when helpful.
+    validations:
+      required: true
+  - type: textarea
+    id: applicability
+    attributes:
+      label: Applicability and exceptions
+      description: When should this apply, when should it not apply, and should it be Required or Advisory? Explain any uncertainty.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and verification
+      description: How could a reviewer check the guidance? Include reproducible evidence for performance or safety claims, or label them exploratory. Link upstream sources and note reuse rights where relevant.
