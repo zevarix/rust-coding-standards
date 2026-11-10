@@ -44,8 +44,8 @@ license texts and its attribution notice. Detailed RCS documentation is
 loaded through an authorized GitHub route or an existing RCS checkout at the
 consumer's selected revision.
 
-While RCS is private, installation and remote documentation reads require
-existing repository access. The CLI supports configured Git/GitHub CLI/SSH
+If the selected source requires authentication, use existing authorized
+repository access. The CLI supports configured Git/GitHub CLI/SSH
 authentication; do not put credentials in commands or repository files.
 This installation guide does not change visibility or publish a package.
 

@@ -33,7 +33,7 @@ hexagonal crab mark in this repository was **drawn independently**,
 not copied from Ferris's offered SVG/PNG files. No sponsorship or
 endorsement by the Rust Project or mascot artist is implied.
 
-The original crab SVG is Copyright (c) 2026 Peder Klockmann (Zevarix), licensed **MIT OR Apache-2.0** alongside the rulebook and tools. The separate Forge CSS and custom homepage visual theme remain **all rights reserved**; see [Licensing and reuse](licensing.md). Licensing alone does not authorize publication; the repository was private at the preparation audit. See the [public-readiness checklist](publication-readiness.md).
+The original crab SVG is Copyright (c) 2026 Peder Klockmann (Zevarix), licensed **MIT OR Apache-2.0** alongside the rulebook and tools. The separate Forge CSS and custom homepage visual theme remain **all rights reserved**; see [Licensing and reuse](licensing.md). Review rights, private information and source provenance before choosing a publication channel. See the [public-readiness checklist](publication-readiness.md).
 
 
 ## Source handling
@@ -44,6 +44,6 @@ The original crab SVG is Copyright (c) 2026 Peder Klockmann (Zevarix), licensed 
 - Before public release, verify the selected [licenses and exceptions](licensing.md) against included material, and perform a private-information and provenance check.
 - Upstream links can change. Review cited upstream semantics when materially revising a rule; do not silently import new upstream requirements.
 
-## Publication decision still pending
+## Redistribution review
 
-**The owner has selected MIT OR Apache-2.0 for original RCS documentation, tools and Forge crab SVG, with Forge CSS/homepage theme rights reserved. No public release or visibility change has been authorized.** Review history, assets and third-party materials before future publication, and avoid pasted guideline text/examples without verified redistribution rights.
+Original RCS documentation, tools and the Forge crab SVG are **MIT OR Apache-2.0**; the Forge CSS and homepage theme remain **rights reserved**. Preserve these boundaries when redistributing material. Review included assets and third-party sources, and avoid pasted guideline text or examples without verified redistribution rights.

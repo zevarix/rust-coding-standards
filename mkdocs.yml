@@ -1,4 +1,4 @@
-# Local documentation preview only. Publishing and public visibility are owner-gated.
+# Documentation build and local preview. No deployment is configured here.
 # MkDocs-compatible configuration used by Zensical.
 site_name: Zevarix / Rust Coding Standards
 site_description: Explicit, practical and reusable Rust coding standards for human readers and automated review

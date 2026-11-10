@@ -40,15 +40,14 @@ Copyright licensing of an SVG does not convey endorsement or ownership
 of another party's trademarks. Original Zensical/Material theme assets
 and other third-party dependencies retain their own licenses.
 
-## Current repository status
+## Publication and private information
 
-At the 2026-10-11 preparation audit, RCS was **private** and had no
-public versioned release. These license terms prepare clear reuse rights,
-but do not authorize public GitHub visibility, documentation hosting,
-domain/deployment or a release. Any future publication requires separate
-owner approval and a fresh source/history review. See the
-[publication-readiness checklist](publication-readiness.md). If the repository is eventually made public, the reserved
-Forge CSS and homepage layout will also become visible in its source;
-copyright reservation alone does not keep those files confidential.
+These license terms define reuse rights; they do not approve publication on
+any particular channel. Source visibility, documentation hosting and versioned
+releases remain separate owner decisions. Review private information and rights
+before publication using the [publication-readiness checklist](publication-readiness.md).
+Public source includes any tracked Forge CSS and homepage layout even though
+those files remain rights reserved; copyright reservation does not keep them
+confidential.
 
 For original sources and attribution see [Sources](sources.md).
