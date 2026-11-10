@@ -1,6 +1,6 @@
 # Zevarix Rust Coding Standards
 
-**Working draft — no versioned release yet.** Consumer projects may independently adopt these guidelines under their own repository-local policies and review authority.
+**Working draft — no versioned release yet.**
 
 Reusable, explicit Rust engineering standards for Zevarix projects, with rule identifiers, rationale, examples and review guidance.
 
@@ -28,7 +28,7 @@ Use $rust-performance to investigate this slow operation and compare optimizatio
 
 Installing a skill does not adopt standards for your repository. Use the
 [adoption guide](docs/adoption.md) to declare scope and choose latest `main`
-or an intentional fixed revision. Your project keeps its own rules and review authority.
+or a fixed revision.
 
 ## Documentation
 
@@ -43,8 +43,6 @@ or an intentional fixed revision. Your project keeps its own rules and review au
 - [Community questions and ideas](https://github.com/zevarix/rust-coding-standards/discussions)
 - [Public-readiness review and publication checklist](docs/publication-readiness.md)
 
-The documentation source is in `docs/`; `mkdocs.yml` supports building the site with **Zensical** and preserves compatibility with Material for MkDocs. The reserved-rights **Forge** visual theme uses a separately open-licensed, original crab-inspired logo and local CSS. GitHub Pages publishes the validated `main` build at **https://rcs.zevarix.com/** after hosting is activated. Pull requests run validation without publishing. For local work, preview on `http://127.0.0.1:8001/` when the localhost preview server is running.
+The site is built with **Zensical** from the Markdown in `docs/`. GitHub Pages publishes validated updates from `main`; pull requests run checks only. See the [preview instructions](docs/site-preview.md) to build and browse the site locally.
 
 **Licensing:** Original RCS rules, documentation, examples, validation tools and [Forge crab SVG](docs/assets/brand/forge-crab.svg) are offered under **MIT OR Apache-2.0**, at your choice, with copyright attributed to **Peder Klockmann (Zevarix)**. The original **Forge CSS and homepage visual theme** are **all rights reserved** and excluded from those licenses. See [Licensing and reuse](docs/licensing.md), [COPYRIGHT](COPYRIGHT), [LICENSE-MIT](LICENSE-MIT), [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-FORGE-THEME](LICENSE-FORGE-THEME).
-
-Source visibility, hosted documentation and versioned releases are separate owner decisions. See the [publication checklist](docs/publication-readiness.md) for source sanitization, rights and validation checks. A local preview does not publish the website.

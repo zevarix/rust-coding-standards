@@ -1,10 +1,10 @@
 # Adopting the guidelines
 
-Adoption is **explicit and repository-local**. A standards document does not govern a different repository merely because both live under the same account or organization.
+Each project adopts RCS by adding a declaration to its own documentation.
 
 ## Suggested adopter declaration
 
-Place a short note in the adopting repository's own contributing/development documentation, tailored to that project's authority:
+Add a note to the project's contributing or development guide:
 
 ```text
 Rust coding guidance:
@@ -15,7 +15,11 @@ Rust coding guidance:
   Owner: <owning repository and issue/decision>
 ```
 
-With `main` adoption, no recurring revision bump is required. Human/agent coders and reviewers read the current guidance when they work, and record the **actual RCS commit SHA consulted** in the relevant PR/review evidence. That SHA is historical provenance, **not** a pin in the consumer's governance files. A project may deliberately choose an immutable commit or release for a specific assurance need; this remains optional. The repository currently has no release tag. Private material is only accessible to authorized members; copying private text to a public repository is a separate publication decision.
+Projects following `main` read the current guidance during implementation and
+review, then record the **RCS commit consulted** in their PR or review evidence.
+That record identifies the rules used; the project does not need to maintain a
+commit pin. Choose a fixed commit when a project needs one for a specific
+assurance requirement. RCS has no release tag yet.
 
 ## What stays local
 
@@ -26,13 +30,17 @@ With `main` adoption, no recurring revision bump is required. Human/agent coders
 - Project-specific exceptions and migration strategy
 - PR integration, release, deployment and publication authority
 
-A consumer may adopt a subset or stricter rules, but should identify the difference explicitly rather than pretending every rule applies unchanged.
+List any rules you omit or tighten in the adoption declaration.
 
 ## Use in a review skill
 
-An adopting repository may tell implementers **and** reviewers to read the applicable rules from current `main` and cite relevant `RCS-*` IDs in evidence-backed findings. The [reviewer guide](review-guide.md) defines a concise method and an example comment. Do **not** paste the whole rulebook into each project or automatically mirror standards content/code when `main` advances.
+Tell implementers and reviewers to consult the adopted revision and cite
+applicable `RCS-*` IDs with their findings. The [reviewer guide](review-guide.md)
+provides a method and an example comment. Link to the rulebook rather than
+copying it into each project or automatically mirroring content when `main`
+advances.
 
-A workable, owner-local review instruction would be:
+Example review instruction:
 
 ```text
 When reviewing changed Rust, read the owning issue and local safety contracts first.
@@ -41,7 +49,9 @@ Cite rule IDs only for demonstrated applicability and evidence-backed findings.
 A clean RCS assessment is not independent review or merge authorization.
 ```
 
-Any private repository source remains subject to the consumer's actual access permissions. The initial draft is not yet a released standard; adopters must not assume an unapproved commit pin.
+Use private project source only with its normal access permissions. Follow the
+[publication checklist](publication-readiness.md) before copying private
+material into public documentation.
 
 ## Example validation
 
@@ -57,4 +67,10 @@ For an application that commits `Cargo.lock`, a project may add `--locked`. For 
 
 ## Upgrades
 
-For projects following latest `main`, **no project PR is necessary merely to refresh a rulebook SHA**. New work and reviews consult current applicable rules and record the revision inspected, while past accepted changes remain historical. A substantive local code, safety-contract or policy change still follows the consuming repository's own issue/PR, tests and owner authority. A project that deliberately uses an immutable pin may update it through its own established review process. External guideline updates never grant authority to rewrite, merge, deploy or publish consumer work.
+Projects following `main` do not need a PR just to refresh a rulebook SHA.
+Record the revision used for new work; past accepted changes keep their
+original review record. Projects using a fixed commit update it through their
+normal review process.
+
+RCS updates do not automatically change a project's code or policy. Make those
+changes through the project's issue, PR, testing and approval process.

@@ -65,6 +65,6 @@ The rules draw on the Rust Style Guide, Rust API Guidelines, and Clippy. Every r
 
 ## Adoption and publication
 
-Projects explicitly adopt either latest main or a selected revision, and retain their own architecture, exceptions, testing, and merge authority. See [adoption](adoption.md) and [contributing](contributing.md).
+Use the [adoption guide](adoption.md) to choose latest `main` or a fixed revision and record which rules apply to your project. To propose a change, see [contributing](contributing.md).
 
-Original RCS guidelines, code examples and the Forge crab mark are **MIT OR Apache-2.0**, Copyright (c) 2026 Peder Klockmann (Zevarix); the authored **Forge CSS and homepage theme** remain rights reserved. See [Licensing and reuse](licensing.md). Repository visibility, documentation hosting and public releases are separate owner decisions. RCS licensing does not itself approve publication. The crab mark is not official Rust branding.
+Original RCS guidelines, code examples and the Forge crab mark are **MIT OR Apache-2.0**, Copyright (c) 2026 Peder Klockmann (Zevarix); the authored **Forge CSS and homepage theme** remain rights reserved. See [Licensing and reuse](licensing.md). The crab mark is not official Rust branding.

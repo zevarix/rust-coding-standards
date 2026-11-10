@@ -15,6 +15,6 @@ For new rules, supply a stable ID, applicability (required/advisory), scope, rat
 
 Prefer minimal, broadly reusable principles over rules tied to one product, operating system or reviewer. No arbitrary file-length quotas or blanket tool/feature prohibitions. A new rule should make code easier to understand, test or maintain.
 
-A project adopting these standards owns its own merge and release decisions. A reviewer finding here cannot authorize modifications or deployments in a consuming repository.
+For use in another project, follow the [adoption guide](adoption.md).
 
-Original documentation, Rust examples, tools and crab artwork are contributed under **MIT OR Apache-2.0** unless different rights are specifically documented and accepted. Contributors retain copyright in their original work; document third-party source rights. The Forge CSS and authored homepage presentation are **rights reserved**, not ordinary open-source contributions; editing them requires separate rights coordination. See [Licensing and reuse](licensing.md). Public visibility still requires a separate explicit owner approval and source/history review.
+Original documentation, Rust examples, tools and crab artwork are contributed under **MIT OR Apache-2.0** unless different rights are specifically documented and accepted. Contributors retain copyright in their original work; document third-party source rights. The Forge CSS and authored homepage presentation are **rights reserved**, not ordinary open-source contributions; editing them requires separate rights coordination. See [Licensing and reuse](licensing.md). Use the [publication checklist](publication-readiness.md) before publishing source or hosting documentation.
