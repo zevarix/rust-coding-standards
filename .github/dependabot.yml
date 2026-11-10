@@ -11,3 +11,12 @@ updates:
       timezone: "America/Phoenix"
     assignees:
       - "zevarix"
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "America/Phoenix"
+    assignees:
+      - "zevarix"
