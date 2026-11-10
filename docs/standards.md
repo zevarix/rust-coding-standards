@@ -1,4 +1,4 @@
-# Rust Coding Standards — Draft 0.1
+# Rust Coding Standards — Working draft
 
 These are **proposed shared rules**, not automatically accepted policy for every Zevarix repository. A project may explicitly adopt the **latest `main`** guidance without maintaining a commit pin, or choose a fixed revision for a specific assurance need. It retains its own scope, exceptions and stronger local rules. Code that predates adoption is not automatically noncompliant.
 
@@ -69,4 +69,4 @@ When a rule warrants an actionable finding, record **ID → path/symbol → conc
 
 An adopting project may explain an exception inline near the code or in its own rules/ADR. A documented exception must still satisfy the project's actual functional and safety contracts. A large but cohesive module can be entirely acceptable; numerical file-size or method-count limits are not part of these standards.
 
-See [SOURCES.md](sources.md) for upstream materials and attribution.
+See [Sources and attribution](sources.md) for upstream materials and attribution.

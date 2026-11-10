@@ -10,7 +10,7 @@ These rules matter when an application persists consequential state or translate
 
 ### Requirement
 
-Group one logical effect's related writes in one transaction with an explicit success condition. Check expected version/state and affected-row counts; a successful SQL statement is not proof that it updated the intended record. If a statement fails or a compare-and-swap guard does not match, fail the transition without persisting a partial completion. Choose \`BEGIN IMMEDIATE\` when competing SQLite writers make early reservation of the write transaction appropriate; do not mandate it for every read-only query.
+Group one logical effect's related writes in one transaction with an explicit success condition. Check expected version/state and affected-row counts; a successful SQL statement is not proof that it updated the intended record. If a statement fails or a compare-and-swap guard does not match, fail the transition without persisting a partial completion. Choose `BEGIN IMMEDIATE` when competing SQLite writers make early reservation of the write transaction appropriate; do not mandate it for every read-only query.
 
 **Avoid** committing the completion claim separately from its evidence:
 
@@ -20,7 +20,7 @@ connection.execute("INSERT INTO receipts (job_id, proof) VALUES (?1, ?2)", (job_
 // The first update may already be committed if the second insert fails.
 ```
 
-**Prefer** an application transaction with an expected-state guard (illustrative \`rusqlite\` example; table definitions and domain errors belong to the consumer):
+**Prefer** an application transaction with an expected-state guard (illustrative `rusqlite` example; table definitions and domain errors belong to the consumer):
 
 ```rust
 use rusqlite::{params, Connection, TransactionBehavior};
@@ -49,7 +49,7 @@ fn record_completion(
 }
 ```
 
-The example establishes **atomic database recording**, not physical output integrity. The caller still must prove that \`proof\` represents the current verified effect and that a completion claim cannot outlive its required physical evidence.
+The example establishes **atomic database recording**, not physical output integrity. The caller still must prove that `proof` represents the current verified effect and that a completion claim cannot outlive its required physical evidence.
 
 ### Reviewer check
 
@@ -88,7 +88,7 @@ open connection -> configure required SQLite PRAGMAs outside transactions
   -> only then permit protected persistence operations
 ```
 
-An index that serves only performance may be an optimization rather than a hard recovery gate; qualify the exact schema objects that actually enforce safety or correctness. SQLite \`PRAGMA integrity_check\` does **not** substitute for \`PRAGMA foreign_key_check\`, and integrity tests cannot establish application-level semantics by themselves.
+An index that serves only performance may be an optimization rather than a hard recovery gate; qualify the exact schema objects that actually enforce safety or correctness. SQLite `PRAGMA integrity_check` does **not** substitute for `PRAGMA foreign_key_check`, and integrity tests cannot establish application-level semantics by themselves.
 
 ### Reviewer check
 
@@ -106,7 +106,7 @@ Identify the source of each invariant (DDL, transaction, application check, or p
 
 ### Requirement
 
-Preserve filenames as \`Path\`, \`PathBuf\`, \`OsStr\` or \`OsString\` across native filesystem boundaries. Do not use lossy Unicode conversion, manual \`to_lowercase\` or ad hoc slash replacement as proof two paths identify the same physical object. Case behavior, normalization, mounted namespaces, symbolic links and reparse points differ by filesystem and can change between observation and effect.
+Preserve filenames as `Path`, `PathBuf`, `OsStr` or `OsString` across native filesystem boundaries. Do not use lossy Unicode conversion, manual `to_lowercase` or ad hoc slash replacement as proof two paths identify the same physical object. Case behavior, normalization, mounted namespaces, symbolic links and reparse points differ by filesystem and can change between observation and effect.
 
 **Avoid** treating a display label as an authoritative path key:
 
@@ -144,7 +144,7 @@ fn preserves_native_components_without_text_rewriting() {
 }
 ```
 
-Retaining the original native path is a **representation property, not a physical identity proof**. A safe read or write still needs the platform-appropriate currently held file handle, file identity, parent namespace and collision guarantees required by its owning product. \`canonicalize\` resolves a pathname at one moment; it does not make a future operation race-free.
+Retaining the original native path is a **representation property, not a physical identity proof**. A safe read or write still needs the platform-appropriate currently held file handle, file identity, parent namespace and collision guarantees required by its owning product. `canonicalize` resolves a pathname at one moment; it does not make a future operation race-free.
 
 ### Reviewer check
 
@@ -152,6 +152,6 @@ Trace user input → path storage → logical/portable IDs → actual filesystem
 
 **Exception:** Lossy formatting may be acceptable in non-authoritative logs or UI where the original native path is still retained separately. Portable display aliases can be normalized as long as they are never substituted for filesystem identity.
 
-**Sources:** [Rust \`std::path\`](https://doc.rust-lang.org/std/path/), [Rust \`OsString\`](https://doc.rust-lang.org/std/ffi/struct.OsString.html).
+**Sources:** [Rust `std::path`](https://doc.rust-lang.org/std/path/), [Rust `OsString`](https://doc.rust-lang.org/std/ffi/struct.OsString.html).
 
 [Back to standards index](../standards.md).

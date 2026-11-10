@@ -63,6 +63,12 @@ The check command exits with status 1 when an update is available. Review
 updates before applying them; use `--global` for a deliberately global
 installation. CLI commands can evolve, so verify the selected version's help.
 
+Manual copies and local-directory installs may not be tracked as updatable
+remote sources. In the tested CLI 1.7.6, project check/update skips local-directory
+installs even when `skills list` shows them. A "no updates" result does not prove
+those copies are current: compare them with the intended source revision and
+reinstall deliberately, preserving any local changes first.
+
 For a reproducible skill-source revision, the tested CLI 1.7.6 accepts
 `zevarix/rust-coding-standards#<git-ref>`; replace the placeholder with an
 intentional full commit or tag and quote the source argument. In that

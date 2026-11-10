@@ -34,7 +34,7 @@ This project adds a small stylesheet (`docs/stylesheets/forge.css`) on top of
 Zensical's built-in modern Material-derived theme. The original crab-inspired
 SVG (`docs/assets/brand/forge-crab.svg`) acts as the logo and favicon. The SVG is **MIT OR Apache-2.0**, but the original Forge CSS and authored homepage visual theme remain all rights reserved. See [Licensing and reuse](licensing.md).
 It references the broader Rustacean community but **is not Ferris artwork** or
-official Rust branding. See `docs/sources.md` for the inspiration and distinction.
+official Rust branding. See [Sources](sources.md) for the inspiration and distinction.
 
 The design includes a custom home hero, editorial code illustration, topic cards,
 accessible focus states, dark/light palettes, responsive navigation, and reduced
@@ -49,21 +49,36 @@ without stopping unrelated services.
 
 Zensical can use an existing `mkdocs.yml`, including familiar Material navigation and Python Markdown extensions. This preserves a straightforward path to compare with Material for MkDocs or migrate later. The current design uses Zensical's `modern` theme variant; some Zensical-specific settings may need adjustment if building with classic MkDocs, so **a separate MkDocs build has not been proven** by a successful Zensical build alone.
 
-We keep the configuration intentionally small: navigation, search, code highlighting, a light/dark choice and anchored rule headings. Avoid plugins, analytics, private-site publication or content duplication unless they provide concrete value.
+We keep the configuration intentionally small: navigation, search, code highlighting, a light/dark choice and anchored rule headings. Add plugins, analytics or duplicated content only when they provide concrete value.
 
 ## Check documentation and Rust examples
 
-These commands run locally and in the source-validation CI:
+After creating the environment and installing dependencies using the matching
+setup above, run these commands from the repository root. Explicit environment
+paths avoid needing to activate the virtual environment. Stop the preview server
+first if it is still running in that terminal.
 
-```sh
-python tools/verify_standards.py
-zensical build
-python tools/verify_standards.py --site
-python -m unittest discover -s tools -p "test_*.py"
-python tools/verify_rust_examples.py
+### Windows PowerShell
+
+```powershell
+.\.venv\Scripts\python.exe tools/verify_standards.py
+.\.venv\Scripts\zensical.exe build
+.\.venv\Scripts\python.exe tools/verify_standards.py --site
+.\.venv\Scripts\python.exe -m unittest discover -s tools -p "test_*.py"
+.\.venv\Scripts\python.exe tools/verify_rust_examples.py
 ```
 
-The Rust example check needs installed `rustc` with Rust 2024 edition support. It compiles **only marked self-contained examples**, runs marked tests and fails on a broken marker; deliberate anti-examples and pseudocode are never executed. The repository uses the current compatible stable Rust toolchain for shared examples; consuming projects keep their own supported toolchain and platform policy. The GitHub Actions workflow validates source only and does not deploy or publish the site.
+### macOS or Linux
+
+```sh
+.venv/bin/python tools/verify_standards.py
+.venv/bin/zensical build
+.venv/bin/python tools/verify_standards.py --site
+.venv/bin/python -m unittest discover -s tools -p "test_*.py"
+.venv/bin/python tools/verify_rust_examples.py
+```
+
+The Rust example check needs installed `rustc` on `PATH` with Rust 2024 edition support. It compiles **only marked self-contained examples**, runs marked tests and fails on a broken marker; deliberate anti-examples and pseudocode are never executed. The repository uses the current compatible stable Rust toolchain for shared examples; consuming projects keep their own supported toolchain and platform policy. The GitHub Actions workflow runs the same checks with its own environment; it validates source only and does not deploy or publish the site.
 
 ## What to validate
 

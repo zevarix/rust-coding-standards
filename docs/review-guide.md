@@ -19,7 +19,9 @@ Read the [standards index](standards.md), then open only the rules relevant to t
 | Naming, module boundaries or public APIs | [Style and structure](rules/style-and-structure.md), [Types and errors](rules/types-and-errors.md) |
 | File sizes, offsets, budgets, index conversions or serialization widths | [Numbers and bounds](rules/numbers-and-bounds.md) |
 | Unsafe code, external input or user-owned data | [Safety and user-owned data](rules/safety.md) |
+| Decoding, archives, malformed data or input/resource limits | [Untrusted input](rules/untrusted-input.md) |
 | Filesystem identity, copying, publishing or uncertain retries | [Filesystem identity and completed effects](rules/mutable-effects.md) |
+| Native pathname representation, SQLite transactions or schema recovery | [Persistence and native paths](rules/persistence-and-paths.md) |
 | External tools, subprocess output or cancellation | [Processes and cancellation](rules/processes-and-cancellation.md) |
 | Concurrent writer admission or shared mutable state | [Concurrency and tooling](rules/concurrency-and-tooling.md) |
 | Toolchain versions, format/lint or supported target checks | [Concurrency and tooling](rules/concurrency-and-tooling.md) |
@@ -60,7 +62,8 @@ For expensive code, name the entry point and count work **through called helpers
 
 For example, rehashing one 4-GiB source nine times implies roughly 36 GiB of logical source reads, **not** proof that the operation takes any particular number of seconds. Before removing a pass, show which identity, concurrency and freshness guarantees survive.
 
-See [RCS-PERF-001](rules/performance.md#rcs-perf-001--review-work-across-call-paths).
+See [RCS-PERF-001](rules/performance.md#rcs-perf-001--review-work-across-call-paths)
+and the [measurement guide](performance/measurement.md) for investigation methods.
 
 ## Write the review result
 
@@ -70,15 +73,12 @@ A normal implementation reviewer may perform self-review; an independent review 
 
 ## Checking rulebook changes
 
-Run the standard-library-only checker from the repository root whenever rule IDs, headings or links change:
-
-```sh
-python tools/verify_standards.py
-zensical build
-python tools/verify_standards.py --site
-```
-
-The first command checks the Markdown index and local links without a site builder. After installing the project's documented Zensical dependency, the build and second checker confirm that generated headings, links and search output exist. The validator discovers rules from their headings and index; it never requires a hardcoded total.
+Run the [documented validation commands](site-preview.md#check-documentation-and-rust-examples)
+from the repository root whenever rule IDs, headings or links change. The
+standard-library-only source checker validates the Markdown index and local links
+without a site builder. The Zensical build and `--site` check then confirm that
+generated headings, links and search output exist. The validator discovers rules
+from their headings and index; it never requires a hardcoded total.
 
 ## Keep the rulebook maintainable
 
