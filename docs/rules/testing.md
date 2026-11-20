@@ -162,6 +162,36 @@ in another table solely for stylistic uniformity.
 **Related:** [RCS-TEST-001](#rcs-test-001--make-tests-deterministic-and-owned) and
 [RCS-TEST-002](#rcs-test-002--verify-real-failure-modes).
 
+## RCS-TEST-004 — Verify consequential behavior, not only execution {#rcs-test-004--verify-consequential-behavior-not-only-execution}
+
+**Level:** Advisory, especially for consequential decisions, state machines, compatibility checks, recovery paths and unsafe wrappers. A consuming project's existing required tests and safety contracts still apply.
+
+**Enforcement:** Contract/state-transition review, focused coverage inspection, selective mutation tests and other supported validation tools where they add useful evidence.
+
+### Requirement
+
+Start with the observable contract and realistic failure cost. Identify the meaningful valid and invalid states, allowed and forbidden transitions, and any outcomes that must never be reported as success. For decision logic, consider both **false acceptance** of invalid input and **false rejection** of valid input. Use deterministic, owned fixtures and fault injection when they reflect reachable scenarios.
+
+Coverage tools such as `cargo-llvm-cov` can reveal unexercised branches, but executing a line does not prove its behavior was asserted. When worthwhile, use `cargo-mutants` on a focused target and investigate surviving mutations: a survivor may reveal a missing behavioral assertion, an equivalent or irrelevant change, an unsupported target, or a test/instrumentation problem. Fix evidence-backed coverage gaps; do not chase a mutation score for its own sake.
+
+Where concurrency or interruption matters, test the important ordering boundaries with deterministic barriers or simulation if feasible, then retain the consuming project's required real-platform evidence. Model-only tests do not prove external filesystem, database, or FFI effects.
+
+**Do not** mandate particular tool installations, 100% coverage, a universal mutation score, or exhaustive enumeration of unrealistic failures. Choose checks proportionate to risk and supported platforms. Record unrun or unsupported checks plainly.
+
+See the [risk-weighted verification workflow](../verification/assurance.md) for a practical sequence and example.
+
+### Reviewer check
+
+- Does each consequential outcome have an observable assertion, including at least one realistic invalid case?
+- Do the tests distinguish valid behavior from false positives and rejected valid cases when relevant?
+- For uncovered branches or surviving mutants, is the practical consequence understood rather than treated as an automatic blocker?
+- Does the evidence exercise the claimed platform and effect boundary instead of just a pure model or instrumented substitute?
+- Are tool versions, limitations and unverified claims stated accurately?
+
+**Exceptions:** Straightforward reversible changes, pure presentation work and code with no meaningful state transition may need only ordinary unit and integration tests; expensive mutation or simulation work should justify its cost.
+
+**Related:** [RCS-TEST-001](#rcs-test-001--make-tests-deterministic-and-owned), [RCS-TEST-002](#rcs-test-002--verify-real-failure-modes), [RCS-SAFE-001](safety.md#rcs-safe-001--justify-unsafe-operations) and [RCS-STATE-001](mutable-effects.md#rcs-state-001--do-not-register-an-effect-as-complete-before-verification).
+
 ## RCS-DOC-001 — Document nonobvious contracts {#rcs-doc-001--document-nonobvious-contracts}
 
 **Level:** Advisory for internal helpers; stronger documentation may be required for public APIs and unsafe contracts.

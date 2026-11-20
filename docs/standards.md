@@ -47,6 +47,7 @@ Rule IDs use the prefix `RCS` for **Rust Coding Standards**. The rest of each ID
 | [RCS-TEST-001](rules/testing.md#rcs-test-001--make-tests-deterministic-and-owned) | Required | Tests/review | Synthetic fixture isolation |
 | [RCS-TEST-002](rules/testing.md#rcs-test-002--verify-real-failure-modes) | Required* | Tests/review | Negative-path coverage |
 | [RCS-TEST-003](rules/testing.md#rcs-test-003--organize-tests-around-behavioral-contracts-and-named-cases) | Advisory | Review | Behavioral tests with named cases |
+| [RCS-TEST-004](rules/testing.md#rcs-test-004--verify-consequential-behavior-not-only-execution) | Advisory | Focused tests/coverage/mutation review | Risk-weighted behavioral verification |
 | [RCS-DOC-001](rules/testing.md#rcs-doc-001--document-nonobvious-contracts) | Advisory | Rustdoc/review | Important invariants |
 | [RCS-TOOL-001](rules/concurrency-and-tooling.md#rcs-tool-001--align-formatting-edition-and-lint-expectations) | Advisory | rustfmt/Clippy/review | Align edition, format and lints |
 | [RCS-TOOL-002](rules/concurrency-and-tooling.md#rcs-tool-002--test-the-supported-contract-not-a-convenient-subset) | Required* | CI/review | Validate actual supported targets |

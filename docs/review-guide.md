@@ -31,6 +31,26 @@ Read the [standards index](standards.md), then open only the rules relevant to t
 
 Follow the execution path far enough to understand effects. The diff tells you where code changed, not necessarily where the problem occurs. Tests and Clippy can confirm important properties, but passing them does not establish that a file copy, durable transition or large-data call path is correct.
 
+## Prioritize verification by failure cost
+
+Match review effort to what a wrong result would do, not whether a human or an
+AI agent typed the code. For low-risk, easily reversible work, normal tests and
+a clear diff may be sufficient. For a public API, compatibility check or other
+decision that callers rely on, inspect its promised behavior and test both
+rejection of invalid cases and acceptance of valid cases when relevant. For
+`unsafe`, FFI and consequential filesystem or durable-state transitions, trace
+the caller's proof obligations and failure boundaries carefully, even when
+coverage and automated tools are green.
+
+Before delegating substantive work to an agent or another contributor, explain
+the load-bearing types, invariants, permitted assumptions, realistic failure
+cases, supported targets and what evidence would qualify the result. Afterward,
+review the design and assertions, not only test counts or formatting; do not
+waive close reading of high-risk native/unsafe code. Apply the
+[risk-weighted verification workflow](verification/assurance.md) when it adds
+confidence. It complements [RCS-TEST-004](rules/testing.md#rcs-test-004--verify-consequential-behavior-not-only-execution);
+it is not a universal request to run mutation tests, Miri or a sanitizer.
+
 ## Classify a finding with evidence
 
 An actionable review comment should state (and the PR/review should record the **RCS commit actually consulted** when applying RCS):
