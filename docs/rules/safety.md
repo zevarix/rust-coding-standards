@@ -1,3 +1,9 @@
+---
+tags:
+  - Safety
+  - Filesystem and Persistence
+---
+
 # Safety and user-owned data
 
 These rules apply when a Rust project handles native FFI, untrusted input, or consequential user data. A small pure arithmetic library need not invent a filesystem approval protocol.

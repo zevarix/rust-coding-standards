@@ -1,3 +1,10 @@
+---
+tags:
+  - Filesystem and Persistence
+  - Safety
+  - Testing
+---
+
 # Filesystem identity and completed effects
 
 These rules apply when an application makes consequential changes to mutable external state. They do not require a pure library or a read-only parser to invent an approval system.

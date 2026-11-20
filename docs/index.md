@@ -1,6 +1,6 @@
 ---
 title: Rust Coding Standards for Humans and AI Agents
-description: Practical Rust coding standards for correct, fast, maintainable software. Rules for human developers and AI coding agents covering performance, testing, and safety.
+description: Rust coding standards for correct, fast, maintainable software. Rules for human developers and AI coding agents covering performance, testing, and safety.
 ---
 
 <!-- Copyright (c) 2026 Peder Klockmann (Zevarix). Original Forge homepage presentation: all rights reserved. See LICENSE-FORGE-THEME at repository root. Links and headings work without JavaScript. -->
@@ -38,7 +38,7 @@ description: Practical Rust coding standards for correct, fast, maintainable sof
 
   <section class="forge-intro" aria-labelledby="explore-by-topic">
     <h2 id="explore-by-topic">Rules by topic</h2>
-    <p>Choose a subject below or use search to find a specific rule ID.</p>
+    <p>Choose a subject below, <a href="topics/">browse all topics</a>, or use search to find a specific rule ID.</p>
   </section>
   <section class="forge-intro" aria-labelledby="ai-rust-quality">
     <h2 id="ai-rust-quality">Write better Rust, whether you're a human or an AI agent</h2>

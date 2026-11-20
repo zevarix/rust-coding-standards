@@ -1,3 +1,10 @@
+---
+tags:
+  - Concurrency
+  - Error Handling
+  - Safety
+---
+
 # External processes and cancellation
 
 External tools are outside Rust's type and memory-safety guarantees. These rules apply when a Rust application launches another program, consumes its output, or allows consequential work to be interrupted.

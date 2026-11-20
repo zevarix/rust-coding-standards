@@ -1,6 +1,9 @@
 ---
 title: "Rust Testing Standards: Behavioral and Failure Coverage"
-description: "Write Rust tests that catch realistic failure modes, exercise behavioral contracts, and support targeted mutation testing without chasing arbitrary coverage numbers."
+description: "Write Rust tests that catch realistic failure modes, exercise behavioral contracts, and support mutation testing without chasing arbitrary coverage numbers."
+tags:
+  - Testing
+  - Rust Fundamentals
 ---
 
 # Testing and documentation

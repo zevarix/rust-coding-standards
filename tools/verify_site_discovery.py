@@ -15,10 +15,13 @@ from pathlib import Path
 from urllib.parse import urlparse
 from xml.etree import ElementTree
 
+from verify_standards import html_element_ids
+
 SITE_URL = "https://rcs.zevarix.com/"
 CHECKED_PAGES = (
     "",
     "standards/",
+    "topics/",
     "ai-rust-code-quality/",
     "review-guide/",
     "rules/performance/",
@@ -36,9 +39,22 @@ class PageHead(HTMLParser):
         self.descriptions: list[str] = []
         self.canonicals: list[str] = []
         self.h1_count = 0
+        self.social: dict[str, str] = {}
+        self.edit_action = False
+        self.view_action = False
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         fields = dict(attrs)
+        if tag == "meta" and fields.get("property") in ("og:title", "og:image", "twitter:card"):
+            self.social[fields["property"]] = fields.get("content") or ""
+        if tag == "a":
+            href = fields.get("href") or ""
+            self.edit_action |= href.startswith(
+                "https://github.com/zevarix/rust-coding-standards/edit/main/docs/"
+            )
+            self.view_action |= href.startswith(
+                "https://github.com/zevarix/rust-coding-standards/raw/main/docs/"
+            )
         if tag == "title":
             self.in_title = True
         elif tag == "meta" and fields.get("name", "").lower() == "description":
@@ -65,7 +81,10 @@ def check_site(site: Path) -> list[str]:
         file = site / suffix / "index.html"
         if not file.is_file():
             problems.append(f"Missing rendered page: {file}")
-            continue
+
+    for file in sorted(site.rglob("index.html")):
+        parent = file.relative_to(site).parent
+        suffix = "" if parent == Path(".") else parent.as_posix() + "/"
         head = PageHead()
         head.feed(file.read_text(encoding="utf-8"))
         if not head.title.strip() or head.title.startswith("Home - "):
@@ -74,12 +93,31 @@ def check_site(site: Path) -> list[str]:
             problems.append(f"Missing or unreasonable page description: {suffix or '/'}")
         else:
             if head.descriptions[0] in descriptions:
-                problems.append(f"Duplicate priority-page description: {suffix or '/'}")
+                problems.append(f"Duplicate page description: {suffix or '/'}")
             descriptions.add(head.descriptions[0])
         if head.canonicals != [SITE_URL + suffix]:
             problems.append(f"Incorrect canonical URL: {suffix or '/'}")
         if head.h1_count != 1:
             problems.append(f"Expected one page H1: {suffix or '/'}")
+        for name in ("og:title", "og:image", "twitter:card"):
+            if not head.social.get(name):
+                problems.append(f"Missing social metadata {name}: {suffix or '/'}")
+        image = head.social.get("og:image", "")
+        if image and (
+            not image.startswith(SITE_URL)
+            or not (site / urlparse(image).path.lstrip("/")).is_file()
+        ):
+            problems.append(f"Missing generated social-card image: {suffix or '/'}")
+        if not head.edit_action or not head.view_action:
+            problems.append(f"Missing current main source/edit actions: {suffix or '/'}")
+        if suffix == "topics/":
+            ids = html_element_ids(file.read_text(encoding="utf-8"))
+            for tag in ("performance", "testing", "safety", "ai-assisted-development"):
+                if f"tag:{tag}" not in ids:
+                    problems.append(f"Topics index missing tag group {tag}")
+    search = site / "search.json"
+    if not search.is_file() or "AI-assisted Development" not in search.read_text(encoding="utf-8"):
+        problems.append("Search index missing tagged AI-assisted Development content")
 
     robots = site / "robots.txt"
     if not robots.is_file() or "Sitemap: https://rcs.zevarix.com/sitemap.xml" not in robots.read_text(encoding="utf-8"):
@@ -91,7 +129,9 @@ def check_site(site: Path) -> list[str]:
         try:
             root = ElementTree.parse(sitemap).getroot()
             urls = {node.text for node in root.iter() if node.tag.endswith("}loc") or node.tag == "loc"}
-            for suffix in CHECKED_PAGES:
+            for file in sorted(site.rglob("index.html")):
+                parent = file.relative_to(site).parent
+                suffix = "" if parent == Path(".") else parent.as_posix() + "/"
                 if SITE_URL + suffix not in urls:
                     problems.append(f"Page absent from sitemap: {suffix or '/'}")
         except ElementTree.ParseError as exc:
@@ -129,5 +169,5 @@ if __name__ == "__main__":
         print("FAIL:", issue)
     if issues:
         raise SystemExit(1)
-    print(f"PASS: {len(CHECKED_PAGES)} priority-page titles, descriptions, canonicals and H1s; "
-          "sitemap, robots and generated AI exports verified")
+    print("PASS: all rendered page titles, unique descriptions, canonicals, H1s, "
+          "social cards, source actions and sitemap; topic tags and AI exports verified")

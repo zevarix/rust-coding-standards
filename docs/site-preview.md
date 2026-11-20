@@ -113,7 +113,9 @@ at an unserved GitHub Pages destination.
 
 1. Confirm `zensical build` exits successfully and produces `site/index.html`.
 2. Open the standards index, each rule page, adoption, source links and contributor instructions.
-3. Verify left navigation, built-in search and on-page headings work in the browser.
-4. Check Markdown cross-links and IDs such as `RCS-PERF-001` and `RCS-SAFE-001`.
+3. Verify left navigation, topic listings and search filtering, source/edit actions, footer links, and on-page headings.
+4. Check Markdown cross-links and IDs such as `RCS-PERF-001` and `RCS-SAFE-001`. Minified HTML may omit optional attribute quotes; the verifier parses actual element IDs rather than matching a formatting convention.
+5. Verify generated page-specific social cards, titles and descriptions, sitemap, `robots.txt`, and the LLM exports with `python tools/verify_site_discovery.py`.
+6. Confirm Forge branding, code-block whitespace and page navigation remain usable; HTML minification changes generated output only, never the source Markdown or Forge CSS.
 
 The source of the guidelines remains the Markdown files under `docs/`, not generated static HTML.

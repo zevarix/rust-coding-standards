@@ -1,3 +1,9 @@
+---
+tags:
+  - Tooling
+  - Error Handling
+---
+
 # Progress, diagnostics and logging
 
 Long-running work is not automatically a performance defect. A correct operation may

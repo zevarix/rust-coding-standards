@@ -1,3 +1,10 @@
+---
+tags:
+  - Concurrency
+  - Tooling
+  - Safety
+---
+
 # Concurrency and toolchain discipline
 
 Concurrency correctness and mechanical tooling require evidence about actual behavior. These rules do not mandate asynchronous Rust, a particular runtime, or every optional Clippy lint.
