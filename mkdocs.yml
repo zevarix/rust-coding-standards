@@ -15,6 +15,7 @@ nav:
   - Home: index.md
   - Standards index: standards.md
   - Reviewing code: review-guide.md
+  - Risk-weighted verification: verification/assurance.md
   - Coding rules:
       - Style and structure: rules/style-and-structure.md
       - Types, APIs and errors: rules/types-and-errors.md

@@ -4,6 +4,7 @@ This repository is **independently authored guidance**, not a copy of the materi
 
 | Source | Role in this draft |
 | --- | --- |
+| [JetBrains: How to Use AI for Rust Development (2026)](https://blog.jetbrains.com/rust/2026/11/04/ai-for-rust-development/) | Interview-derived ideas for risk-weighted review, agent briefs and selective behavior/unsafe verification; RCS wording and examples are independently written |
 | [The Rust Style Guide](https://doc.rust-lang.org/style-guide/) | Formatting principles; use the default `rustfmt` style |
 | [Rust API Guidelines checklist](https://rust-lang.github.io/api-guidelines/checklist.html) | Naming, predictable public API design, useful newtypes, documentation and error types |
 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | Idiomatic ownership, errors, testing and application-level explanations |

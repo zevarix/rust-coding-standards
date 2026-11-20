@@ -42,6 +42,7 @@ These links locate canonical pages; substitute the resolved revision for
 | Locate rules and levels | [Standards index](https://github.com/zevarix/rust-coding-standards/blob/main/docs/standards.md) |
 | Establish adoption and exceptions | [Adoption](https://github.com/zevarix/rust-coding-standards/blob/main/docs/adoption.md) |
 | Review an exact candidate | [Review guide](https://github.com/zevarix/rust-coding-standards/blob/main/docs/review-guide.md) |
+| Verify consequential behavior | [Risk-weighted verification](https://github.com/zevarix/rust-coding-standards/blob/main/docs/verification/assurance.md) |
 | Propose a shared correction | [Contributing](https://github.com/zevarix/rust-coding-standards/blob/main/docs/contributing.md) |
 
 Follow index links to the rules relevant to the actual call path. Apply a
@@ -52,6 +53,16 @@ contracts and avoid unrelated refactoring.
 For performance investigations, also load the `rust-performance` skill
 when available, or its canonical source. Standards supply expectations;
 the performance skill supplies the investigation method.
+
+For consequential stateful logic or AI-assisted implementation, use the
+[risk-weighted verification workflow](https://github.com/zevarix/rust-coding-standards/blob/main/docs/verification/assurance.md)
+when relevant. Establish the design's load-bearing invariants, legitimate
+assumptions, allowed transitions, failure cost and acceptance evidence before
+suggesting implementation. Inspect tests for both missed failures and false
+rejections when the behavior calls for them. Treat coverage, `cargo-mutants`,
+Miri and sanitizers as selective supporting evidence; do not require tools
+or universal score thresholds. Keep project-local acceptance, platform
+requirements and exact-review authority intact.
 
 ## Report with evidence
 

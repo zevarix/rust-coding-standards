@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix)
 # SPDX-License-Identifier: MIT OR Apache-2.0
-"""Compile explicitly marked Rust examples from the RCS rulebook.
+"""Compile explicitly marked Rust examples from RCS documentation.
 
 Only immediately adjacent <!-- rcs-example: test|compile --> fenced Rust
 blocks are executable contracts. Intentional anti-examples, pseudocode,
@@ -65,9 +65,9 @@ def run(command: list[str]) -> tuple[bool, str]:
 
 
 def validate(root: Path, rustc: str) -> int:
-    pages = sorted((root / "docs" / "rules").glob("*.md"))
+    pages = sorted((root / "docs").rglob("*.md"))
     if not pages:
-        print("FAIL: no Rust rule pages found")
+        print("FAIL: no documentation Markdown pages found")
         return 1
 
     found = 0

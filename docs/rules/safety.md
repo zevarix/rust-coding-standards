@@ -29,6 +29,25 @@ A comment by itself never proves soundness: review how the preconditions are est
 
 Do not claim all FFI is automatically unsafe in the same way. On Windows, Unix and macOS, the applicable handle, sharing, error and path semantics require platform-specific evidence.
 
+### Focused verification tools
+
+For code with consequential unsafe invariants, first trace the caller's proof
+of pointer validity, aliasing, initialization, lifetime and synchronization.
+When the supported target and test harness permit it, consider running relevant
+synthetic tests under [Miri](https://github.com/rust-lang/miri) and a sanitizer
+such as [AddressSanitizer](https://doc.rust-lang.org/beta/unstable-book/compiler-flags/sanitizer.html).
+These are **additional evidence**, not alternatives to soundness review.
+
+Miri does not execute arbitrary FFI/native operations and may not support a
+project's platform or runtime behavior. Sanitizer coverage also depends on the
+compiler, target, instrumentation and executed paths; passing ASan cannot prove
+the absence of every undefined behavior or native-handle bug. Check the
+installed toolchain's current documentation and the consuming project's target
+before choosing commands or making a PASS claim. Retain platform-specific
+tests for native handles, sharing, concurrency and filesystem identity.
+Use the [risk-weighted verification workflow](../verification/assurance.md)
+to choose the smallest useful set of checks.
+
 ## RCS-DATA-001 — Protect user-owned data {#rcs-data-001--protect-user-owned-data}
 
 **Level:** Required when operating on user-owned files, archives, databases or other consequential external state.
