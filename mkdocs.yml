@@ -1,8 +1,8 @@
 # Documentation build, local preview and GitHub Pages configuration.
 # MkDocs-compatible configuration used by Zensical.
-site_name: Zevarix / Rust Coding Standards
+site_name: Zevarix RCS
 site_url: https://rcs.zevarix.com/
-site_description: Explicit, practical and reusable Rust coding standards for human readers and automated review
+site_description: Practical Rust coding standards for correct, fast, maintainable software developed and reviewed by humans and AI agents
 repo_name: zevarix/rust-coding-standards
 repo_url: https://github.com/zevarix/rust-coding-standards
 copyright: Copyright (c) 2026 Peder Klockmann (Zevarix) · Open rules MIT OR Apache-2.0 · Forge theme rights reserved
@@ -15,6 +15,7 @@ nav:
   - Home: index.md
   - Standards index: standards.md
   - Reviewing code: review-guide.md
+  - Anti-AI-Slop Rust guide: ai-rust-code-quality.md
   - Risk-weighted verification: verification/assurance.md
   - Coding rules:
       - Style and structure: rules/style-and-structure.md
@@ -74,6 +75,30 @@ extra_css:
 
 plugins:
   - search
+  - meta-descriptions:
+      trim: true
+      max_length: 160
+  - llmstxt:
+      full_output: llms-full.txt
+      markdown_description: |
+        Engineering guidance for Rust developers and AI coding agents. The adopting
+        project's requirements, safety boundaries and supported platforms remain authoritative.
+      sections:
+        Start here:
+          - index.md: What the standards cover and how to use them
+          - standards.md: Indexed, scoped Rust coding rules
+          - ai-rust-code-quality.md: Review AI-generated Rust for correctness, performance and maintainability
+          - adoption.md: Project-level adoption of RCS rules
+          - review-guide.md: Evidence-based review method
+          - verification/assurance.md: Risk-weighted behavior verification
+        Rust coding rules:
+          - rules/*.md
+        Performance workflows:
+          - performance/*.md
+        Skills and contribution:
+          - skills.md: Installable Rust guidance and performance skills
+          - contributing.md: Propose improvements to the standard
+          - sources.md: Technical sources and attribution
 
 markdown_extensions:
   - attr_list

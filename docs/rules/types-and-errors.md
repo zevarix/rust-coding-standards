@@ -1,3 +1,8 @@
+---
+title: "Rust Types, API Design and Error Handling Standards"
+description: "Rust coding rules for distinct domain identities, predictable APIs, explicit recoverable errors, and actionable error context without hidden panics."
+---
+
 # Types, APIs and errors
 
 ## RCS-TYPE-001 — Model consequential identities distinctly {#rcs-type-001--model-consequential-identities-distinctly}

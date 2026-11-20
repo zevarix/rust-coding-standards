@@ -1,3 +1,8 @@
+---
+title: "Rust Profiling Guide: CPU, I/O and Lock Contention"
+description: "Profile slow Rust operations with the right tools: locate CPU, allocation, disk I/O, native-call, and lock-contention costs with honest capture limits."
+---
+
 <!-- SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix) -->
 <!-- SPDX-License-Identifier: MIT OR Apache-2.0 -->
 

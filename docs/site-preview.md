@@ -66,6 +66,7 @@ first if it is still running in that terminal.
 .\.venv\Scripts\python.exe tools/verify_standards.py
 .\.venv\Scripts\zensical.exe build
 .\.venv\Scripts\python.exe tools/verify_standards.py --site
+.\.venv\Scripts\python.exe tools/verify_site_discovery.py
 .\.venv\Scripts\python.exe -m unittest discover -s tools -p "test_*.py"
 .\.venv\Scripts\python.exe tools/verify_rust_examples.py
 ```
@@ -76,6 +77,7 @@ first if it is still running in that terminal.
 .venv/bin/python tools/verify_standards.py
 .venv/bin/zensical build
 .venv/bin/python tools/verify_standards.py --site
+.venv/bin/python tools/verify_site_discovery.py
 .venv/bin/python -m unittest discover -s tools -p "test_*.py"
 .venv/bin/python tools/verify_rust_examples.py
 ```

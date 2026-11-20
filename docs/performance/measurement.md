@@ -1,3 +1,8 @@
+---
+title: "Rust Benchmarking: Repeatable, Comparable Measurements"
+description: "Compare Rust performance changes with matched workloads, verified build provenance, controlled input state, and honest uncertainty instead of one-off timing claims."
+---
+
 <!-- SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix) -->
 <!-- SPDX-License-Identifier: MIT OR Apache-2.0 -->
 
