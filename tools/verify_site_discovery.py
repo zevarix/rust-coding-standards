@@ -137,6 +137,14 @@ def check_site(site: Path) -> list[str]:
         except ElementTree.ParseError as exc:
             problems.append(f"Invalid sitemap XML: {exc}")
 
+    public_keys = sorted(site.glob("indexnow-*.txt"))
+    if len(public_keys) != 1:
+        problems.append("Expected exactly one public IndexNow verification file")
+    else:
+        marker = public_keys[0]
+        if marker.read_text(encoding="utf-8") != marker.stem:
+            problems.append("IndexNow verification file must contain its public key exactly")
+
     llms = site / "llms.txt"
     full = site / "llms-full.txt"
     if not llms.is_file() or not full.is_file():
