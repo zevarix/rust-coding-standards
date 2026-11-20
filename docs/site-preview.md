@@ -109,6 +109,30 @@ build passing does not itself confirm public availability. To stop hosting,
 disable the Pages site and reconcile its DNS record so it no longer points
 at an unserved GitHub Pages destination.
 
+## Search discovery and submissions
+
+The public site exposes an XML sitemap at
+[rcs.zevarix.com/sitemap.xml](https://rcs.zevarix.com/sitemap.xml) and a
+`robots.txt` sitemap declaration. Those are crawl-discovery mechanisms, not
+proof that a search engine indexed or ranked a page.
+
+Google Search Console requires verified property access for tracked sitemap
+submissions. The site owner supplies the verification step in Search Console;
+do not put private OAuth credentials, authentication tokens or DNS administration
+secrets in the repository. [Google's official submission guide](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+describes the available routes.
+
+For IndexNow-compatible engines, `docs/indexnow-*.txt` is a deliberately
+**public host-verification marker**: its name and text are part of IndexNow's
+documented protocol, not a private credential. It is served at the site root
+by Zensical/GitHub Pages. Submit only current canonical URLs that have been
+added, changed or removed, after the hosting URL and content are verified.
+Record submission results and avoid replaying an uncertain request.
+[The IndexNow protocol](https://www.indexnow.org/documentation) and
+[Microsoft's implementation guide](https://www2.bing.com/indexnow/getstarted)
+specify accepted methods and status codes. A successful notification does
+not guarantee crawling, indexing or ranking.
+
 ## What to validate
 
 1. Confirm `zensical build` exits successfully and produces `site/index.html`.

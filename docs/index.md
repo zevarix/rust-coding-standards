@@ -73,6 +73,28 @@ description: Rust coding standards for correct, fast, maintainable software. Rul
 
 The rules draw on the Rust Style Guide, Rust API Guidelines, and Clippy. Every rule specifies whether it is required or advisory, where it applies, and how to evaluate it. See the [standards index](standards.md) or [source references](sources.md).
 
+## Rust coding standards: common questions
+
+### What do Rust coding standards add beyond rustfmt and Clippy?
+
+[rustfmt](https://github.com/rust-lang/rustfmt) handles formatting, while [Clippy](https://github.com/rust-lang/rust-clippy) detects many mechanical mistakes and suspicious patterns. RCS complements those tools with reviewable behavioral and engineering questions: are important state transitions correct, are errors recoverable, does an operation repeat expensive work, and do the tests prove the claimed behavior? Start with the [indexed RCS rules](standards.md) and apply only the rules relevant to the change.
+
+### How does RCS help produce faster Rust code?
+
+Performance should be considered during design, not only after users report slow operations. [RCS-PERF-001](rules/performance.md#rcs-perf-001--review-work-across-call-paths) asks reviewers to count the *whole call path's* expensive operations—database queries, parsing, allocation, native calls and large file reads—rather than judging one helper in isolation. The [performance workflow](performance/optimization.md) then measures candidates on comparable workloads while protecting correctness and recovery boundaries.
+
+### Can AI coding agents apply the same standards as human developers?
+
+Yes. The standard applies based on the consuming project's declared scope, independent of who authored the code. [RCS guidance and Rust performance skills](skills.md) help an agent retrieve the current rulebook and investigate bottlenecks; those skills do not override a project's safety requirements or grant merge authority. For practical review of unnecessary abstraction and redundant checks, read [Anti AI Slop Rust](ai-rust-code-quality.md).
+
+### May tests change when Rust implementation changes?
+
+Absolutely. Legitimate behavior or interface changes often require tests to evolve. The constraint is **not** to weaken independent correctness evidence merely to make a performance experiment appear successful. See [risk-weighted behavioral verification](verification/assurance.md) for positive and negative cases, test effectiveness, and scope-appropriate tools.
+
+### Does RCS replace official Rust guidance?
+
+No. It builds on the [Rust Style Guide](https://doc.rust-lang.org/style-guide/), Rust API Guidelines, and standard Rust tooling. It adds scoped rules for consequential applications and specific review guidance for performance, data safety, testing, and maintenance. Adopting projects retain their own requirements and exceptions under the [adoption model](adoption.md).
+
 ## Adoption and publication
 
 Use the [adoption guide](adoption.md) to choose latest `main` or a fixed revision and record which rules apply to your project. To propose a change, see [contributing](contributing.md).

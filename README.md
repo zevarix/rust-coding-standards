@@ -4,6 +4,12 @@
 
 Reusable, explicit Rust engineering standards for Zevarix projects, with rule identifiers, rationale, examples and review guidance.
 
+## What these standards help you build
+
+RCS brings together practical standards for **correct, efficient, maintainable Rust** written by humans or AI coding agents. The rulebook covers explicit errors, realistic failure cases, safe state transitions, and costly repeated work across complete execution paths—not arbitrary source-length or coverage quotas.
+
+For a focused review of generated code, see [Anti AI Slop Rust](https://rcs.zevarix.com/ai-rust-code-quality/). For code that passes tests but runs slowly, start with [performance and execution cost](https://rcs.zevarix.com/rules/performance/) and [the optimization workflow](https://rcs.zevarix.com/performance/optimization/). Browse the [full topic index](https://rcs.zevarix.com/topics/) for related guidelines.
+
 ## Quickstart
 
 For a code review, open the [standards index](docs/standards.md) and follow the
