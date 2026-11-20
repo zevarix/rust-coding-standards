@@ -1,3 +1,8 @@
+---
+title: "Rust Performance Standards: Avoid Redundant Work"
+description: "Rust performance standards for finding repeated expensive work across full call paths, benchmarking accurately, and retaining optimizations that justify their cost."
+---
+
 # Performance and execution cost
 
 The purpose is to catch **real, significant repeated work**, not to enforce numerical budgets or optimize small code prematurely.

@@ -1,6 +1,13 @@
+---
+title: "Rust Code Review Guide for Humans and AI Agents"
+description: "Review Rust changes against behavioral contracts, safety, repeated work, error handling, and evidence from tests and benchmarks—not style preferences."
+---
+
 # Using Rust Coding Standards in code review
 
 Use this guide to review Rust against the rules a project has adopted.
+
+For a focused walkthrough of AI-generated Rust quality and performance, read [Anti AI Slop Rust](ai-rust-code-quality.md); its review questions also apply to human-written code.
 
 ## Start with the owning project
 

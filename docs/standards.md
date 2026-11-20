@@ -1,6 +1,13 @@
+---
+title: "Rust Coding Standards: Indexed Rules and Applicability"
+description: "Explore RCS coding standards for Rust: named rules for safe code, errors, concurrency, performance, testing, and maintainability across human and AI development."
+---
+
 # Rust Coding Standards — Working draft
 
 These are **proposed shared rules**, not automatically accepted policy for every Zevarix repository. A project may explicitly adopt the **latest `main`** guidance without maintaining a commit pin, or choose a fixed revision for a specific assurance need. It retains its own scope, exceptions and stronger local rules. Code that predates adoption is not automatically noncompliant.
+
+For a practical review of unnecessary abstraction and repeated expensive work in generated code, see [Anti AI Slop Rust](ai-rust-code-quality.md). The same quality expectations apply to human contributors.
 
 ## Rule levels
 

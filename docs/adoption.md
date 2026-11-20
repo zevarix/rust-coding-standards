@@ -1,3 +1,8 @@
+---
+title: "How to Adopt Rust Coding Standards in Your Project"
+description: "Apply RCS to your Rust project with a clear adoption scope, review provenance, project-specific exceptions, and current guidance for human and AI contributors."
+---
+
 # Adopting the guidelines
 
 Each project adopts RCS by adding a declaration to its own documentation.

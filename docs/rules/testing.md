@@ -1,3 +1,8 @@
+---
+title: "Rust Testing Standards: Behavioral and Failure Coverage"
+description: "Write Rust tests that catch realistic failure modes, exercise behavioral contracts, and support targeted mutation testing without chasing arbitrary coverage numbers."
+---
+
 # Testing and documentation
 
 ## RCS-TEST-001 — Make tests deterministic and owned {#rcs-test-001--make-tests-deterministic-and-owned}

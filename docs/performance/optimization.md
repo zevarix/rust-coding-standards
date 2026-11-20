@@ -1,3 +1,8 @@
+---
+title: "Rust Optimization Workflow: Remove Unnecessary Work"
+description: "Find inefficient Rust call paths, redundant filesystem and SQLite work, lock contention, and avoidable allocations while preserving correctness and recovery."
+---
+
 <!-- SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix) -->
 <!-- SPDX-License-Identifier: MIT OR Apache-2.0 -->
 

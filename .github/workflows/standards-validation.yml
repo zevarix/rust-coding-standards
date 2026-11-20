@@ -28,6 +28,8 @@ jobs:
         run: zensical build --strict
       - name: Validate built rule anchors and search
         run: python tools/verify_standards.py --site
+      - name: Verify generated SEO and agent-discovery artifacts
+        run: python tools/verify_site_discovery.py
       - name: Test Rust example validator
         run: python -m unittest discover -s tools -p "test_*.py"
       - name: Use current stable Rust for reusable examples

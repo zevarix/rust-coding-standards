@@ -1,3 +1,8 @@
+---
+title: "Rust Verification: Behavioral Tests and Unsafe Code"
+description: "Assess Rust behavior using positive and negative tests, targeted mutation analysis, and appropriate unsafe-code checks without arbitrary coverage quotas."
+---
+
 <!-- SPDX-FileCopyrightText: 2026 Peder Klockmann (Zevarix) -->
 <!-- SPDX-License-Identifier: MIT OR Apache-2.0 -->
 

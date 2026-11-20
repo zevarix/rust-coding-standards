@@ -1,3 +1,8 @@
+---
+title: "Rust AI Coding Agent Skills: Code Review and Performance"
+description: "Install Rust coding agent skills for reviewing changes, measuring performance, and applying the RCS rules without inventing extra approval requirements."
+---
+
 # Reusable Rust skills
 
 RCS documentation is the canonical source of standards and technical guidance.
@@ -13,6 +18,8 @@ Detailed methods live in the [measurement](performance/measurement.md),
 [profiling](performance/profiling.md) and
 [optimization](performance/optimization.md) documentation. Skills load these
 pages as needed rather than carrying separate copies.
+
+When reviewing generated code, follow the [Anti AI Slop Rust guide](ai-rust-code-quality.md) to examine behavioral correctness, performance and unnecessary complexity.
 
 ## Install with the Skills CLI
 
