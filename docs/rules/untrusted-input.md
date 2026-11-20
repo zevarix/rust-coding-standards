@@ -1,3 +1,10 @@
+---
+tags:
+  - Safety
+  - Testing
+  - Error Handling
+---
+
 # Untrusted inputs and bounded work
 
 Parsing files, archives, network responses or external-tool output is not automatically safe merely because it is written in safe Rust. These rules apply when untrusted size, count, nesting or field values drive resource use or correctness.

@@ -1,6 +1,10 @@
 ---
 title: "Rust AI Coding Agent Skills: Code Review and Performance"
 description: "Install Rust coding agent skills for reviewing changes, measuring performance, and applying the RCS rules without inventing extra approval requirements."
+tags:
+  - AI-assisted Development
+  - Tooling
+  - Performance
 ---
 
 # Reusable Rust skills

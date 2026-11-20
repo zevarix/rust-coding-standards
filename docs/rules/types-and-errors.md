@@ -1,6 +1,9 @@
 ---
 title: "Rust Types, API Design and Error Handling Standards"
 description: "Rust coding rules for distinct domain identities, predictable APIs, explicit recoverable errors, and actionable error context without hidden panics."
+tags:
+  - Rust Fundamentals
+  - Error Handling
 ---
 
 # Types, APIs and errors

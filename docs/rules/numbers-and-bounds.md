@@ -1,3 +1,9 @@
+---
+tags:
+  - Rust Fundamentals
+  - Safety
+---
+
 # Numbers, sizes and bounds
 
 Rust makes arithmetic behavior explicit when you choose the appropriate operations. The relevant question in review is whether a value can exceed its valid range and what the caller does when that happens. Ordinary local arithmetic does not need a new wrapper for every expression.

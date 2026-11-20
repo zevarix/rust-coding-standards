@@ -1,6 +1,10 @@
 ---
 title: "Rust Coding Standards: Indexed Rules and Applicability"
-description: "Explore RCS coding standards for Rust: named rules for safe code, errors, concurrency, performance, testing, and maintainability across human and AI development."
+description: "Explore RCS coding standards for Rust: rules for safe code, errors, concurrency, performance, testing, and maintainability across human and AI development."
+tags:
+  - Rust Fundamentals
+  - Documentation
+  - AI-assisted Development
 ---
 
 # Rust Coding Standards — Working draft

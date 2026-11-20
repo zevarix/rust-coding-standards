@@ -1,6 +1,10 @@
 ---
 title: "Rust Code Review Guide for Humans and AI Agents"
 description: "Review Rust changes against behavioral contracts, safety, repeated work, error handling, and evidence from tests and benchmarks—not style preferences."
+tags:
+  - AI-assisted Development
+  - Safety
+  - Testing
 ---
 
 # Using Rust Coding Standards in code review

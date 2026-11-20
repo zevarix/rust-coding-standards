@@ -1,3 +1,9 @@
+---
+tags:
+  - Filesystem and Persistence
+  - Safety
+---
+
 # SQLite state and native filesystem paths
 
 These rules matter when an application persists consequential state or translates filesystem paths into identities. They are **conditional**; a pure calculation crate has no need to adopt a SQLite persistence contract.

@@ -1,3 +1,8 @@
+---
+tags:
+  - Rust Fundamentals
+---
+
 # Style and structure
 
 These conventions are based on ordinary Rust tooling and the design goals of a shared coding standard. The rules below are original guidance, not copied from upstream.

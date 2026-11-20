@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -22,6 +23,25 @@ INDEX_LINK = re.compile(
     re.MULTILINE,
 )
 MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]\n]*\]\(([^)\n]+)\)")
+
+
+class HtmlElementIds(HTMLParser):
+    """Collect real HTML element IDs, including those in minified attributes."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.ids: set[str] = set()
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        for key, value in attrs:
+            if key == "id" and value is not None:
+                self.ids.add(value)
+
+
+def html_element_ids(html: str) -> set[str]:
+    parser = HtmlElementIds()
+    parser.feed(html)
+    return parser.ids
 
 
 def validate(root: Path, verify_site: bool) -> list[str]:
@@ -107,11 +127,15 @@ def validate(root: Path, verify_site: bool) -> list[str]:
 
     if verify_site:
         site = root / "site"
+        ids_by_page: dict[Path, set[str]] = {}
         for rule_id, (page, anchor) in headings.items():
             built = site / page.relative_to(docs).with_suffix("") / "index.html"
             if not built.is_file():
                 errors.append(f"{rule_id}: no generated HTML {built}")
-            elif f'id="{anchor}"' not in built.read_text(encoding="utf-8"):
+                continue
+            if built not in ids_by_page:
+                ids_by_page[built] = html_element_ids(built.read_text(encoding="utf-8"))
+            if anchor not in ids_by_page[built]:
                 errors.append(f"{rule_id}: missing generated HTML anchor {anchor}")
         if not (site / "search.json").is_file():
             errors.append("Generated search index missing")

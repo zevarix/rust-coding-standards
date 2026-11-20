@@ -1,6 +1,9 @@
 ---
 title: "Rust Performance Standards: Avoid Redundant Work"
-description: "Rust performance standards for finding repeated expensive work across full call paths, benchmarking accurately, and retaining optimizations that justify their cost."
+description: "Rust performance standards for finding repeated expensive work across full call paths, measuring results and retaining justified optimizations."
+tags:
+  - Performance
+  - Rust Fundamentals
 ---
 
 # Performance and execution cost
