@@ -1,5 +1,5 @@
 ---
-title: "Anti AI Slop Rust: Review AI-Generated Code for Quality and Speed"
+title: "Anti AI Slop Rust: Review AI-Generated Code"
 description: "Practical anti-AI-slop Rust code review: eliminate redundant work, preserve correctness, verify tests, and measure performance for human and AI-written Rust."
 tags:
   - AI-assisted Development
