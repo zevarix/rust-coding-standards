@@ -4,8 +4,28 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { once } from "node:events";
 import { request } from "node:http";
-import { createNodeHttpServer } from "../src/node.mjs";
+import { createNodeHttpServer, parsePublicHostnames } from "../src/node.mjs";
 import { metadata } from "../src/catalog.mjs";
+
+test("public Host allowlist accepts exact names and fails closed on unsafe config", () => {
+  const hosts = parsePublicHostnames(
+    "solar-olive-mule-94.hostingersite.com, RCSMCP.ZEVARIX.COM "
+  );
+  assert.deepEqual([...hosts], [
+    "solar-olive-mule-94.hostingersite.com",
+    "rcsmcp.zevarix.com",
+  ]);
+  for (const bad of [
+    "", " ", ",", "rcsmcp.zevarix.com,", "*.zevarix.com",
+    "https://rcsmcp.zevarix.com", "rcsmcp.zevarix.com:443",
+    "rcsmcp..zevarix.com", "localhost", "127.0.0.1",
+    "rcsmcp.zevarix.com,https://attacker.example",
+    "user@rcsmcp.zevarix.com",
+  ]) {
+    assert.throws(() => parsePublicHostnames(bad), { name: /Error/ }, bad);
+  }
+  assert.throws(() => parsePublicHostnames(null), TypeError);
+});
 
 test("Hostinger Node transport serves the same stateless read-only MCP catalog", async (t) => {
   const server = createNodeHttpServer();

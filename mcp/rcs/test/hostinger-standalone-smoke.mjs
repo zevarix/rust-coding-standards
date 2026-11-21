@@ -15,6 +15,7 @@ if (!packageDir) throw new Error("Usage: node hostinger-standalone-smoke.mjs PAT
 const basePath = resolve(packageDir);
 const entry = pathToFileURL(join(basePath, "src/hostinger-entry.mjs")).href;
 const host = "rcs-hostinger-smoke.example.com";
+const alternateHost = "rcsmcp-alias.example.com";
 
 const probe = createServer();
 probe.listen(0, "127.0.0.1");
@@ -31,7 +32,7 @@ const child = spawn(process.execPath,
     env: {
       ...process.env,
       NODE_ENV: "production",
-      RCS_PUBLIC_HOSTNAME: host,
+      RCS_PUBLIC_HOSTNAME: host + ", " + alternateHost,
       PORT: String(port),
     },
     stdio: ["ignore", "pipe", "pipe"],
@@ -126,12 +127,27 @@ try {
   const health = await send("GET", "/health");
   assert.equal(rule.body.result.structuredContent.revision, health.body.revision);
   assert.match(rule.body.result.structuredContent.source_url, new RegExp(health.body.revision));
+  const aliasHealth = await send("GET", "/health", undefined, { host: alternateHost });
+  assert.equal(aliasHealth.status, 200);
+  assert.equal(aliasHealth.body.revision, health.body.revision);
+  const aliasInitialize = await send("POST", "/mcp", {
+    jsonrpc: "2.0", id: 4, method: "initialize", params: {
+      protocolVersion: "2025-06-18", capabilities: {},
+      clientInfo: { name: "rcs-alias-smoke", version: "0.1.2" },
+    },
+  }, { host: alternateHost, origin: "https://" + alternateHost });
+  assert.equal(aliasInitialize.status, 200, JSON.stringify(aliasInitialize.body));
+  assert.equal(aliasInitialize.body.result.serverInfo.name, "rcs-readonly");
+  const crossHostOrigin = await send("POST", "/mcp", {
+    jsonrpc: "2.0", id: 5, method: "tools/list",
+  }, { host, origin: "https://" + alternateHost });
+  assert.equal(crossHostOrigin.status, 403);
   const blocked = await send("GET", "/health", undefined, { host: "attacker.example" });
   assert.equal(blocked.status, 403);
   const hostileOrigin = await send("POST", "/mcp", { jsonrpc: "2.0", id: 4, method: "tools/list" },
     { origin: "https://attacker.example" });
   assert.equal(hostileOrigin.status, 403);
-  console.log("PASS: imported Hostinger app calls listen(), real MCP handshake, four tools, citations and host/origin guards");
+  console.log("PASS: imported Hostinger app, two trusted hosts, real MCP handshake, four tools, citations and Host/Origin guards");
 } finally {
   if (child.exitCode === null) {
     child.kill();

@@ -86,7 +86,7 @@ the Node adapter, the read-only tool factory, generated catalog and licenses:
 
     python tools/package_rcs_hostinger.py
 
-The generated `dist/rcs-hostinger-mcp-0.1.1.zip` is Git-ignored.
+The generated `dist/rcs-hostinger-mcp-0.1.2.zip` is Git-ignored.
 The GitHub Actions `rcs-hostinger-mcp` artifact on `main`
 contains this **inner ZIP**; extract the Actions wrapper before uploading to
 Hostinger. Rebuild from the selected release commit so the catalog identifies
@@ -99,11 +99,23 @@ application**, framework `Other`, compatible Node.js 24.22+ (or
 `node src/hostinger-entry.mjs`). Hostinger's archive builder installed
 production dependencies via `npm install`; CI separately verifies
 `npm ci --omit=dev` from the extracted ZIP. Hostinger supplies `PORT`.
-Set `NODE_ENV=production` and `RCS_PUBLIC_HOSTNAME` to the
-hostname receiving requests. The current temporary hostname is
-`solar-olive-mule-94.hostingersite.com`. The optional branded hostname
-`mcp.rcs.zevarix.com` is **not configured**; it would require a
-separately approved Hostinger/DNS change.
+Set `NODE_ENV=production` and `RCS_PUBLIC_HOSTNAME` to a
+comma-separated list of **exact public DNS names**. A production service
+with a temporary hostname and a branded alias can use:
+
+    RCS_PUBLIC_HOSTNAME=solar-olive-mule-94.hostingersite.com,rcsmcp.zevarix.com
+
+The server rejects malformed or wildcard host settings at startup. For every
+HTTP request, the Host must match an allowed name and any supplied Origin must
+match that request's Host. The temporary URL remains supported through the
+transition.
+
+Hostinger attached `rcsmcp.zevarix.com` as a parked alias to this **same**
+RCS Node.js application and provisioned its DNS record and HTTPS automatically.
+The branded URL is not considered production accepted until the Node.js
+multi-host v0.1.2 release and external Streamable HTTP protocol tests pass.
+Do not allocate `mcp.zevarix.com`; it is reserved for potential
+future use.
 `GET /health` exposes the Git revision, and `POST /mcp`
 exposes stateless JSON-response Streamable HTTP without sessions.
 
@@ -114,9 +126,9 @@ Hostinger imports entry modules instead of executing them as `argv[1]`.
 Always configure the **exact build** with `node_version=24`,
 `app_type=other`, `entry_file=src/hostinger-entry.mjs`,
 `build_script=` empty and the versioned archive source.
-The saved Hostinger build settings may still show the earlier entry, even
-when the successful deployment's build options and runtime are correct.
-Do not rely on old auto-detected settings on subsequent deployments.
+The saved Hostinger build settings have since been corrected and read back
+to `src/hostinger-entry.mjs`. Verify the actual entry on each future
+deployment rather than assuming Hostinger's archive detector chose correctly.
 
 Local and CI verification exercise a temporary loopback Node.js server,
 real MCP initialization, tool discovery and lookup, hostile Host/Origin,
