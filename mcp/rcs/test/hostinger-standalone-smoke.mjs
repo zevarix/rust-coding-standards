@@ -16,6 +16,8 @@ const basePath = resolve(packageDir);
 const entry = pathToFileURL(join(basePath, "src/hostinger-entry.mjs")).href;
 const host = "rcs-hostinger-smoke.example.com";
 const alternateHost = "rcsmcp-alias.example.com";
+const brandedHost = "rcsmcp.zevarix.com";
+const syntheticChallenge = "synthetic-review-challenge-456";
 
 const probe = createServer();
 probe.listen(0, "127.0.0.1");
@@ -32,7 +34,8 @@ const child = spawn(process.execPath,
     env: {
       ...process.env,
       NODE_ENV: "production",
-      RCS_PUBLIC_HOSTNAME: host + ", " + alternateHost,
+      RCS_PUBLIC_HOSTNAME: host + ", " + alternateHost + ", " + brandedHost,
+      RCS_OPENAI_APPS_CHALLENGE_TOKEN: syntheticChallenge,
       PORT: String(port),
     },
     stdio: ["ignore", "pipe", "pipe"],
@@ -45,7 +48,7 @@ for (const stream of [child.stdout, child.stderr]) {
   });
 }
 
-async function send(method, path, payload, headerOverrides = {}) {
+async function send(method, path, payload, headerOverrides = {}, parseJson = true) {
   const body = payload === undefined ? undefined : JSON.stringify(payload);
   return new Promise((fulfill, reject) => {
     const req = request({
@@ -66,7 +69,7 @@ async function send(method, path, payload, headerOverrides = {}) {
       res.once("end", () => {
         const raw = Buffer.concat(chunks).toString("utf8");
         try {
-          fulfill({ status: res.statusCode, body: JSON.parse(raw) });
+          fulfill({ status: res.statusCode, body: parseJson ? JSON.parse(raw) : raw, headers: res.headers });
         } catch {
           reject(new Error("Non-JSON HTTP response: " + raw.slice(0, 200)));
         }
@@ -101,6 +104,18 @@ try {
     await new Promise((done) => setTimeout(done, 80));
   }
   if (!ready) throw new Error("Imported Node entry did not call listen()\n" + captured);
+
+  const challenge = await send("GET", "/.well-known/openai-apps-challenge", undefined,
+    { host: brandedHost }, false);
+  assert.equal(challenge.status, 200);
+  assert.equal(challenge.body, syntheticChallenge);
+  assert.match(challenge.headers["content-type"], /^text\/plain/);
+  assert.equal((await send("GET", "/.well-known/openai-apps-challenge", undefined,
+    { host: alternateHost })).status, 404);
+  assert.equal((await send("GET", "/.well-known/openai-apps-challenge", undefined,
+    { host: brandedHost, origin: "https://attacker.example" })).status, 403);
+  assert.equal((await send("POST", "/.well-known/openai-apps-challenge", undefined,
+    { host: brandedHost })).status, 405);
 
   const initialized = await rpc(1, "initialize", {
     protocolVersion: "2025-06-18",

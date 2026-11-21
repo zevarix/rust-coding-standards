@@ -85,7 +85,9 @@ the Node adapter, the read-only tool factory, generated catalog and licenses:
 
     python tools/package_rcs_hostinger.py
 
-The generated `dist/rcs-hostinger-mcp-0.1.2.zip` is Git-ignored.
+The generated `dist/rcs-hostinger-mcp-0.1.3.zip` is Git-ignored.
+This version is a **source candidate only** until separately qualified and deployed;
+the existing public service still runs v0.1.2.
 The GitHub Actions `rcs-hostinger-mcp` artifact on `main`
 contains this **inner ZIP**; extract the Actions wrapper before uploading to
 Hostinger. Rebuild from the selected release commit so the catalog identifies
@@ -152,6 +154,37 @@ Hostinger build entrypoint and both configured hostnames. Never overwrite
 unrelated websites or change unrelated DNS or billing settings without
 separate authority. GitHub integration is not hosting authority; public
 OpenAI Plugin Directory review and publication remain separate steps.
+
+
+## OpenAI publisher domain verification (optional; NOT deployed)
+
+The OpenAI plugin portal requires a challenge token at:
+
+    https://rcsmcp.zevarix.com/.well-known/openai-apps-challenge
+
+After the owner creates the separate remote-MCP plugin draft, the portal gives
+the actual verification token and challenge URL. Only if that exact URL points
+at this application, configure `RCS_OPENAI_APPS_CHALLENGE_TOKEN` in the
+existing isolated Node.js application to the **exact token**, without surrounding
+whitespace, newline, quote marks or JSON. Never commit or log the real token.
+The token is intentionally public at the challenge endpoint, not a private
+credential; use a Hostinger configuration secret rather than source history.
+
+This feature is inert when the variable is unset (HTTP 404). When configured
+and deployed it serves that exact token as `text/plain`, with `no-store`, on
+the **branded host only**. It rejects other Hosts/Origins and non-GET methods
+under the preexisting security checks. The fallback Hostinger alias does not
+serve the proof even if its ordinary MCP route is allowed. Synthetic proof
+values are exercised in Node and the extracted Hostinger ZIP smoke tests.
+
+**Deployment and verification remain separate authorization gates.**
+A repo merge neither publishes an OpenAI challenge nor updates the running
+Hostinger application. Before any real change, read back the exact portal
+challenge base and the existing configured variables, qualify the next
+versioned ZIP, preserve both working MCP Hostnames, deploy only this RCS
+Node.js app, and perform a fresh external protocol acceptance test on
+both endpoints. Do not replace another plugin's existing challenge token or
+use a different shared hostname without a separate owner decision.
 
 ## Explicit free-tier and deployment gate
 
