@@ -7,6 +7,7 @@ This repository is **independently authored guidance**, not a copy of the materi
 | [JetBrains: How to Use AI for Rust Development (2026)](https://blog.jetbrains.com/rust/2026/11/04/ai-for-rust-development/) | Interview-derived ideas for risk-weighted review, agent briefs and selective behavior/unsafe verification; RCS wording and examples are independently written |
 | [The Rust Style Guide](https://doc.rust-lang.org/style-guide/) | Formatting principles; use the default `rustfmt` style |
 | [Rust API Guidelines checklist](https://rust-lang.github.io/api-guidelines/checklist.html) | Naming, predictable public API design, useful newtypes, documentation and error types |
+| [Google Rust Style Guide](https://google.github.io/styleguide/rustguide.html) | Selective comparison for practical application APIs, borrowing, justified abstractions and clear control flow; RCS prose/examples are independently written, and Chromium/Fuchsia-specific rules are not adopted |
 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | Idiomatic ownership, errors, testing and application-level explanations |
 | [Clippy documentation](https://doc.rust-lang.org/clippy/) | Mechanical diagnostics and selectable lint categories |
 | [Cargo Book](https://doc.rust-lang.org/cargo/) | Workspace/toolchain/dependency workflow context |
