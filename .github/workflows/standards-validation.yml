@@ -71,6 +71,21 @@ jobs:
         run: npm run build
       - name: Exercise actual MCP protocol on local loopback
         run: python mcp/rcs/test/protocol_smoke.py
+      - name: Package portable Hostinger Node.js MCP from canonical sources
+        run: python tools/package_rcs_hostinger.py
+      - name: Install and test the extracted Hostinger deployment archive
+        run: |
+          mkdir -p dist/hostinger-verify
+          unzip -q dist/rcs-hostinger-mcp-*.zip -d dist/hostinger-verify
+          npm ci --prefix dist/hostinger-verify --omit=dev --no-audit --no-fund
+          node mcp/rcs/test/hostinger-standalone-smoke.mjs "$PWD/dist/hostinger-verify"
+      - name: Attach validated Hostinger MCP upload ZIP
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rcs-hostinger-mcp
+          path: dist/rcs-hostinger-mcp-*.zip
+          if-no-files-found: error
 
   plugin-package:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
