@@ -4,7 +4,7 @@
 """Reproducibly package a separate RCS plugin with public read-only MCP and both skills.
 
 Reuses the validated skills-only packager for the exact canonical skill payload.
-This technical candidate is not yet a public-submission-ready legal artifact.
+Public submission still requires owner-controlled demo, verification and attestations.
 """
 from __future__ import annotations
 
@@ -20,6 +20,10 @@ from package_rcs_plugin import STAMP, collect_files as collect_canonical_skill_f
 
 PACKAGE = "rcs-rust-standards"
 MCP_URL = "https://rcsmcp.zevarix.com/mcp"
+LEGAL_URLS = {
+    "privacyPolicyURL": "https://rcs.zevarix.com/privacy/",
+    "termsOfServiceURL": "https://rcs.zevarix.com/terms/",
+}
 TOOLS = frozenset(("search_rules", "get_rule", "get_guidance", "catalog_info"))
 PLUGIN_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
 MCP_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json"
@@ -58,12 +62,9 @@ def collect_files(repository: Path) -> dict[str, bytes]:
             raise ValueError(f"Unexpected {icon} path")
     if not ui.get("websiteURL", "").startswith("https://") or not ui.get("supportURL", "").startswith("https://"):
         raise ValueError("Public website and support links must use HTTPS")
-    legal = ("privacyPolicyURL", "termsOfServiceURL")
-    if any(key in ui for key in legal):
-        if not all(ui.get(key, "").startswith("https://") for key in legal):
-            raise ValueError("Privacy and terms URLs must both be real HTTPS links")
-        if any("example.com" in ui[key] for key in legal):
-            raise ValueError("Placeholder legal URLs cannot be submitted")
+    for key, verified_url in LEGAL_URLS.items():
+        if ui.get(key) != verified_url:
+            raise ValueError(f"{key} must use the verified RCS public HTTPS page")
     cases = ext.get("review", {}).get("test_cases", {})
     positive, negative = cases.get("positive", []), cases.get("negative", [])
     if len(positive) != 5 or len(negative) != 3:
@@ -131,7 +132,7 @@ if __name__ == "__main__":
     output = (args.output or Path("dist") / f"rcs-connected-plugin-{version}.zip").resolve()
     digest = build(root, output)
     print("PASS: reproducible RCS connected-plugin candidate with four public MCP tools and two canonical skills")
-    print("NOT SUBMISSION READY: owner-approved public privacy/terms URLs and reviewer demo recording remain required")
+    print("PORTAL SUBMISSION PENDING: reviewer demo, domain verification, scans and owner attestations")
     print(f"ARCHIVE={output}")
     print(f"SHA256={digest}")
 

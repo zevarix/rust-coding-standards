@@ -17,14 +17,18 @@ python tools/package_rcs_mcp_plugin.py
 python -m unittest discover -s tools -p "test_*.py"
 ```
 
-The package source and ZIP are **not yet submission ready**. OpenAI's remote
-MCP review requires the individual publisher to supply **approved, already
-published** HTTPS privacy and terms URLs and a reviewer-accessible demo
-recording. Their absence is intentional; never substitute `example.com` or
-an invented policy. Verify actual hosting-side request metadata retention,
-logs and applicable user controls before drafting legal representations.
-The current five positive / three negative review prompts are candidate
-test cases; verify them against the live endpoint before submission.
+The separate v0.1.1 candidate includes owner-approved, publicly served
+[privacy](https://rcs.zevarix.com/privacy/) and
+[terms](https://rcs.zevarix.com/terms/) pages. The two real HTTPS pages were
+independently checked for HTTP 200 and correct policy content before their
+addresses were added to the manifest; no placeholder legal URLs are used.
+
+This is **still a review candidate, not a submitted or published plugin**.
+OpenAI's remote MCP review additionally needs a reviewer-accessible demo
+recording, connection and domain verification using the exact portal-issued
+challenge, scans of real tools and skills, and personal publisher attestations.
+The current five positive / three negative review prompts are candidate test
+cases; verify them against the real client before submission.
 
 The new package is meant to be uploaded as **With MCP / a new plugin**.
 It cannot be attached to the older skills-only draft. Domain verification,
