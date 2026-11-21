@@ -91,4 +91,4 @@ RCS site before or when new collection practices take effect. This service
 is not intended to solicit data from children under 13.
 
 For terms governing this service, see the
-[RCS Plugin Terms of Service](../terms/).
+[RCS Plugin Terms of Service](terms.md).

@@ -39,7 +39,7 @@ RCS service.
 The public RCS rules, independently drawn Forge crab graphic, and open
 source code are made available under the published **MIT OR Apache-2.0**
 terms, subject to the scope and notices in
-[RCS licensing and reuse](../licensing/). The separately identified
+[RCS licensing and reuse](licensing.md). The separately identified
 Forge website theme and homepage presentation have reserved rights.
 These service terms do not enlarge, revoke, or substitute for the license
 grants and exceptions applicable to those materials.
@@ -68,7 +68,7 @@ cannot legally be excluded.
 ## Privacy and support
 
 How the plugin and its hosting providers process requests is described in
-the [RCS Plugin Privacy Policy](../privacy/). The public support route is the
+the [RCS Plugin Privacy Policy](privacy.md). The public support route is the
 [RCS GitHub issue tracker](https://github.com/zevarix/rust-coding-standards/issues);
 do not post personal data, credentials, or confidential source in a public
 issue. To ask about a privacy matter, open only a minimal issue requesting
