@@ -48,24 +48,39 @@ test("optional OpenAI challenge is exact, text-only, host-bound and fail-closed"
     return "http://127.0.0.1:" + server.address().port;
   }
   const base = await serve(synthetic);
-  const send = (method, host, origin) =>
-    fetch(base + challengePath, {
-      method,
-      headers: { host, ...(origin ? { origin } : {}) },
-      signal: AbortSignal.timeout(8000),
+  // Use raw HTTP to preserve the intentionally forged Host under test. Fetch
+  // may silently replace Host with the loopback target's authority.
+  const send = (url, method, host, origin) =>
+    new Promise((resolve, reject) => {
+      const req = request(url + challengePath, {
+        method,
+        headers: { host, ...(origin ? { origin } : {}) },
+      }, (res) => {
+        const parts = [];
+        res.on("data", (bytes) => parts.push(bytes));
+        res.once("end", () => resolve({
+          status: res.statusCode,
+          headers: new Headers(res.headers),
+          text: Buffer.concat(parts).toString("utf8"),
+        }));
+        res.once("error", reject);
+      });
+      req.once("error", reject);
+      req.setTimeout(8000, () => req.destroy(new Error("Challenge test timed out")));
+      req.end();
     });
-  const exact = await send("GET", "rcsmcp.zevarix.com");
+  const exact = await send(base, "GET", "rcsmcp.zevarix.com");
   assert.equal(exact.status, 200);
   assert.equal(exact.headers.get("content-type"), "text/plain; charset=utf-8");
   assert.equal(exact.headers.get("cache-control"), "no-store");
   assert.equal(exact.headers.get("x-content-type-options"), "nosniff");
-  assert.equal(await exact.text(), synthetic);
-  assert.equal((await send("POST", "rcsmcp.zevarix.com")).status, 405);
-  assert.equal((await send("GET", "attacker.example")).status, 403);
-  assert.equal((await send("GET", "rcsmcp.zevarix.com", "https://attacker.example")).status, 403);
-  assert.equal((await send("GET", "localhost")).status, 404);
+  assert.equal(exact.text, synthetic);
+  assert.equal((await send(base, "POST", "rcsmcp.zevarix.com")).status, 405);
+  assert.equal((await send(base, "GET", "attacker.example")).status, 403);
+  assert.equal((await send(base, "GET", "rcsmcp.zevarix.com", "https://attacker.example")).status, 403);
+  assert.equal((await send(base, "GET", "localhost")).status, 404);
   const empty = await serve(null);
-  const absent = await fetch(empty + challengePath, { headers: { host: "rcsmcp.zevarix.com" } });
+  const absent = await send(empty, "GET", "rcsmcp.zevarix.com");
   assert.equal(absent.status, 404);
 });
 
