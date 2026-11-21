@@ -25,6 +25,31 @@ pages as needed rather than carrying separate copies.
 
 When reviewing generated code, follow the [Anti AI Slop Rust guide](ai-rust-code-quality.md) to examine behavioral correctness, performance and unnecessary complexity.
 
+## OpenAI plugin package
+
+RCS also offers a **skills-only plugin** for ChatGPT and Codex that installs the
+same `rcs-guidance` and `rust-performance` workflows as one bundle. The
+manifest is stored under `plugin/rust-coding-standards/plugin.json`, and the
+package builder reads the *current repository skill files* when invoked:
+
+```sh
+python tools/package_rcs_plugin.py --output dist/rcs-plugin-0.1.0.zip
+python -m unittest discover -s tools -p "test_*.py"
+```
+
+The generated ZIP contains the plugin manifest, the original two complete
+skill directories including their license notices, and the openly licensed
+Forge crab icon. It contains **no MCP server or live document snapshot**.
+The skills still resolve the adopting project's chosen RCS revision and read
+the relevant current documentation from a permitted source. They do not
+implicitly gain file, network or repository-writing permissions.
+
+The ZIP is deliberately Git-ignored. Install it as a **private** plugin for
+testing first; public directory review and publication require separate
+publisher/listing checks and explicit authorization. The plugin's bundled
+skills share this repository's normal MIT OR Apache-2.0 material, not the
+rights-reserved Forge website CSS.
+
 ## Install with the Skills CLI
 
 Run installation from the project that should receive the skills. Use a

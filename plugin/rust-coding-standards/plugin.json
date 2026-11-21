@@ -1,0 +1,41 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "rust-coding-standards",
+  "version": "0.1.0",
+  "description": "Apply Zevarix Rust Coding Standards when developing or reviewing Rust: focus on correctness, meaningful testing, performance, safety and maintainability.",
+  "author": {
+    "name": "Zevarix"
+  },
+  "homepage": "https://rcs.zevarix.com/",
+  "repository": "https://github.com/zevarix/rust-coding-standards",
+  "license": "MIT OR Apache-2.0",
+  "keywords": [
+    "rust",
+    "coding standards",
+    "code review",
+    "performance",
+    "software quality",
+    "AI coding agents"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Rust Coding Standards",
+        "shortDescription": "Rust review and optimization",
+        "longDescription": "Practical Rust coding and review guidance for human developers and AI coding agents. Find the RCS standards that apply to a project, review changes against their behavioral contracts, and investigate performance bottlenecks with comparable measurements. Includes the existing rcs-guidance and rust-performance skills, which resolve the current canonical rulebook at the consuming project's selected revision. No remote MCP service, account authentication, write permissions or production operations are bundled.",
+        "developerName": "Zevarix",
+        "category": "Developer Tools",
+        "capabilities": [],
+        "logo": "./assets/forge-crab.svg",
+        "composerIcon": "./assets/forge-crab.svg",
+        "websiteURL": "https://rcs.zevarix.com/",
+        "supportURL": "https://github.com/zevarix/rust-coding-standards/issues",
+        "defaultPrompt": [
+          "Review this Rust change using applicable RCS rules and report evidence-backed findings.",
+          "Investigate this slow Rust operation using the RCS performance workflow.",
+          "Help me adopt RCS in a Rust project while preserving its existing requirements."
+        ]
+      }
+    }
+  }
+}
