@@ -53,15 +53,34 @@ Public review, approval and directory publication are separate from the build,
 and neither installation nor publication authorizes changes to user projects.
 See [plugin packaging and usage](docs/skills.md#openai-plugin-package).
 
+A **separate MCP-backed plugin candidate** lives in
+[plugin/rcs-rust-standards](plugin/rcs-rust-standards/README.md). It combines
+the same two canonical skills with the real public, read-only RCS MCP tools:
+
+```sh
+python tools/package_rcs_mcp_plugin.py
+```
+
+This is a reproducible technical **candidate**, not an approved or published
+ChatGPT directory plugin. The existing skills-only plugin is unchanged; OpenAI's
+public submission, domain verification, legal pages and reviewer demo are
+separate steps. See [RCS public plugin review issue #64](https://github.com/zevarix/rust-coding-standards/issues/64).
+
 ## Read-only MCP documentation lookup
 
-The experimental [RCS MCP service](mcp/rcs/README.md) exposes real read-only
-rule search, exact rule retrieval, review guidance, and source revision details
-to remote MCP clients. It builds from this same public rulebook, without an
-independent copy, write tools, user files, a database, or paid AI inference.
-The service has passed local protocol tests; **there is no published MCP
-endpoint yet**. Cloudflare deployment is gated on a verified no-extra-charge
-Workers plan and explicit public release authority.
+The **live** [RCS MCP service](mcp/rcs/README.md) provides source-cited,
+read-only rule search, exact rule retrieval, review guidance and revision
+details to remote MCP clients:
+
+- **MCP endpoint:** https://rcsmcp.zevarix.com/mcp
+- **Health and source revision:** https://rcsmcp.zevarix.com/health
+
+The service runs on an existing isolated Hostinger Node.js application. It uses
+the same publicly licensed RCS rulebook without a separate hand-maintained
+copy, account access, write tools, user files, a database or paid AI inference.
+The optional Cloudflare Worker transport is still tested but **undeployed**;
+its separate cost and release gate remains in effect. Production deployment and
+OpenAI directory publication are independently authorized steps.
 
 ## Documentation
 
