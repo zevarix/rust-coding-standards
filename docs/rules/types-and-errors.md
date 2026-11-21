@@ -54,6 +54,18 @@ The example is intentionally small. Real constructors should validate externally
 - Use intuitive getters and method names. If an operation is fallible, expose that fact in its return type.
 - Document non-obvious invariants and resource lifetimes where users need them.
 
+For read-only input, prefer the view the operation actually needs: `&str` rather than `&String`, `&[T]` rather than `&Vec<T>`, or `&Path` rather than `&PathBuf`. This allows callers to borrow existing storage without allocating a temporary owned copy. For example:
+
+```rust
+fn has_selected_label(labels: &[String], wanted: &str) -> bool {
+    labels.iter().any(|label| label.as_str() == wanted)
+}
+```
+
+For an application-only API, do not introduce generic `impl Into<String>` or `impl IntoIterator` parameters for hypothetical callers when a plain borrowed signature is clearer. Keep ownership explicit when a callee must retain, mutate, transfer, or outlive the source; borrowing does not replace current identity checks on mutable resources.
+
+A Boolean is fine when its purpose is obvious. If an opaque Boolean chooses a consequential operation (such as preview versus apply), a named mode makes a call site harder to misread.
+
 Avoid introducing wrapper types and traits for hypothetical future integrations without a concrete consumer. Consult the [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/checklist.html), but apply public-library advice proportionally to private application code.
 
 ## RCS-ERR-001 — Use explicit recoverable errors {#rcs-err-001--use-explicit-recoverable-errors}
@@ -77,7 +89,7 @@ fn read_magic(path: &Path) -> io::Result<[u8; 4]> {
 }
 ```
 
-A failed I/O read must not produce an invented digest or a partially trusted state. `expect`/`unwrap` remain reasonable in tests, examples and contexts with proven invariants; a blanket ban is not intended.
+A failed I/O read must not produce an invented digest or a partially trusted state. When an `Option` or `Result` branch is already being checked, prefer `if let`, `match`, or `let ... else` to a predicate followed by `.unwrap()`; the matched value makes the successful branch and failure path explicit. `expect`/`unwrap` remain reasonable in tests, examples and contexts with proven invariants; a blanket ban is not intended.
 
 ## RCS-ERR-002 — Preserve actionable boundary context {#rcs-err-002--preserve-actionable-boundary-context}
 

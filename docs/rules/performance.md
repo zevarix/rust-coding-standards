@@ -38,6 +38,10 @@ In real code, `inspect_entire_file` is a project-owned helper; these snippets ar
 
 For large sources, stream bytes through one bounded buffer and update all necessary digests and counters in a single pass where safe. Do not substitute an unbounded `fs::read` for streaming just to reduce call counts.
 
+On repeated per-item paths, also inspect unnecessary allocation and copying: `.clone()`, `.to_owned()`, `.to_string()`, temporary buffers, and `.collect()` used only to iterate once over an intermediate vector. Check **what gets copied, how frequently, and how many bytes**, not merely whether a clone appears in source. A stable borrowed slice or simple iterator may avoid the repeated work. `Arc::clone` and `Rc::clone` share ownership rather than deep-copying the payload, so assess them differently from `String` or `Vec` clones.
+
+Retaining an owned value is often correct across a worker handoff, asynchronous lifetime, transaction, snapshot, or recovery boundary. Do not trade away those contracts for an allocation count. Measure uncertain costs on an owned representative workload rather than reporting an imagined speedup.
+
 A useful finding documents: action → nested call chain → number of full passes or queries → size/frequency → effect on time/I/O → which checks are actually independent → smallest safe correction. The count is evidence, not a hard pass/fail quota.
 
 ## RCS-PERF-002 — Optimize with evidence {#rcs-perf-002--optimize-with-evidence}

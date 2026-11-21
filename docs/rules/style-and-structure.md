@@ -65,6 +65,12 @@ filesystem/
 
 This is only an illustrative design, not a mandated module layout. A larger cohesive module may be clearer than several tiny layers. **Do not impose an arbitrary line count**, introduce interfaces for a single known implementation without benefit, or split a change merely to meet a PR-size metric.
 
+Make abstractions earn their cost. Start with ordinary functions or inherent `impl` methods when one concrete implementation is sufficient. Introduce a trait when a real caller needs interchangeable implementations, generic behavior, or a meaningful test boundary. Existing replaceable platform or external-tool adapters can already meet that need; do not remove a justified adapter merely to make the type graph smaller.
+
+For item-processing paths with per-item errors, progress, cancellation, or consequential effects, a direct `for`/`match` often makes the control flow easier to audit than a long iterator chain with hidden mutation or discarded failures. Short `any`, `map`, or `filter` expressions remain useful when they make intent clearer. This is a readability judgment, **not** a claim that every explicit loop is faster.
+
+Borrowing or unique ownership is a useful default, but actual worker handoffs or retained callbacks can justify `Arc` or `Rc`. Check resource lifetimes and shared-state invariants before changing an established ownership model.
+
 **Review question:** Would an experienced Rust maintainer understand the behavior, responsibilities, and failure paths without reconstructing a maze of wrappers?
 
 ## RCS-META-001 — Derive package release versions from their authority {#rcs-meta-001--derive-package-release-versions-from-their-authority}
