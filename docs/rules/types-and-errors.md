@@ -54,7 +54,7 @@ The example is intentionally small. Real constructors should validate externally
 - Use intuitive getters and method names. If an operation is fallible, expose that fact in its return type.
 - Document non-obvious invariants and resource lifetimes where users need them.
 
-For read-only input, prefer the view the operation actually needs: `&str` rather than `&String`, `&[T]` rather than `&Vec<T>`, or `&Path` rather than `&PathBuf`. This allows callers to borrow existing storage without allocating a temporary owned copy. For example:
+For read-only input, prefer the view the operation actually needs: `&str` rather than `&String`, `&[T]` rather than `&Vec<T>`, or `&Path` rather than `&PathBuf`. These signatures accept more existing storage types without forcing callers to construct a particular container. They do not imply that borrowing a `String` or `Vec` itself allocates. For example:
 
 ```rust
 fn has_selected_label(labels: &[String], wanted: &str) -> bool {
