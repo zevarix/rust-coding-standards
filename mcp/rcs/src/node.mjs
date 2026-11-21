@@ -11,7 +11,6 @@ import { metadata } from "./catalog.mjs";
 import { createRcsServer } from "./server.mjs";
 
 const MAX_RPC_BODY_BYTES = 64 * 1024;
-const PUBLIC_HOST = (process.env.RCS_PUBLIC_HOSTNAME || "mcp.rcs.zevarix.com").toLowerCase();
 const LOOPBACK = new Set(["127.0.0.1", "localhost"]);
 const HEADERS = {
   "cache-control": "no-store",
@@ -35,10 +34,29 @@ function hostnameFromHostHeader(raw) {
   }
 }
 
+// A deployment can have multiple explicit public hostnames (for example a
+// temporary Hostinger name and a branded alias). No wildcard, URL, port,
+// localhost or IP values are accepted in the production allowlist.
+export function parsePublicHostnames(raw) {
+  if (typeof raw !== "string") throw new TypeError("RCS_PUBLIC_HOSTNAME must be a string");
+  const hosts = raw.split(",").map((value) => value.trim().toLowerCase());
+  for (const host of hosts) {
+    if (!host.includes(".") || /^\d+(?:\.\d+){3}$/.test(host) ||
+        hostnameFromHostHeader(host) !== host) {
+      throw new Error("RCS_PUBLIC_HOSTNAME contains an invalid public DNS hostname");
+    }
+  }
+  return new Set(hosts);
+}
+
+const PUBLIC_HOSTS = parsePublicHostnames(
+  process.env.RCS_PUBLIC_HOSTNAME || "rcsmcp.zevarix.com"
+);
+
 function allowedHost(req) {
   const host = hostnameFromHostHeader(req.headers.host);
   if (!host) return null;
-  if (host === PUBLIC_HOST) return host;
+  if (PUBLIC_HOSTS.has(host)) return host;
   if (process.env.NODE_ENV !== "production" && LOOPBACK.has(host)) return host;
   return null;
 }
