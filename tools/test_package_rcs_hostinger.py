@@ -33,7 +33,7 @@ class HostingerMcpPackageTests(unittest.TestCase):
                 lock = json.loads(contents.read("package-lock.json"))
                 catalog = json.loads(contents.read("src/generated/catalog.json"))
                 self.assertEqual(pkg["dependencies"], ALLOWED_DEPS)
-                self.assertEqual(pkg["scripts"], {"start": "node src/node.mjs"})
+                self.assertEqual(pkg["scripts"], {"start": "node src/hostinger-entry.mjs"})
                 self.assertEqual(lock["packages"][""]["dependencies"], ALLOWED_DEPS)
                 self.assertGreaterEqual(len(catalog["rules"]), 36)
                 self.assertEqual(len(catalog["guides"]), 7)

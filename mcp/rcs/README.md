@@ -72,7 +72,7 @@ the Node adapter, the read-only tool factory, generated catalog and licenses:
 
     python tools/package_rcs_hostinger.py
 
-The generated `dist/rcs-hostinger-mcp-0.1.0.zip` is Git-ignored.
+The generated `dist/rcs-hostinger-mcp-0.1.1.zip` is Git-ignored.
 The GitHub Actions `rcs-hostinger-mcp` artifact on `main`
 contains this **inner ZIP**; extract the Actions wrapper before uploading to
 Hostinger. Rebuild from the selected release commit so the catalog identifies
@@ -82,7 +82,7 @@ CLI, Agents runtime, worktrees, tests, untrusted files and credentials.
 Hostinger Business/Cloud web-app deployment uses a **new isolated Node.js
 application**, framework `Other`, compatible Node.js 24.22+ (or
 22.23+), `npm ci --omit=dev` and start command `npm start`
-(running `node src/node.mjs`). Hostinger supplies `PORT`.
+(running `node src/hostinger-entry.mjs`). Hostinger supplies `PORT`.
 Set `NODE_ENV=production` and `RCS_PUBLIC_HOSTNAME` to the
 hostname receiving requests. The proposed public hostname
 `mcp.rcs.zevarix.com` is **not provisioned** by packaging.
