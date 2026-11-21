@@ -1,6 +1,14 @@
 # Locally installed documentation tooling and generated output.
 /.venv/
 /site/
+/.toolchain/
+/mcp/rcs/node_modules/
+/mcp/rcs/.cloudflare/
+/mcp/rcs/.wrangler/
+/mcp/rcs/dist/
+/mcp/rcs/.dev.vars*
+/mcp/rcs/.env*
+/mcp/rcs/src/generated/catalog.json
 /dist/
 /.cache/
 /.zensical/

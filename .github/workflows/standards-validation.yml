@@ -47,6 +47,31 @@ jobs:
         with:
           path: site/
 
+  mcp-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out canonical RCS source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Select pinned Node runtime
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "24.22.0"
+      - name: Select Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: "3.12"
+      - name: Install pinned stateless MCP dependencies
+        working-directory: mcp/rcs
+        run: npm ci --no-audit --no-fund
+      - name: Validate generated source and bounded search tools
+        working-directory: mcp/rcs
+        run: npm test
+      - name: Bundle stateless Cloudflare Worker without deploying
+        working-directory: mcp/rcs
+        run: npm run build
+      - name: Exercise actual MCP protocol on local loopback
+        run: python mcp/rcs/test/protocol_smoke.py
+
   plugin-package:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     needs: source-and-examples

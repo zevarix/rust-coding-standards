@@ -58,6 +58,19 @@ extract the Actions artifact to obtain the **inner**, version-named
 wrapper is not itself the OpenAI plugin package. A downloadable ZIP does not
 mean the plugin was submitted, approved, or published.
 
+## Read-only MCP rule retrieval (development)
+
+The [RCS MCP server source](https://github.com/zevarix/rust-coding-standards/tree/main/mcp/rcs)
+provides a separate public-documentation interface using the Streamable HTTP
+protocol. Its tools search exact rule IDs and topics, return the full sourced
+rule, expose review/performance guidance, and report the exact Git revision.
+
+The server does not accept or store private repository content and cannot
+modify a project. It is **not yet hosted**. Its build/test workflow and
+deployment cost gate are documented with its source. The existing skills-only
+OpenAI plugin is a separate package and is not automatically converted to an
+MCP-backed plugin by this work.
+
 ## Install with the Skills CLI
 
 Run installation from the project that should receive the skills. Use a

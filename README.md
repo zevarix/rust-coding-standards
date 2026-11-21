@@ -53,6 +53,16 @@ Public review, approval and directory publication are separate from the build,
 and neither installation nor publication authorizes changes to user projects.
 See [plugin packaging and usage](docs/skills.md#openai-plugin-package).
 
+## Read-only MCP documentation lookup
+
+The experimental [RCS MCP service](mcp/rcs/README.md) exposes real read-only
+rule search, exact rule retrieval, review guidance, and source revision details
+to remote MCP clients. It builds from this same public rulebook, without an
+independent copy, write tools, user files, a database, or paid AI inference.
+The service has passed local protocol tests; **there is no published MCP
+endpoint yet**. Cloudflare deployment is gated on a verified no-extra-charge
+Workers plan and explicit public release authority.
+
 ## Documentation
 
 - [Documentation website](https://rcs.zevarix.com/)
