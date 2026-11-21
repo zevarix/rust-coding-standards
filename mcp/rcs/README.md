@@ -3,14 +3,18 @@
 This directory implements a genuine stateless Model Context Protocol server for
 the public [Zevarix Rust Coding Standards](https://rcs.zevarix.com/) rules.
 
-**Current release state (November 20, 2026):** A standalone read-only
+**Verified live release (November 20, 2026):** The standalone read-only
 Node.js MCP service is **live on Hostinger** at the dedicated RCS hostname.
 The Cloudflare Worker implementation remains tested but **undeployed**.
 
 - **Public MCP (Streamable HTTP):** `https://rcsmcp.zevarix.com/mcp`
-- **Health and revision:** <https://rcsmcp.zevarix.com/health>
-- **Exact deployed RCS source revision:** `7a88387b636f5baf948ef8eb68adc907c4305077`
-- **Hostinger Node.js release:** 24.x, standalone package v0.1.2.
+- **Health and source revision:** <https://rcsmcp.zevarix.com/health>
+- **Verified deployed RCS source revision:** `a2be64f2194067da86932611d6ea168dbf118043`
+- **Hostinger Node.js release:** Node 24, standalone package v0.1.3.
+
+The deployed revision is read from the live `/health` endpoint. GitHub `main`
+can advance independently; a repository merge does not update the running
+server or its embedded catalog.
 
 The RCS documentation site stays on GitHub Pages. The MCP runs in a separate
 Node.js application on already provisioned hosting, without a new subscription.
@@ -86,8 +90,9 @@ the Node adapter, the read-only tool factory, generated catalog and licenses:
     python tools/package_rcs_hostinger.py
 
 The generated `dist/rcs-hostinger-mcp-0.1.3.zip` is Git-ignored.
-This version is a **source candidate only** until separately qualified and deployed;
-the existing public service still runs v0.1.2.
+Version 0.1.3 is **deployed on the existing RCS Node.js application** from the
+qualified source revision shown above. Rebuilding from a later GitHub commit
+produces a new catalog revision and is **not** an automatic production release.
 The GitHub Actions `rcs-hostinger-mcp` artifact on `main`
 contains this **inner ZIP**; extract the Actions wrapper before uploading to
 Hostinger. Rebuild from the selected release commit so the catalog identifies
@@ -147,7 +152,7 @@ and oversized request bodies. HTTP on the branded hostname redirects to HTTPS.
 
 To repeat the public endpoint acceptance check from a separate Python client:
 
-    python mcp/rcs/test/live_remote_smoke.py --base-url https://rcsmcp.zevarix.com --expected-revision 7a88387b636f5baf948ef8eb68adc907c4305077
+    python mcp/rcs/test/live_remote_smoke.py --base-url https://rcsmcp.zevarix.com --expected-revision a2be64f2194067da86932611d6ea168dbf118043
 
 Future deployments must use a reviewed source revision and verify the actual
 Hostinger build entrypoint and both configured hostnames. Never overwrite
@@ -156,35 +161,35 @@ separate authority. GitHub integration is not hosting authority; public
 OpenAI Plugin Directory review and publication remain separate steps.
 
 
-## OpenAI publisher domain verification (optional; NOT deployed)
+## OpenAI publisher domain verification (live and verified)
 
-The OpenAI plugin portal requires a challenge token at:
+The standalone RCS Node.js v0.1.3 application serves the OpenAI domain
+ownership challenge at:
 
     https://rcsmcp.zevarix.com/.well-known/openai-apps-challenge
 
-After the owner creates the separate remote-MCP plugin draft, the portal gives
-the actual verification token and challenge URL. Only if that exact URL points
-at this application, configure `RCS_OPENAI_APPS_CHALLENGE_TOKEN` in the
-existing isolated Node.js application to the **exact token**, without surrounding
-whitespace, newline, quote marks or JSON. Never commit or log the real token.
-The token is intentionally public at the challenge endpoint, not a private
-credential; use a Hostinger configuration secret rather than source history.
+On November 20, 2026, the owner verified the **branded MCP hostname** in the
+OpenAI Platform for the separate, real MCP-backed RCS plugin draft. The portal
+reported **Domain verified**. This verifies domain control, **not** plugin
+submission, directory approval or publication; see [review issue #64](https://github.com/zevarix/rust-coding-standards/issues/64)
+and [completed verification issue #66](https://github.com/zevarix/rust-coding-standards/issues/66).
 
-This feature is inert when the variable is unset (HTTP 404). When configured
-and deployed it serves that exact token as `text/plain`, with `no-store`, on
-the **branded host only**. It rejects other Hosts/Origins and non-GET methods
-under the preexisting security checks. The fallback Hostinger alias does not
-serve the proof even if its ordinary MCP route is allowed. Synthetic proof
-values are exercised in Node and the extracted Hostinger ZIP smoke tests.
+The challenge is configured through
+`RCS_OPENAI_APPS_CHALLENGE_TOKEN` in the existing Hostinger application,
+without publishing the token in Git or logs. It is intentionally public at the
+verification URL but should not be duplicated in source history. The route
+returns exact `text/plain` with `no-store` **only on the branded host** and
+returns HTTP 404 if the variable is unset or the fallback Hostinger hostname
+is used. Existing Host and Origin checks remain in force; synthetic-token
+tests also cover hostile Hosts, Origins and methods.
 
-**Deployment and verification remain separate authorization gates.**
-A repo merge neither publishes an OpenAI challenge nor updates the running
-Hostinger application. Before any real change, read back the exact portal
-challenge base and the existing configured variables, qualify the next
-versioned ZIP, preserve both working MCP Hostnames, deploy only this RCS
-Node.js app, and perform a fresh external protocol acceptance test on
-both endpoints. Do not replace another plugin's existing challenge token or
-use a different shared hostname without a separate owner decision.
+**Future token or domain changes require separate authority.** Before rotating
+a token or redeploying, read the exact current portal challenge and hosting
+configuration, preserve both working MCP hostnames, and qualify a versioned
+release. Hostinger's environment-variable API replaces the whole set; do not
+replace the original values with masked placeholders or erase the host allowlist.
+A repository merge alone neither changes the live server nor completes new
+portal verification.
 
 ## Explicit free-tier and deployment gate
 
@@ -215,9 +220,10 @@ When a zero-cost destination is verified, the release procedure is:
 5. Read back the actual deployment and Worker settings, and test the public
    `/health`, Streamable HTTP tools, revision, and errors from an external
    client. Record the URL, commit, cost plan, and evidence on the owning issue.
-6. Only then consider a **separate MCP-backed OpenAI plugin submission**.
-   The existing skills-only plugin's public-directory intake status remains
-   separate, and no fake MCP integration should be used to bypass that policy.
+6. Keep any Cloudflare Worker endpoint independent of the existing Hostinger
+   MCP and its domain-verified OpenAI draft. Do not silently replace the
+   plugin's server URL, create a second subscription, or infer that an
+   undeployed Worker is required for OpenAI review.
 
 The canonical documentation website remains on **GitHub Pages** and is not
 migrated by this service.
