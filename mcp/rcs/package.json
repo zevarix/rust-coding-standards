@@ -6,12 +6,14 @@
   "description": "Stateless read-only MCP tools for public Zevarix Rust Coding Standards",
   "scripts": {
     "index": "python ../../tools/build_rcs_mcp_index.py",
+    "start": "node src/node.mjs",
     "test": "npm run index && node --test test/*.test.mjs",
     "build": "npm run index && cf build",
     "dev": "npm run index && cf dev",
     "deploy": "echo 'Deployment is gated on a verified Workers Free account and explicit release check.' && exit 1"
   },
   "dependencies": {
+    "@modelcontextprotocol/node": "2.1.2",
     "@modelcontextprotocol/server": "2.4.0",
     "agents": "0.34.0",
     "zod": "4.6.7"

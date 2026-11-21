@@ -3,9 +3,10 @@
 This directory implements a genuine stateless Model Context Protocol server for
 the public [Zevarix Rust Coding Standards](https://rcs.zevarix.com/) rules.
 
-**Current release state:** Source implementation and loopback testing only.
-**No Cloudflare deployment or public MCP URL has been verified.** Do not claim
-the service is hosted merely because a source branch is merged.
+**Current release state:** Source implementation, loopback tests and portable
+Node.js packaging only. **No Cloudflare or Hostinger deployment or public MCP
+URL has been verified.** Do not claim the service is hosted merely because a
+source branch is merged.
 
 ## Tools and scope
 
@@ -57,6 +58,50 @@ matches a real heading and index entry, and that output is deterministic.
 Cloudflare CLI `cf` and Cloudflare Vite plugin v2 are pinned in
 `package-lock.json` / `package.json`. No `wrangler.jsonc` is needed. The Worker
 configuration is in `cloudflare.config.ts`; there are no paid bindings.
+
+## Hostinger Business/Cloud Node.js deployment target
+
+The repository also supports a **standalone Node.js Streamable HTTP MCP**
+application, sharing the exact same four tool registrations and generated
+source-revision-qualified catalog as the Cloudflare Worker. This is a separate
+runtime option, not an additional tool provider or a rewritten standards set.
+No live Hostinger application has been created by the source release.
+
+Build a small, versioned ZIP containing only pinned runtime dependencies,
+the Node adapter, the read-only tool factory, generated catalog and licenses:
+
+    python tools/package_rcs_hostinger.py
+
+The generated `dist/rcs-hostinger-mcp-0.1.0.zip` is Git-ignored.
+The GitHub Actions `rcs-hostinger-mcp` artifact on `main`
+contains this **inner ZIP**; extract the Actions wrapper before uploading to
+Hostinger. Rebuild from the selected release commit so the catalog identifies
+the exact Git revision. The archive intentionally excludes the Cloudflare
+CLI, Agents runtime, worktrees, tests, untrusted files and credentials.
+
+Hostinger Business/Cloud web-app deployment uses a **new isolated Node.js
+application**, framework `Other`, compatible Node.js 24.22+ (or
+22.23+), `npm ci --omit=dev` and start command `npm start`
+(running `node src/node.mjs`). Hostinger supplies `PORT`.
+Set `NODE_ENV=production` and `RCS_PUBLIC_HOSTNAME` to the
+hostname receiving requests. The proposed public hostname
+`mcp.rcs.zevarix.com` is **not provisioned** by packaging.
+`GET /health` exposes the Git revision, and `POST /mcp`
+exposes stateless JSON-response Streamable HTTP without sessions.
+
+Local and CI verification exercise a temporary loopback Node.js server,
+real MCP initialization, tool discovery and lookup, hostile Host/Origin,
+malformed input, and the 64 KiB request bound. CI also installs the
+**extracted standalone ZIP** with production dependencies and tests it
+independently of the source checkout.
+
+**Hostinger release gate:** Verify a suitable existing Business/Cloud plan,
+runtime compatibility, Node app capacity, DNS/subdomain ownership and
+**no additional hosting purchase or charge** before creating or deploying
+the app. Never overwrite the existing RCS documentation website or modify
+unrelated sites, hosting settings, DNS or billing. Live activation and
+public OpenAI plugin review remain separate, evidenced steps. The canonical
+documentation website stays on GitHub Pages.
 
 ## Explicit free-tier and deployment gate
 

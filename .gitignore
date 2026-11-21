@@ -3,6 +3,8 @@
 /site/
 /.toolchain/
 /mcp/rcs/node_modules/
+/mcp/rcs/hostinger/node_modules/
+/mcp/rcs/hostinger/.env*
 /mcp/rcs/.cloudflare/
 /mcp/rcs/.wrangler/
 /mcp/rcs/dist/
