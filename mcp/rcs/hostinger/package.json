@@ -1,11 +1,11 @@
 {
   "name": "@zevarix/rcs-mcp-hostinger",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Stateless read-only Rust Coding Standards MCP server for Node.js",
   "scripts": {
-    "start": "node src/node.mjs"
+    "start": "node src/hostinger-entry.mjs"
   },
   "engines": {
     "node": "^22.23.0 || ^24.22.0"

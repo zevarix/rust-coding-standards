@@ -23,6 +23,7 @@ HOSTINGER_FILES = {
     "package.json": "mcp/rcs/hostinger/package.json",
     "package-lock.json": "mcp/rcs/hostinger/package-lock.json",
     "src/node.mjs": "mcp/rcs/src/node.mjs",
+    "src/hostinger-entry.mjs": "mcp/rcs/src/hostinger-entry.mjs",
     "src/server.mjs": "mcp/rcs/src/server.mjs",
     "src/catalog.mjs": "mcp/rcs/src/catalog.mjs",
     "src/generated/catalog.json": "mcp/rcs/src/generated/catalog.json",
@@ -47,7 +48,7 @@ def collect_files(root: Path) -> dict[str, bytes]:
     lock = json.loads((root / HOSTINGER_FILES["package-lock.json"]).read_text(encoding="utf-8"))
     if not re.fullmatch(r"\d+\.\d+\.\d+", str(pkg.get("version", ""))):
         raise ValueError("Hostinger bundle must use an explicit release version")
-    if pkg.get("dependencies") != ALLOWED_DEPS or pkg.get("scripts") != {"start": "node src/node.mjs"}:
+    if pkg.get("dependencies") != ALLOWED_DEPS or pkg.get("scripts") != {"start": "node src/hostinger-entry.mjs"}:
         raise ValueError("Unexpected runtime dependencies or executable scripts")
     if pkg.get("private") is not True or pkg.get("type") != "module":
         raise ValueError("Unexpected package publishing/module settings")
