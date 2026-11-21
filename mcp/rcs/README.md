@@ -3,21 +3,20 @@
 This directory implements a genuine stateless Model Context Protocol server for
 the public [Zevarix Rust Coding Standards](https://rcs.zevarix.com/) rules.
 
-**Current release state (November 20, 2026):** A standalone Node.js release
-is **live on Hostinger Business Web Hosting**, using a new temporary Hostinger
-hostname on an existing subscription. The Cloudflare Worker implementation is
-built and tested but **has not been deployed**.
+**Current release state (November 20, 2026):** A standalone read-only
+Node.js MCP service is **live on Hostinger** at the dedicated RCS hostname.
+The Cloudflare Worker implementation remains tested but **undeployed**.
 
-- **Public MCP (Streamable HTTP):** `https://solar-olive-mule-94.hostingersite.com/mcp`
-- **Health and revision:** <https://solar-olive-mule-94.hostingersite.com/health>
-- **Exact deployed RCS source revision:** `343754ecf0a1c784d7edb14b7f83a8c653baae84`
-- **Hostinger deployment:** Node 24, standalone package v0.1.1, build
-  `01a1fc02-2af7-73b0-b30e-20e97805dbbe`; no new paid hosting subscription.
+- **Public MCP (Streamable HTTP):** `https://rcsmcp.zevarix.com/mcp`
+- **Health and revision:** <https://rcsmcp.zevarix.com/health>
+- **Exact deployed RCS source revision:** `7a88387b636f5baf948ef8eb68adc907c4305077`
+- **Hostinger Node.js release:** 24.x, standalone package v0.1.2.
 
-The canonical RCS documentation remains on GitHub Pages, and the original
-seven Hostinger site records remained present and enabled; no deployment
-operations targeted those sites.
-Public OpenAI Plugin Directory approval remains a separate process.
+The RCS documentation site stays on GitHub Pages. The MCP runs in a separate
+Node.js application on already provisioned hosting, without a new subscription.
+A previous temporary Hostinger hostname remains a functional fallback but is
+not advertised as the canonical public endpoint. Public OpenAI Plugin Directory
+approval is a separate process.
 
 ## Tools and scope
 
@@ -78,8 +77,8 @@ The repository also supports a **standalone Node.js Streamable HTTP MCP**
 application, sharing the exact same four tool registrations and generated
 source-revision-qualified catalog as the Cloudflare Worker. This is a separate
 runtime option, not an additional tool provider or a rewritten standards set.
-The Hostinger Node.js application is deployed to a separate, public temporary
-hostname; it is not hosted on, or routed through, the RCS GitHub Pages site.
+The Hostinger Node.js application is deployed to the RCS-specific public
+hostname, separate from the RCS documentation site on GitHub Pages.
 
 Build a small, versioned ZIP containing only pinned runtime dependencies,
 the Node adapter, the read-only tool factory, generated catalog and licenses:
@@ -99,23 +98,23 @@ application**, framework `Other`, compatible Node.js 24.22+ (or
 `node src/hostinger-entry.mjs`). Hostinger's archive builder installed
 production dependencies via `npm install`; CI separately verifies
 `npm ci --omit=dev` from the extracted ZIP. Hostinger supplies `PORT`.
-Set `NODE_ENV=production` and `RCS_PUBLIC_HOSTNAME` to a
-comma-separated list of **exact public DNS names**. A production service
-with a temporary hostname and a branded alias can use:
+Set `NODE_ENV=production` and configure `RCS_PUBLIC_HOSTNAME` to
+a comma-separated list of **exact public DNS names**. For example:
 
-    RCS_PUBLIC_HOSTNAME=solar-olive-mule-94.hostingersite.com,rcsmcp.zevarix.com
+    RCS_PUBLIC_HOSTNAME=rcsmcp.zevarix.com,temporary-mcp.example.com
 
-The server rejects malformed or wildcard host settings at startup. For every
-HTTP request, the Host must match an allowed name and any supplied Origin must
-match that request's Host. The temporary URL remains supported through the
-transition.
+The actual temporary fallback hostname is deployment configuration, not a
+code or documentation dependency. The server rejects wildcards, malformed
+names, URL forms, ports and IP addresses at startup. For every request,
+Host must match an allowed name and any supplied Origin must match that
+request's Host, including when both names are trusted.
 
-Hostinger attached `rcsmcp.zevarix.com` as a parked alias to this **same**
-RCS Node.js application and provisioned its DNS record and HTTPS automatically.
-The branded URL is not considered production accepted until the Node.js
-multi-host v0.1.2 release and external Streamable HTTP protocol tests pass.
-Do not allocate `mcp.zevarix.com`; it is reserved for potential
-future use.
+Hostinger parks `rcsmcp.zevarix.com` on the **same** RCS Node.js
+application, using its automatically managed DNS ALIAS and valid TLS certificate.
+HTTP redirects to HTTPS. The original temporary endpoint was verified
+functional after configuring both names. The generic `mcp.zevarix.com`
+hostname remains unallocated for possible future services.
+
 `GET /health` exposes the Git revision, and `POST /mcp`
 exposes stateless JSON-response Streamable HTTP without sessions.
 
@@ -136,24 +135,23 @@ malformed input, and the 64 KiB request bound. CI also installs the
 **extracted standalone ZIP** with production dependencies and tests it
 independently of the source checkout.
 
-**Live deployment verification (November 20, 2026):** An external HTTPS
-client confirmed HTTP 200 for `/health`, a real MCP initialization,
-discovery and invocation of all four read-only tools, source-revision
-citations, and rejection of hostile Origin, invalid method, unknown rules and
-oversized request bodies. Hostinger runtime logs show a successful listener
-startup. The eight Hostinger sites consist of the original seven enabled
-sites plus this new isolated Node.js site, under the original Business plan;
-the four existing account subscriptions remained the same.
+**Live deployment verification (November 20, 2026):** An independent
+external HTTPS client tested **both** the branded and temporary hostnames.
+Each returned HTTP 200 for `/health` with the exact deployed source
+revision, accepted Streamable HTTP MCP initialization and discovery of all four
+read-only tools, and returned source-cited results for tool calls. Both hosts
+correctly rejected malicious Origin, unsupported HTTP methods, unknown rules
+and oversized request bodies. HTTP on the branded hostname redirects to HTTPS.
 
-To reproduce this acceptance check from an external Python environment:
+To repeat the public endpoint acceptance check from a separate Python client:
 
-    python mcp/rcs/test/live_remote_smoke.py --base-url https://solar-olive-mule-94.hostingersite.com --expected-revision 343754ecf0a1c784d7edb14b7f83a8c653baae84
+    python mcp/rcs/test/live_remote_smoke.py --base-url https://rcsmcp.zevarix.com --expected-revision 7a88387b636f5baf948ef8eb68adc907c4305077
 
-For future deployment destinations verify Business/Cloud plan capacity and
-additional charges before creating any site. Never overwrite existing user
-websites, modify unrelated site settings, DNS or billing without explicit
-approval. GitHub merges are not hosting authority. Public OpenAI plugin
-review and any custom DNS hostname remain separate release steps.
+Future deployments must use a reviewed source revision and verify the actual
+Hostinger build entrypoint and both configured hostnames. Never overwrite
+unrelated websites or change unrelated DNS or billing settings without
+separate authority. GitHub integration is not hosting authority; public
+OpenAI Plugin Directory review and publication remain separate steps.
 
 ## Explicit free-tier and deployment gate
 

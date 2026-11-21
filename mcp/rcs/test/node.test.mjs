@@ -9,10 +9,10 @@ import { metadata } from "../src/catalog.mjs";
 
 test("public Host allowlist accepts exact names and fails closed on unsafe config", () => {
   const hosts = parsePublicHostnames(
-    "solar-olive-mule-94.hostingersite.com, RCSMCP.ZEVARIX.COM "
+    "temporary-mcp.example.com, RCSMCP.ZEVARIX.COM "
   );
   assert.deepEqual([...hosts], [
-    "solar-olive-mule-94.hostingersite.com",
+    "temporary-mcp.example.com",
     "rcsmcp.zevarix.com",
   ]);
   for (const bad of [
