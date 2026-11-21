@@ -31,7 +31,14 @@ class TestRcsPluginPackage(unittest.TestCase):
                     with self.subTest(path=path):
                         self.assertEqual(z.read(path), content)
                 manifest = json.loads(z.read(f"{PACKAGE}/plugin.json"))
-                self.assertEqual(manifest["extensions"]["com.openai"]["interface"]["category"], "Developer Tools")
+                interface = manifest["extensions"]["com.openai"]["interface"]
+                self.assertEqual(interface["category"], "Developer Tools")
+                self.assertEqual(manifest["author"]["name"], interface["developerName"])
+                self.assertEqual(interface["logo"], "./assets/forge-crab.png")
+                image = z.read(f"{PACKAGE}/assets/forge-crab.png")
+                self.assertEqual(image[:8], b"\x89PNG\r\n\x1a\n")
+                self.assertEqual(len(manifest["extensions"]["com.openai"]["review"]["prompts"]), 3)
+                self.assertTrue(manifest["extensions"]["com.openai"]["publication"]["release_notes"])
                 self.assertNotIn("mcp.json", z.namelist())
                 self.assertNotIn(".app.json", z.namelist())
             self.assertEqual(len(expected), 2 + len(SKILLS) * len(SKILL_FILES))
@@ -41,11 +48,19 @@ class TestRcsPluginPackage(unittest.TestCase):
             temp = Path(directory)
             shutil.copytree(ROOT / "skills", temp / "skills")
             shutil.copytree(ROOT / "plugin", temp / "plugin")
-            logo = temp / "docs" / "assets" / "brand"
-            logo.mkdir(parents=True)
-            shutil.copy2(ROOT / "docs" / "assets" / "brand" / "forge-crab.svg", logo / "forge-crab.svg")
             (temp / "skills" / "rcs-guidance" / "NOTICE").unlink()
             with self.assertRaisesRegex(ValueError, "Unexpected/missing"):
+                build(temp, temp / "bundle.zip")
+
+    def test_corrupt_public_icon_fails_closed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            shutil.copytree(ROOT / "skills", temp / "skills")
+            shutil.copytree(ROOT / "plugin", temp / "plugin")
+            (temp / "plugin" / PACKAGE / "assets" / "forge-crab.png").write_bytes(
+                b"not a PNG" * 4
+            )
+            with self.assertRaisesRegex(ValueError, "not a valid PNG"):
                 build(temp, temp / "bundle.zip")
 
     def test_unreviewed_extra_file_fails_closed(self):
@@ -53,9 +68,6 @@ class TestRcsPluginPackage(unittest.TestCase):
             temp = Path(directory)
             shutil.copytree(ROOT / "skills", temp / "skills")
             shutil.copytree(ROOT / "plugin", temp / "plugin")
-            logo = temp / "docs" / "assets" / "brand"
-            logo.mkdir(parents=True)
-            shutil.copy2(ROOT / "docs" / "assets" / "brand" / "forge-crab.svg", logo / "forge-crab.svg")
             (temp / "skills" / "rcs-guidance" / "unreviewed.txt").write_text("test-only", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "Unexpected/missing"):
                 build(temp, temp / "bundle.zip")

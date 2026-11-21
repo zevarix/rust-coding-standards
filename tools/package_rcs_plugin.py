@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import re
+import struct
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
@@ -44,14 +45,25 @@ def collect_files(repository: Path) -> dict[str, bytes]:
         raise ValueError("Plugin subtitle must be 1 to 30 characters")
     if "mcpServers" in manifest or "apps" in manifest:
         raise ValueError("Skills-only plugin must not declare invented tools or apps")
+    openai = manifest.get("extensions", {}).get("com.openai", {})
+    if openai.get("apps") is not None:
+        raise ValueError("Public skills-only plugin must not declare app bindings")
 
     entries = {f"{PACKAGE}/plugin.json": manifest_path.read_bytes()}
-    mark = repository / "docs" / "assets" / "brand" / "forge-crab.svg"
+    mark = repository / "plugin" / PACKAGE / "assets" / "forge-crab.png"
     if mark.is_symlink() or not mark.is_file():
-        raise ValueError("Openly licensed Forge mark missing or symlinked")
-    entries[f"{PACKAGE}/assets/forge-crab.svg"] = mark.read_bytes()
+        raise ValueError("Openly licensed Forge PNG missing or symlinked")
+    image = mark.read_bytes()
+    if len(image) > 5 * 1024 * 1024 or len(image) < 24:
+        raise ValueError("Forge PNG is missing or exceeds the supported size")
+    if image[:8] != b"\x89PNG\r\n\x1a\n" or image[12:16] != b"IHDR":
+        raise ValueError("Forge mark is not a valid PNG")
+    width, height = struct.unpack(">II", image[16:24])
+    if width != height or not (256 <= width <= 4096):
+        raise ValueError("Forge PNG must be a square image of at least 256 pixels")
+    entries[f"{PACKAGE}/assets/forge-crab.png"] = image
     for field in ("logo", "composerIcon"):
-        if interface.get(field) != "./assets/forge-crab.svg":
+        if interface.get(field) != "./assets/forge-crab.png":
             raise ValueError(f"Unexpected {field} icon reference")
 
     for name in SKILLS:
@@ -103,11 +115,13 @@ def build(repository: Path, archive: Path) -> str:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=Path("dist/rcs-plugin-0.1.0.zip"))
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent)
     args = parser.parse_args()
-    out = args.output.resolve()
-    digest = build(args.root.resolve(), out)
+    repository = args.root.resolve()
+    manifest = json.loads((repository / "plugin" / PACKAGE / "plugin.json").read_text(encoding="utf-8"))
+    out = (args.output or Path("dist") / f"rcs-plugin-{manifest['version']}.zip").resolve()
+    digest = build(repository, out)
     print("PASS: deterministic skills-only plugin ZIP; two canonical skills, notices and icon verified")
     print(f"ARCHIVE={out}")
     print(f"SHA256={digest}")

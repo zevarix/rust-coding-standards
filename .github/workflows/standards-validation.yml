@@ -31,7 +31,7 @@ jobs:
       - name: Verify generated SEO and agent-discovery artifacts
         run: python tools/verify_site_discovery.py
       - name: Validate reproducible skills-only plugin
-        run: python tools/package_rcs_plugin.py --output dist/rcs-plugin-0.1.0.zip
+        run: python tools/package_rcs_plugin.py
       - name: Test Rust example validator
         run: python -m unittest discover -s tools -p "test_*.py"
       - name: Use current stable Rust for reusable examples
