@@ -94,10 +94,14 @@ Version 0.1.4 is **deployed on the existing RCS Node.js application** from the
 qualified source revision shown above. The prior v0.1.3 deployment archive
 is retained as a rollback candidate. Rebuilding from a later GitHub commit
 produces a new catalog revision and is **not** an automatic production release.
-The GitHub Actions `rcs-hostinger-mcp` artifact on `main`
-contains this **inner ZIP**; extract the Actions wrapper before uploading to
-Hostinger. Rebuild from the selected release commit so the catalog identifies
-the exact Git revision. The archive intentionally excludes the Cloudflare
+The release-qualified [main CI run #44881511101](https://github.com/zevarix/rust-coding-standards/actions/runs/44881511101)
+for source revision `d1d37f45985e4cb01a3b9fe2d621d40097e23e38`
+contains the deployed **inner ZIP** in its `rcs-hostinger-mcp` artifact
+(SHA-256 `9a4ef4d4c40b43fda0a1b4682cb53627929362d919b677f7da51b7257ed76da6`).
+Extract the Actions wrapper before uploading to Hostinger. Later `main` CI
+builds can produce a different catalog at the same package version; they are
+not automatically deployed. Rebuild from the selected release commit so the
+catalog identifies the exact Git revision. The archive intentionally excludes the Cloudflare
 CLI, Agents runtime, worktrees, tests, untrusted files and credentials.
 
 Hostinger Business/Cloud web-app deployment uses an **isolated Node.js
