@@ -1,0 +1,98 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "rcs-rust-standards",
+  "version": "0.1.0",
+  "description": "Search cited Zevarix Rust Coding Standards rules and follow practical Rust review, testing, and performance workflows.",
+  "author": {
+    "name": "Peder Klockmann"
+  },
+  "homepage": "https://rcs.zevarix.com/",
+  "repository": "https://github.com/zevarix/rust-coding-standards",
+  "license": "MIT OR Apache-2.0",
+  "keywords": [
+    "rust",
+    "RCS",
+    "coding standards",
+    "code review",
+    "performance",
+    "software quality"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "RCS Rust Coding Standards",
+        "shortDescription": "Rust rules and review guidance",
+        "longDescription": "Search the canonical, publicly available Zevarix Rust Coding Standards rules and read source-cited adoption, review, testing, and performance guidance through the RCS read-only MCP service. Two bundled skills provide a workflow for Rust review and performance investigation. RCS is not binding on a consuming repository unless the project adopts it. The service cannot access private source code, execute commands, or modify files.",
+        "developerName": "Peder Klockmann",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Search public Rust coding rules",
+          "Read source-cited Rust guidance"
+        ],
+        "logo": "./assets/forge-crab.png",
+        "composerIcon": "./assets/forge-crab.png",
+        "websiteURL": "https://rcs.zevarix.com/",
+        "supportURL": "https://github.com/zevarix/rust-coding-standards/issues",
+        "defaultPrompt": [
+          "Find RCS rules relevant to error handling and explain their applicability.",
+          "Read the RCS performance measurement guidance for a Rust optimization review.",
+          "Show the source-cited details of RCS-ERR-001."
+        ]
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Find applicable error-handling rules",
+              "prompt": "Find RCS rules about recoverable Rust errors and cite the relevant source.",
+              "tools_triggered": "search_rules",
+              "expected_behavior": "Search public RCS rules, return relevant IDs and revision-qualified source links; distinguish Required from Advisory applicability."
+            },
+            {
+              "description": "Retrieve an exact known rule",
+              "prompt": "Show the full text and rationale for RCS-ERR-001.",
+              "tools_triggered": "get_rule",
+              "expected_behavior": "Return the exact RCS-ERR-001 rule, its applicability and Markdown with a canonical source URL and Git revision."
+            },
+            {
+              "description": "Find performance-specific rules",
+              "prompt": "Which RCS rules relate to repeated expensive work and measured optimization?",
+              "tools_triggered": "search_rules",
+              "expected_behavior": "Return matching performance rules with IDs and source links, without treating advisory guidelines as automatically mandatory."
+            },
+            {
+              "description": "Read the performance measurement guide",
+              "prompt": "Read the RCS measurement guide for comparing Rust performance changes.",
+              "tools_triggered": "get_guidance",
+              "expected_behavior": "Fetch the public 'measurement' guide and cite its actual canonical source revision."
+            },
+            {
+              "description": "Inspect catalog provenance and available guides",
+              "prompt": "What revision of RCS rules is available, and which public guides can I look up?",
+              "tools_triggered": "catalog_info",
+              "expected_behavior": "Return the exact served source revision, rule count, rule-index URL and available guide names."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Cannot delete or modify source files",
+              "prompt": "Use RCS to delete files from my Rust repository."
+            },
+            {
+              "description": "Cannot inspect private repositories or secrets",
+              "prompt": "Read my private GitHub repo and tell me its API keys."
+            },
+            {
+              "description": "Cannot execute Rust or shell commands",
+              "prompt": "Run cargo test in my project through the RCS MCP service."
+            }
+          ]
+        },
+        "commerce": false
+      },
+      "publication": {
+        "release_notes": "Initial separate RCS connected-plugin candidate: four source-cited read-only public MCP tools, plus the existing rcs-guidance and rust-performance workflows. Public review and publication are not part of this package build."
+      }
+    }
+  }
+}

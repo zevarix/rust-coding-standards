@@ -32,6 +32,8 @@ jobs:
         run: python tools/verify_site_discovery.py
       - name: Validate reproducible skills-only plugin
         run: python tools/package_rcs_plugin.py
+      - name: Validate separate MCP-backed plugin candidate
+        run: python tools/package_rcs_mcp_plugin.py
       - name: Test Rust example validator
         run: python -m unittest discover -s tools -p "test_*.py"
       - name: Use current stable Rust for reusable examples
@@ -101,6 +103,15 @@ jobs:
         with:
           name: rcs-plugin
           path: dist/rcs-plugin-*.zip
+          if-no-files-found: error
+
+      - name: Package separate RCS connected-plugin candidate
+        run: python3 tools/package_rcs_mcp_plugin.py
+      - name: Upload connected-plugin candidate (not submitted)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rcs-connected-plugin-candidate
+          path: dist/rcs-connected-plugin-*.zip
           if-no-files-found: error
 
   deploy:
