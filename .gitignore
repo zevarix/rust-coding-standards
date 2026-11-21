@@ -1,6 +1,7 @@
 # Locally installed documentation tooling and generated output.
 /.venv/
 /site/
+/dist/
 /.cache/
 /.zensical/
 /.mkdocs_cache/

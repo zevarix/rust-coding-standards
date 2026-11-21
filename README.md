@@ -36,6 +36,22 @@ Installing a skill does not adopt standards for your repository. Use the
 [adoption guide](docs/adoption.md) to declare scope and choose latest `main`
 or a fixed revision.
 
+## ChatGPT and Codex plugin (private preview)
+
+The source for the **Rust Coding Standards** skills-only plugin lives in
+[plugin/rust-coding-standards/plugin.json](plugin/rust-coding-standards/plugin.json).
+Build it directly from the two canonical Rust skills; no copied standards or MCP
+server are needed:
+
+```sh
+python tools/package_rcs_plugin.py --output dist/rcs-plugin-0.1.0.zip
+```
+
+The ZIP is a generated, Git-ignored artifact. Run the package tests before
+installing it into a private ChatGPT workspace. Private installation is not
+public directory publication or additional authority to edit user projects.
+See [plugin packaging and usage](docs/skills.md#openai-plugin-package).
+
 ## Documentation
 
 - [Documentation website](https://rcs.zevarix.com/)
