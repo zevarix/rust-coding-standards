@@ -59,6 +59,24 @@ class TestRcsPluginPackage(unittest.TestCase):
             self.assertEqual(build(sources[0], first), build(sources[1], second))
             self.assertEqual(first.read_bytes(), second.read_bytes())
 
+    def test_skill_checkout_line_endings_do_not_change_archive(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            sources = []
+            for folder, ending in (("lf", b"\n"), ("crlf", b"\r\n")):
+                repo = directory / folder
+                shutil.copytree(ROOT / "skills", repo / "skills")
+                shutil.copytree(ROOT / "plugin", repo / "plugin")
+                for skill in SKILLS:
+                    for name in SKILL_FILES:
+                        source = repo / "skills" / skill / name
+                        canonical = source.read_bytes().replace(b"\r\n", b"\n")
+                        source.write_bytes(canonical.replace(b"\n", ending))
+                sources.append(repo)
+            first, second = directory / "skills-lf.zip", directory / "skills-crlf.zip"
+            self.assertEqual(build(sources[0], first), build(sources[1], second))
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+
     def test_missing_skill_file_fails_closed(self):
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)

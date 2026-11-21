@@ -85,8 +85,12 @@ def collect_files(repository: Path) -> dict[str, bytes]:
             payload = source.read_bytes()
             if not payload or len(payload) > 1024 * 1024:
                 raise ValueError(f"Missing or excessively large skill component: {name}/{relative}")
-            payload.decode("utf-8")
-            entries[f"{PACKAGE}/skills/{name}/{relative}"] = payload
+            # The Git source uses LF; normalize CRLF Windows checkouts before
+            # archiving so skill text is byte-identical across platforms.
+            text = payload.decode("utf-8")
+            entries[f"{PACKAGE}/skills/{name}/{relative}"] = (
+                text.replace("\r\n", "\n").encode("utf-8")
+            )
         header = (folder / "SKILL.md").read_text(encoding="utf-8")
         if not re.search(r"\A---\r?\nname:\s*" + re.escape(name) + r"\s*\r?\n", header):
             raise ValueError(f"Skill {name} lacks expected name frontmatter")
