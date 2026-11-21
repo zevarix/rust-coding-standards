@@ -58,18 +58,38 @@ extract the Actions artifact to obtain the **inner**, version-named
 wrapper is not itself the OpenAI plugin package. A downloadable ZIP does not
 mean the plugin was submitted, approved, or published.
 
-## Read-only MCP rule retrieval (development)
+## Read-only MCP rule retrieval (live)
 
-The [RCS MCP server source](https://github.com/zevarix/rust-coding-standards/tree/main/mcp/rcs)
-provides a separate public-documentation interface using the Streamable HTTP
-protocol. Its tools search exact rule IDs and topics, return the full sourced
-rule, expose review/performance guidance, and report the exact Git revision.
+RCS also provides a **public, read-only Streamable HTTP MCP service** that can
+be connected independently of installing the two skills. Use these settings
+in any client that supports remote Streamable HTTP MCP; the exact configuration
+file format and user interface depend on the client:
 
-The server does not accept or store private repository content and cannot
-modify a project. It is **not yet hosted**. Its build/test workflow and
-deployment cost gate are documented with its source. The existing skills-only
-OpenAI plugin is a separate package and is not automatically converted to an
-MCP-backed plugin by this work.
+- **Server URL:** `https://rcsmcp.zevarix.com/mcp`
+- **Authentication:** None; no account, access token or API key is required
+- **Health and deployed source revision:** [RCS MCP health](https://rcsmcp.zevarix.com/health)
+
+After connecting, discover the four tools: `search_rules` searches public
+rule IDs and topics; `get_rule` returns a full exact-ID rule;
+`get_guidance` returns a public review or performance guide; and
+`catalog_info` lists available guides and the **deployed** source revision.
+For example, retrieve `RCS-ERR-001` with `get_rule` or the `measurement`
+guide with `get_guidance`. Results include revision-qualified source links.
+
+The service cannot read a private repository, inspect local files, execute
+commands, modify code, or adopt a standard on your behalf. Its generated
+documentation catalog is fixed at the deployed source revision; it is not a
+general web search tool. The [MCP server source and operator guide](https://github.com/zevarix/rust-coding-standards/tree/main/mcp/rcs)
+explain transport, safeguards and the independently gated, **undeployed**
+Cloudflare alternative.
+
+A **separate genuine MCP-backed OpenAI plugin candidate** bundles these
+four tools and both Rust skills. Its domain ownership is verified, but it
+remains an **unsubmitted, unpublished draft** until real reviewer evidence,
+individual publisher attestations, OpenAI approval and an explicit publication
+step. The original skills-only plugin stays separate and unpublished; the
+public directory is currently not accepting new skills-only submissions.
+Neither draft is a public directory installation.
 
 ## Install with the Skills CLI
 

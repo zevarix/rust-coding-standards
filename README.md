@@ -62,9 +62,11 @@ python tools/package_rcs_mcp_plugin.py
 ```
 
 This is a reproducible technical **candidate**, not an approved or published
-ChatGPT directory plugin. The existing skills-only plugin is unchanged; OpenAI's
-public submission, domain verification, legal pages and reviewer demo are
-separate steps. See [RCS public plugin review issue #64](https://github.com/zevarix/rust-coding-standards/issues/64).
+ChatGPT directory plugin. The existing skills-only plugin is unchanged. The
+separate MCP-backed draft has verified domain ownership and public privacy and
+terms pages, but still requires a real reviewer demonstration, owner attestations,
+submission, review and a separately authorized publication step. See
+[RCS public plugin review issue #64](https://github.com/zevarix/rust-coding-standards/issues/64).
 
 ## Read-only MCP documentation lookup
 
