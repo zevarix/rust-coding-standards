@@ -1,0 +1,27 @@
+{
+  "name": "@zevarix/rcs-mcp",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Stateless read-only MCP tools for public Zevarix Rust Coding Standards",
+  "scripts": {
+    "index": "python ../../tools/build_rcs_mcp_index.py",
+    "test": "npm run index && node --test test/*.test.mjs",
+    "build": "npm run index && cf build",
+    "dev": "npm run index && cf dev",
+    "deploy": "echo 'Deployment is gated on a verified Workers Free account and explicit release check.' && exit 1"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "agents": "0.34.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "2.0.0-rc.3",
+    "cf": "1.0.0-rc.2",
+    "vite": "8.3.8"
+  },
+  "engines": {
+    "node": "^22.23.0 || ^24.22.0 || ^26.12.0"
+  }
+}
