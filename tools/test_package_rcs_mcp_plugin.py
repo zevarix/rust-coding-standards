@@ -12,7 +12,7 @@ from pathlib import Path
 from zipfile import ZipFile
 
 from package_rcs_plugin import collect_files as existing_skills
-from package_rcs_mcp_plugin import PACKAGE, MCP_URL, build, collect_files
+from package_rcs_mcp_plugin import PACKAGE, MCP_URL, LEGAL_URLS, build, collect_files
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -41,6 +41,10 @@ class TestRcsConnectedPlugin(unittest.TestCase):
                         self.assertEqual(archive.read(f"{PACKAGE}/skills/{relative}"), content)
                 manifest = json.loads(archive.read(f"{PACKAGE}/plugin.json"))
                 self.assertEqual(manifest["name"], PACKAGE)
+                self.assertEqual(manifest["version"], "0.1.1")
+                ui = manifest["extensions"]["com.openai"]["interface"]
+                for key, expected_url in LEGAL_URLS.items():
+                    self.assertEqual(ui[key], expected_url)
                 self.assertEqual(manifest["extensions"]["com.openai"]["interface"]["category"], "Developer Tools")
                 cases = manifest["extensions"]["com.openai"]["review"]["test_cases"]
                 self.assertEqual((len(cases["positive"]), len(cases["negative"])), (5, 3))
@@ -82,6 +86,26 @@ class TestRcsConnectedPlugin(unittest.TestCase):
             manifest["extensions"]["com.openai"]["review"]["test_cases"]["positive"].pop()
             path.write_text(json.dumps(manifest), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "five positive"):
+                collect_files(repo)
+
+    def test_missing_legal_url_fails_closed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = self.copy_sources(directory)
+            path = repo / "plugin" / PACKAGE / "plugin.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["extensions"]["com.openai"]["interface"].pop("privacyPolicyURL")
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "privacyPolicyURL must use"):
+                collect_files(repo)
+
+    def test_substituted_legal_url_fails_closed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = self.copy_sources(directory)
+            path = repo / "plugin" / PACKAGE / "plugin.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["extensions"]["com.openai"]["interface"]["termsOfServiceURL"] = "https://attacker.example/terms/"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "termsOfServiceURL must use"):
                 collect_files(repo)
 
     def test_reject_missing_canonical_skill(self):

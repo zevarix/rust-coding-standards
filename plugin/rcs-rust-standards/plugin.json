@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "rcs-rust-standards",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Search cited Zevarix Rust Coding Standards rules and follow practical Rust review, testing, and performance workflows.",
   "author": {
     "name": "Peder Klockmann"
@@ -37,7 +37,9 @@
           "Find RCS rules relevant to error handling and explain their applicability.",
           "Read the RCS performance measurement guidance for a Rust optimization review.",
           "Show the source-cited details of RCS-ERR-001."
-        ]
+        ],
+        "privacyPolicyURL": "https://rcs.zevarix.com/privacy/",
+        "termsOfServiceURL": "https://rcs.zevarix.com/terms/"
       },
       "review": {
         "test_cases": {
@@ -91,7 +93,7 @@
         "commerce": false
       },
       "publication": {
-        "release_notes": "Initial separate RCS connected-plugin candidate: four source-cited read-only public MCP tools, plus the existing rcs-guidance and rust-performance workflows. Public review and publication are not part of this package build."
+        "release_notes": "RCS connected-plugin review candidate v0.1.1: public privacy and terms links, four source-cited read-only MCP tools, and the two canonical RCS Rust skills. Directory review and publication are separate steps."
       }
     }
   }
