@@ -12,6 +12,20 @@ import { createRcsServer } from "./server.mjs";
 
 const MAX_RPC_BODY_BYTES = 64 * 1024;
 const LOOPBACK = new Set(["127.0.0.1", "localhost"]);
+// A publisher-chosen, public domain-verification proof is never bundled into
+// source or logged. Without an explicitly configured portal token, the route
+// remains unavailable. The proof is served only on the RCS-branded hostname.
+const OPENAI_CHALLENGE_PATH = "/.well-known/openai-apps-challenge";
+const OPENAI_CHALLENGE_HOST = "rcsmcp.zevarix.com";
+
+export function parseChallengeToken(raw) {
+  if (raw === undefined || raw === null || raw === "") return null;
+  if (typeof raw !== "string" || !/^[\x21-\x7e]{1,2048}$/.test(raw)) {
+    throw new Error("RCS_OPENAI_APPS_CHALLENGE_TOKEN must be one printable ASCII line");
+  }
+  return raw;
+}
+
 const HEADERS = {
   "cache-control": "no-store",
   "x-content-type-options": "nosniff",
@@ -99,7 +113,8 @@ async function readJsonBody(req) {
   }
 }
 
-export function createNodeHttpServer() {
+export function createNodeHttpServer({ challengeToken = process.env.RCS_OPENAI_APPS_CHALLENGE_TOKEN } = {}) {
+  const challenge = parseChallengeToken(challengeToken);
   return createServer(async (req, res) => {
     const host = allowedHost(req);
     if (!host || !validOrigin(req, host)) {
@@ -112,6 +127,23 @@ export function createNodeHttpServer() {
       path = new URL(req.url || "/", "http://" + req.headers.host).pathname;
     } catch {
       json(res, 400, { error: "Invalid request path" });
+      return;
+    }
+    if (path === OPENAI_CHALLENGE_PATH) {
+      if (host !== OPENAI_CHALLENGE_HOST || challenge === null) {
+        json(res, 404, { error: "Not found" });
+        return;
+      }
+      if (req.method !== "GET") {
+        json(res, 405, { error: "Method not allowed" }, { allow: "GET" });
+        return;
+      }
+      res.writeHead(200, {
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-type": "text/plain; charset=utf-8",
+      });
+      res.end(challenge); // Exactly the portal token; no JSON, whitespace or newline.
       return;
     }
     if (path === "/" || path === "/health") {

@@ -4,7 +4,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { once } from "node:events";
 import { request } from "node:http";
-import { createNodeHttpServer, parsePublicHostnames } from "../src/node.mjs";
+import { createNodeHttpServer, parsePublicHostnames, parseChallengeToken } from "../src/node.mjs";
 import { metadata } from "../src/catalog.mjs";
 
 test("public Host allowlist accepts exact names and fails closed on unsafe config", () => {
@@ -25,6 +25,48 @@ test("public Host allowlist accepts exact names and fails closed on unsafe confi
     assert.throws(() => parsePublicHostnames(bad), { name: /Error/ }, bad);
   }
   assert.throws(() => parsePublicHostnames(null), TypeError);
+});
+
+
+test("optional OpenAI challenge is exact, text-only, host-bound and fail-closed", async (t) => {
+  assert.equal(parseChallengeToken(undefined), null);
+  assert.equal(parseChallengeToken(""), null);
+  assert.equal(parseChallengeToken("synthetic-app-challenge-123"), "synthetic-app-challenge-123");
+  for (const invalid of ["a\nb", "a\rb", " with-space", "with space", "\t", "ø", "a".repeat(2049), 123]) {
+    assert.throws(() => parseChallengeToken(invalid), /printable ASCII/);
+  }
+  const challengePath = "/.well-known/openai-apps-challenge";
+  const synthetic = "synthetic-app-challenge-123";
+  async function serve(value) {
+    const server = createNodeHttpServer({ challengeToken: value });
+    server.listen(0, "127.0.0.1");
+    await once(server, "listening");
+    t.after(async () => {
+      await new Promise((resolve, reject) =>
+        server.close((error) => error ? reject(error) : resolve()));
+    });
+    return "http://127.0.0.1:" + server.address().port;
+  }
+  const base = await serve(synthetic);
+  const send = (method, host, origin) =>
+    fetch(base + challengePath, {
+      method,
+      headers: { host, ...(origin ? { origin } : {}) },
+      signal: AbortSignal.timeout(8000),
+    });
+  const exact = await send("GET", "rcsmcp.zevarix.com");
+  assert.equal(exact.status, 200);
+  assert.equal(exact.headers.get("content-type"), "text/plain; charset=utf-8");
+  assert.equal(exact.headers.get("cache-control"), "no-store");
+  assert.equal(exact.headers.get("x-content-type-options"), "nosniff");
+  assert.equal(await exact.text(), synthetic);
+  assert.equal((await send("POST", "rcsmcp.zevarix.com")).status, 405);
+  assert.equal((await send("GET", "attacker.example")).status, 403);
+  assert.equal((await send("GET", "rcsmcp.zevarix.com", "https://attacker.example")).status, 403);
+  assert.equal((await send("GET", "localhost")).status, 404);
+  const empty = await serve(null);
+  const absent = await fetch(empty + challengePath, { headers: { host: "rcsmcp.zevarix.com" } });
+  assert.equal(absent.status, 404);
 });
 
 test("Hostinger Node transport serves the same stateless read-only MCP catalog", async (t) => {
