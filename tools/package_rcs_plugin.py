@@ -32,7 +32,9 @@ STAMP = (1980, 1, 1, 0, 0, 0)
 
 def collect_files(repository: Path) -> dict[str, bytes]:
     manifest_path = repository / "plugin" / PACKAGE / "plugin.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    # Universal-newline text reading avoids Windows checkout CRLF in the ZIP.
+    manifest_text = manifest_path.read_text(encoding="utf-8")
+    manifest = json.loads(manifest_text)
     if manifest.get("$schema") != SCHEMA or manifest.get("name") != PACKAGE:
         raise ValueError("Plugin name/schema mismatch")
     if not re.fullmatch(r"\d+\.\d+\.\d+", str(manifest.get("version", ""))):
@@ -49,7 +51,7 @@ def collect_files(repository: Path) -> dict[str, bytes]:
     if openai.get("apps") is not None:
         raise ValueError("Public skills-only plugin must not declare app bindings")
 
-    entries = {f"{PACKAGE}/plugin.json": manifest_path.read_bytes()}
+    entries = {f"{PACKAGE}/plugin.json": manifest_text.encode("utf-8")}
     mark = repository / "plugin" / PACKAGE / "assets" / "forge-crab.png"
     if mark.is_symlink() or not mark.is_file():
         raise ValueError("Openly licensed Forge PNG missing or symlinked")

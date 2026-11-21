@@ -51,6 +51,13 @@ not an approved or published directory listing. The plugin's bundled
 skills share this repository's normal MIT OR Apache-2.0 material, not the
 rights-reserved Forge website CSS.
 
+After successful validation on `main`, GitHub Actions attaches the generated
+ZIP as the `rcs-plugin` artifact for that exact workflow run. Download and
+extract the Actions artifact to obtain the **inner**, version-named
+`rcs-plugin-<version>.zip` for a directory submission. The Actions artifact
+wrapper is not itself the OpenAI plugin package. A downloadable ZIP does not
+mean the plugin was submitted, approved, or published.
+
 ## Install with the Skills CLI
 
 Run installation from the project that should receive the skills. Use a
