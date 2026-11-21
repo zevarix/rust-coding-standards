@@ -33,20 +33,21 @@ manifest is stored under `plugin/rust-coding-standards/plugin.json`, and the
 package builder reads the *current repository skill files* when invoked:
 
 ```sh
-python tools/package_rcs_plugin.py --output dist/rcs-plugin-0.1.0.zip
+python tools/package_rcs_plugin.py
 python -m unittest discover -s tools -p "test_*.py"
 ```
 
-The generated ZIP contains the plugin manifest, the original two complete
-skill directories including their license notices, and the openly licensed
-Forge crab icon. It contains **no MCP server or live document snapshot**.
-The skills still resolve the adopting project's chosen RCS revision and read
+The generated, version-named ZIP contains the plugin manifest, the original
+two complete skill directories including their license notices, and the
+openly licensed 512 x 512 PNG rendition of the Forge crab icon. It contains
+**no MCP server or live document snapshot**. The skills still resolve the adopting project's chosen RCS revision and read
 the relevant current documentation from a permitted source. They do not
 implicitly gain file, network or repository-writing permissions.
 
-The ZIP is deliberately Git-ignored. Install it as a **private** plugin for
-testing first; public directory review and publication require separate
-publisher/listing checks and explicit authorization. The plugin's bundled
+The ZIP is deliberately Git-ignored. Test it privately first. Public
+directory submission requires a verified individual or business identity,
+passing skill scans and owner-completed attestations. An uploaded draft is
+not an approved or published directory listing. The plugin's bundled
 skills share this repository's normal MIT OR Apache-2.0 material, not the
 rights-reserved Forge website CSS.
 
