@@ -43,6 +43,22 @@ class TestRcsPluginPackage(unittest.TestCase):
                 self.assertNotIn(".app.json", z.namelist())
             self.assertEqual(len(expected), 2 + len(SKILLS) * len(SKILL_FILES))
 
+    def test_manifest_checkout_line_endings_do_not_change_archive(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            sources = []
+            for name, ending in (("lf", b"\n"), ("crlf", b"\r\n")):
+                repo = directory / name
+                shutil.copytree(ROOT / "skills", repo / "skills")
+                shutil.copytree(ROOT / "plugin", repo / "plugin")
+                manifest = repo / "plugin" / PACKAGE / "plugin.json"
+                canonical = manifest.read_bytes().replace(b"\r\n", b"\n")
+                manifest.write_bytes(canonical.replace(b"\n", ending))
+                sources.append(repo)
+            first, second = directory / "lf.zip", directory / "crlf.zip"
+            self.assertEqual(build(sources[0], first), build(sources[1], second))
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+
     def test_missing_skill_file_fails_closed(self):
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)

@@ -47,6 +47,22 @@ jobs:
         with:
           path: site/
 
+  plugin-package:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    needs: source-and-examples
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out validated source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Build versioned plugin ZIP from canonical skills
+        run: python3 tools/package_rcs_plugin.py
+      - name: Upload validated public plugin candidate
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rcs-plugin
+          path: dist/rcs-plugin-*.zip
+          if-no-files-found: error
+
   deploy:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     needs: source-and-examples
