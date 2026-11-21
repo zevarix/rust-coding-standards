@@ -3,10 +3,21 @@
 This directory implements a genuine stateless Model Context Protocol server for
 the public [Zevarix Rust Coding Standards](https://rcs.zevarix.com/) rules.
 
-**Current release state:** Source implementation, loopback tests and portable
-Node.js packaging only. **No Cloudflare or Hostinger deployment or public MCP
-URL has been verified.** Do not claim the service is hosted merely because a
-source branch is merged.
+**Current release state (November 20, 2026):** A standalone Node.js release
+is **live on Hostinger Business Web Hosting**, using a new temporary Hostinger
+hostname on an existing subscription. The Cloudflare Worker implementation is
+built and tested but **has not been deployed**.
+
+- **Public MCP (Streamable HTTP):** `https://solar-olive-mule-94.hostingersite.com/mcp`
+- **Health and revision:** <https://solar-olive-mule-94.hostingersite.com/health>
+- **Exact deployed RCS source revision:** `343754ecf0a1c784d7edb14b7f83a8c653baae84`
+- **Hostinger deployment:** Node 24, standalone package v0.1.1, build
+  `01a1fc02-2af7-73b0-b30e-20e97805dbbe`; no new paid hosting subscription.
+
+The canonical RCS documentation remains on GitHub Pages, and the original
+seven Hostinger site records remained present and enabled; no deployment
+operations targeted those sites.
+Public OpenAI Plugin Directory approval remains a separate process.
 
 ## Tools and scope
 
@@ -30,8 +41,10 @@ merge or execution authority.
 
 The HTTP endpoint is `/mcp` (stateless Streamable HTTP). `/health` and `/` report
 the bundle's source revision and catalog counts. Requests over 64 KiB are
-rejected, query/result sizes are bounded, and MCP Origin/Host handling is
-provided by the current official Cloudflare Agents SDK handler.
+rejected, and query/result sizes are bounded. Both transport adapters apply
+Host and Origin checks: the Cloudflare transport uses the official Agents SDK
+handler, while the Node.js adapter uses the official MCP Node transport with
+explicit HTTP request validation.
 
 ## Local build and protocol test
 
@@ -65,7 +78,8 @@ The repository also supports a **standalone Node.js Streamable HTTP MCP**
 application, sharing the exact same four tool registrations and generated
 source-revision-qualified catalog as the Cloudflare Worker. This is a separate
 runtime option, not an additional tool provider or a rewritten standards set.
-No live Hostinger application has been created by the source release.
+The Hostinger Node.js application is deployed to a separate, public temporary
+hostname; it is not hosted on, or routed through, the RCS GitHub Pages site.
 
 Build a small, versioned ZIP containing only pinned runtime dependencies,
 the Node adapter, the read-only tool factory, generated catalog and licenses:
@@ -81,13 +95,28 @@ CLI, Agents runtime, worktrees, tests, untrusted files and credentials.
 
 Hostinger Business/Cloud web-app deployment uses a **new isolated Node.js
 application**, framework `Other`, compatible Node.js 24.22+ (or
-22.23+), `npm ci --omit=dev` and start command `npm start`
-(running `node src/hostinger-entry.mjs`). Hostinger supplies `PORT`.
+22.23+), and start command `npm start` (running
+`node src/hostinger-entry.mjs`). Hostinger's archive builder installed
+production dependencies via `npm install`; CI separately verifies
+`npm ci --omit=dev` from the extracted ZIP. Hostinger supplies `PORT`.
 Set `NODE_ENV=production` and `RCS_PUBLIC_HOSTNAME` to the
-hostname receiving requests. The proposed public hostname
-`mcp.rcs.zevarix.com` is **not provisioned** by packaging.
+hostname receiving requests. The current temporary hostname is
+`solar-olive-mule-94.hostingersite.com`. The optional branded hostname
+`mcp.rcs.zevarix.com` is **not configured**; it would require a
+separately approved Hostinger/DNS change.
 `GET /health` exposes the Git revision, and `POST /mcp`
 exposes stateless JSON-response Streamable HTTP without sessions.
+
+**Hostinger entrypoint caveat:** Its build-from-archive auto-detection
+selected `src/server.mjs`, which is a tool factory and does not listen.
+An earlier deployment with `src/node.mjs` also returned HTTP 503:
+Hostinger imports entry modules instead of executing them as `argv[1]`.
+Always configure the **exact build** with `node_version=24`,
+`app_type=other`, `entry_file=src/hostinger-entry.mjs`,
+`build_script=` empty and the versioned archive source.
+The saved Hostinger build settings may still show the earlier entry, even
+when the successful deployment's build options and runtime are correct.
+Do not rely on old auto-detected settings on subsequent deployments.
 
 Local and CI verification exercise a temporary loopback Node.js server,
 real MCP initialization, tool discovery and lookup, hostile Host/Origin,
@@ -95,13 +124,24 @@ malformed input, and the 64 KiB request bound. CI also installs the
 **extracted standalone ZIP** with production dependencies and tests it
 independently of the source checkout.
 
-**Hostinger release gate:** Verify a suitable existing Business/Cloud plan,
-runtime compatibility, Node app capacity, DNS/subdomain ownership and
-**no additional hosting purchase or charge** before creating or deploying
-the app. Never overwrite the existing RCS documentation website or modify
-unrelated sites, hosting settings, DNS or billing. Live activation and
-public OpenAI plugin review remain separate, evidenced steps. The canonical
-documentation website stays on GitHub Pages.
+**Live deployment verification (November 20, 2026):** An external HTTPS
+client confirmed HTTP 200 for `/health`, a real MCP initialization,
+discovery and invocation of all four read-only tools, source-revision
+citations, and rejection of hostile Origin, invalid method, unknown rules and
+oversized request bodies. Hostinger runtime logs show a successful listener
+startup. The eight Hostinger sites consist of the original seven enabled
+sites plus this new isolated Node.js site, under the original Business plan;
+the four existing account subscriptions remained the same.
+
+To reproduce this acceptance check from an external Python environment:
+
+    python mcp/rcs/test/live_remote_smoke.py --base-url https://solar-olive-mule-94.hostingersite.com --expected-revision 343754ecf0a1c784d7edb14b7f83a8c653baae84
+
+For future deployment destinations verify Business/Cloud plan capacity and
+additional charges before creating any site. Never overwrite existing user
+websites, modify unrelated site settings, DNS or billing without explicit
+approval. GitHub merges are not hosting authority. Public OpenAI plugin
+review and any custom DNS hostname remain separate release steps.
 
 ## Explicit free-tier and deployment gate
 
